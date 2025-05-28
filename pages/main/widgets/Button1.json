@@ -14,6 +14,11 @@
       "key": "borderRadius"
     }
   ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
   "isDefaultClickDisabled": true,
   "isDisabled": false,
   "isLoading": false,
@@ -26,6 +31,7 @@
   "mobileRightColumn": 17,
   "mobileTopRow": 30,
   "needsErrorInfo": false,
+  "onClick": "{{JS_Test.sayHello();}}",
   "originalBottomRow": 61,
   "originalTopRow": 57,
   "parentColumnSpace": 15.359375,
