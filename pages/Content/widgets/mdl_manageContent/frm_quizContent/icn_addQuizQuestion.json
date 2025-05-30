@@ -1,0 +1,64 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 16,
+  "boxShadow": "none",
+  "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "buttonVariant": "SECONDARY",
+  "displayName": "Icon Button",
+  "dynamicBindingPathList": [
+    {
+      "key": "buttonColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "iconName"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    },
+    {
+      "key": "iconName"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "hideCard": false,
+  "iconName": "{{utils.addQuestion ? 'minus' : 'plus'}}",
+  "iconSVG": "/static/media/icon.1a0c634ac75f9fa6b6ae7a8df882a3ba.svg",
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "hfx6gntj2i",
+  "leftColumn": 29,
+  "minWidth": 50,
+  "mobileBottomRow": 14,
+  "mobileLeftColumn": 28,
+  "mobileRightColumn": 32,
+  "mobileTopRow": 10,
+  "onClick": "{{utils.setAddQuestion(!utils.addQuestion);\nutils.showNewQuestion && utils.setShowNewQuestion(false);\nresetWidget('lst_updateQuiz')\n}}",
+  "parentColumnSpace": 16.16092529296875,
+  "parentId": "2dz0aqid6j",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "hug",
+  "rightColumn": 32,
+  "searchTags": [
+    "click",
+    "submit"
+  ],
+  "tooltip": "Add Question",
+  "topRow": 12,
+  "type": "ICON_BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "evuom09kqk",
+  "widgetName": "icn_addQuizQuestion"
+}

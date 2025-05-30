@@ -1,0 +1,21 @@
+INSERT INTO course (
+    name,
+    description,
+    duration,
+    language,
+	 	instrcutor,
+    thumbnail_url,
+    course_type_id,
+    course_level_id,
+    course_subject_id
+) VALUES (
+    {{inp_courseTitle.text}},
+    {{inp_description.text}},
+    {{inp_duration.text}},
+    {{inp_language.text}},
+	{{inp_instructor.text}},
+    {{this.params.thumbnailUrl}},
+    {{sel_type.selectedOptionValue}},
+    {{sel_levels.selectedOptionValue}},
+    {{sel_courseSubject.selectedOptionValue}}
+);

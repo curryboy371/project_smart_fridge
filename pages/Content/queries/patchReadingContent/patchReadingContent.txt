@@ -1,0 +1,7 @@
+UPDATE reading_content
+  SET title = {{inp_updateReadingTitle.text}},
+	content = {{rte_updateReadingContent.text}},
+	course_subject_id = {{sel_updateSubject.selectedOptionValue}},
+	course_module_id = {{sel_updateModule.selectedOptionValue}},
+	course_id = {{sel_updateCourse.selectedOptionValue}}
+  WHERE id = {{ utils.moduleContent.content.id}};

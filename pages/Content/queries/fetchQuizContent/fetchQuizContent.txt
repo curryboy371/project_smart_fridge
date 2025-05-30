@@ -1,0 +1,1 @@
+SELECT * FROM quiz_content WHERE course_module_content_id = {{this.params.id}}

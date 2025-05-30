@@ -1,0 +1,1 @@
+DELETE FROM course_module_content WHERE id = {{utils.moduleContent.content.id}};

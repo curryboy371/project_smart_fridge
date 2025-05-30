@@ -1,0 +1,83 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 47,
+  "bottomRowBeforeCollapse": 46,
+  "boxShadow": "{{appsmith.theme.boxShadow.appBoxShadow}}",
+  "defaultText": "{{lst_updateQuiz.selectedItem ? lst_updateQuiz.selectedItem.question : ''}}",
+  "displayName": "Rich Text Editor",
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "boxShadow"
+    },
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "isRequired"
+    },
+    {
+      "key": "defaultText"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "isRequired"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onTextChange"
+    }
+  ],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.b35e139c93907b5eab3c68c1db842330.svg",
+  "inputType": "html",
+  "isDefaultClickDisabled": true,
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": "{{rte_updateQuizQuestion.isVisible}}",
+  "isVisible": "{{lst_updateQuiz.selectedItem || utils.showNewQuestion ? true : false}}",
+  "key": "sj3bn0w1oz",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelStyle": "BOLD",
+  "labelText": "Question",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 33,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 25,
+  "mobileLeftColumn": 24,
+  "mobileRightColumn": 48,
+  "mobileTopRow": 6,
+  "onTextChange": "",
+  "originalBottomRow": 46,
+  "originalTopRow": 15,
+  "parentColumnSpace": 13.627343749999998,
+  "parentId": "2dz0aqid6j",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "searchTags": [
+    "input",
+    "rte"
+  ],
+  "topRow": 16,
+  "topRowBeforeCollapse": 15,
+  "type": "RICH_TEXT_EDITOR_WIDGET",
+  "version": 1,
+  "widgetId": "hdpqcmm90j",
+  "widgetName": "rte_updateQuizQuestion"
+}

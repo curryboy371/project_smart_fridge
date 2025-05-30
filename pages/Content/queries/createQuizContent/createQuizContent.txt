@@ -1,0 +1,13 @@
+INSERT INTO quiz_content
+  (title, due_date, total_points, course_subject_id, course_id, course_module_id, course_module_content_id)
+VALUES
+  (
+    {{ inp_newQuizTitle.text }},
+		{{dat_newQuizDueDate.formattedDate}},
+		{{inp_newQuizPoints.text}},
+    {{ sel_newSubject.selectedOptionValue }},
+		{{ sel_newCourse.selectedOptionValue }},
+		{{ sel_newModule.selectedOptionValue }},
+		{{ this.params.courseModuleContentId }}
+  )
+	RETURNING*;

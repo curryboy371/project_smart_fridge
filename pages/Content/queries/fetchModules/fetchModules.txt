@@ -1,0 +1,4 @@
+SELECT cm.id, cm.name, cm.description AS module_description, cm.duration
+FROM public.course_module cm
+WHERE cm.course_subject_id = {{sel_subject.selectedOptionValue || 1}} 
+      AND (cm.course_id = COALESCE({{sel_course.selectedOptionValue || undefined}}, cm.course_id));

@@ -1,0 +1,11 @@
+INSERT INTO quiz_content_question
+  (type, question, answer, answer_options, quiz_content_id)
+VALUES
+  (
+    {{ this.params.type }},
+    {{ this.params.question }},
+		{{ this.params.answer }},
+    {{ this.params.answerOptions }},
+		{{ this.params.quizContentId }}
+  )
+	RETURNING*;

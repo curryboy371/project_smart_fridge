@@ -1,0 +1,47 @@
+{
+  "animateLoading": true,
+  "autoPlay": false,
+  "backgroundColor": "#000",
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 57,
+  "boxShadow": "{{appsmith.theme.boxShadow.appBoxShadow}}",
+  "displayName": "Video",
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "boxShadow"
+    },
+    {
+      "key": "url"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.39c2d6968b6bb91bbe019646a9243566.svg",
+  "isDeprecated": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "9l6llzaadb",
+  "leftColumn": 2,
+  "mobileBottomRow": 43,
+  "mobileLeftColumn": 3,
+  "mobileRightColumn": 27,
+  "mobileTopRow": 15,
+  "parentColumnSpace": 13.53125,
+  "parentId": "j7ljris5qh",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 62,
+  "searchTags": [
+    "youtube"
+  ],
+  "topRow": 20,
+  "type": "VIDEO_WIDGET",
+  "url": "{{inp_updateVideoUrl.text}}",
+  "version": 1,
+  "widgetId": "b1pvobavwi",
+  "widgetName": "vid_updateVideo"
+}

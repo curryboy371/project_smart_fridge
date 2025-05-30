@@ -1,0 +1,112 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 17,
+  "boxShadow": "none",
+  "configureMenuItems": {
+    "config": {
+      "id": "config",
+      "isDisabled": false,
+      "isVisible": true,
+      "label": "Menu Item"
+    },
+    "id": "config",
+    "label": "Configure menu items"
+  },
+  "displayName": "Menu Button",
+  "dynamicBindingPathList": [
+    {
+      "key": "menuColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "menuItems.menuItemr36sty56y3.onClick"
+    },
+    {
+      "key": "menuItems.menuIteme2w7r408c7.onClick"
+    },
+    {
+      "key": "menuItems.menuItem3.onClick"
+    },
+    {
+      "key": "menuItems.menuItem2.onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "menuItems.menuItem2.onClick"
+    },
+    {
+      "key": "menuItems.menuItem3.onClick"
+    },
+    {
+      "key": "menuItems.menuIteme2w7r408c7.onClick"
+    }
+  ],
+  "hideCard": false,
+  "iconAlign": "left",
+  "iconName": "plus",
+  "iconSVG": "/static/media/icon.0341d17d67020c8bfc560cc5928af2a7.svg",
+  "isCompact": false,
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "9tkorsf6z6",
+  "label": "Upload Content",
+  "leftColumn": 51,
+  "menuColor": "{{appsmith.theme.colors.primaryColor}}",
+  "menuItems": {
+    "menuItem2": {
+      "id": "menuItem2",
+      "index": 1,
+      "isDisabled": false,
+      "isVisible": true,
+      "label": "Video",
+      "onClick": "{{utils.setNewQuestionType('Video');\nshowModal('mdl_createContent');}}",
+      "widgetId": ""
+    },
+    "menuItem3": {
+      "id": "menuItem3",
+      "index": 2,
+      "isDisabled": false,
+      "isVisible": true,
+      "label": "Quiz",
+      "onClick": "{{utils.setNewQuestionType('Quiz');\nshowModal('mdl_createContent');}}",
+      "widgetId": ""
+    },
+    "menuIteme2w7r408c7": {
+      "id": "menuIteme2w7r408c7",
+      "index": 0,
+      "isDisabled": false,
+      "isVisible": true,
+      "label": "Reading Material",
+      "onClick": "{{utils.setNewQuestionType('Reading Material');\nshowModal('mdl_createContent');}}",
+      "widgetId": "h2hi4iyx0z"
+    }
+  },
+  "menuItemsSource": "STATIC",
+  "menuVariant": "PRIMARY",
+  "mobileBottomRow": 7,
+  "mobileLeftColumn": 38,
+  "mobileRightColumn": 54,
+  "mobileTopRow": 3,
+  "originalBottomRow": 14,
+  "originalTopRow": 10,
+  "parentColumnSpace": 18.21875,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "renderMode": "CANVAS",
+  "rightColumn": 62,
+  "sourceData": [],
+  "topRow": 13,
+  "type": "MENU_BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "vnn0ex7c7f",
+  "widgetName": "frm_newVideo"
+}

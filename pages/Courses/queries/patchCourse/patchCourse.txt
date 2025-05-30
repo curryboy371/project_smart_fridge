@@ -1,0 +1,14 @@
+UPDATE course
+SET
+    name = {{inp_courseTitle.text}},
+    description = {{inp_description.text}},
+    duration = {{inp_duration.text}},
+    language = {{inp_language.text}},
+    thumbnail_url = {{this.params.thumbnailUrl}},
+		instructor={{inp_instructor.text}},
+    course_type_id = {{sel_type.selectedOptionValue}},
+    course_level_id = {{sel_levels.selectedOptionValue}},
+    course_subject_id = {{sel_courseSubject.selectedOptionValue}},
+    updated = now()
+WHERE
+    id = {{tbl_courseSubjects.triggeredRow.Id}};

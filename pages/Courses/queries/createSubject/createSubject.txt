@@ -1,0 +1,1 @@
+INSERT INTO public.course_subject (name) VALUES ({{this.params.name}});

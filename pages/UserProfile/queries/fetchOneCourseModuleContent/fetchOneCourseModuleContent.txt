@@ -1,0 +1,1 @@
+SELECT * FROM course_module_content WHERE id = {{this.params.id}};

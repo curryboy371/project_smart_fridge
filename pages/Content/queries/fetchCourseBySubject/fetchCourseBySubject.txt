@@ -1,0 +1,17 @@
+SELECT
+    c.name AS course_name,
+		C.id as course_id,
+    c.description AS course_description,
+    c.duration AS course_duration,
+    c.language AS course_language,
+		C.instructor aS course_instructor,
+    c.thumbnail_url AS course_thumbnail_url,
+    cs.name AS subject_name,
+    ct.name AS type_name,
+    cl.name AS level_name
+FROM
+    public.course AS c
+    JOIN public.course_subject AS cs ON c.course_subject_id = cs.id
+    JOIN public.course_type AS ct ON c.course_type_id = ct.id
+    JOIN public.course_level AS cl ON c.course_level_id = cl.id
+		WHERE cs.id = {{sel_subject.selectedOptionValue || 1}}

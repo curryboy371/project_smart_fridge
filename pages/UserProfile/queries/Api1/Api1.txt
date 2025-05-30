@@ -1,0 +1,7 @@
+{
+  "name": "JavaScript Basics",
+  "duration": 120,
+  "description": "Introduction to JavaScript fundamentals.",
+  "course_id": 5,
+  "course_subject_id": 12
+}

@@ -9,10 +9,27 @@
     "width": "1024px"
   },
   "evaluationVersion": 2,
+  "icon": "bicycle",
   "pages": [
+    {
+      "id": "Courses",
+      "isDefault": false
+    },
+    {
+      "id": "UserProfile",
+      "isDefault": false
+    },
+    {
+      "id": "Content",
+      "isDefault": false
+    },
     {
       "id": "main",
       "isDefault": true
+    },
+    {
+      "id": "Page_UserEdit",
+      "isDefault": false
     }
   ]
 }

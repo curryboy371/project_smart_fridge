@@ -1,0 +1,2 @@
+
+SELECT * FROM course_module WHERE course_module.course_subject_id = {{sel_subject.selectedOptionValue || 1}} AND (course_module.course_id = COALESCE({{sel_course.selectedOptionValue || undefined}}, course_module.course_id));

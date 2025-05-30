@@ -1,0 +1,91 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 5,
+  "boxShadow": "none",
+  "displayName": "Menu Button",
+  "dynamicBindingPathList": [
+    {
+      "key": "menuColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "isDisabled"
+    },
+    {
+      "key": "menuItems.menuItem2.onClick"
+    },
+    {
+      "key": "menuItems.menuItem1.onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "menuItems.menuItem2.onClick"
+    },
+    {
+      "key": "menuItems.menuItem1.onClick"
+    }
+  ],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.0341d17d67020c8bfc560cc5928af2a7.svg",
+  "isCompact": false,
+  "isDeprecated": false,
+  "isDisabled": "{{utils.activeModuleContent.activeModuleContent.markComplete === 'Approve'}}",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "f3s2pgu1tc",
+  "label": "Mark Complete",
+  "leftColumn": 52,
+  "menuColor": "{{appsmith.theme.colors.primaryColor}}",
+  "menuItems": {
+    "menuItem1": {
+      "iconColor": "rgb(3, 179, 101)",
+      "iconName": "tick",
+      "id": "menuItem1",
+      "index": 0,
+      "isDisabled": false,
+      "isVisible": true,
+      "label": "Approve",
+      "onClick": "{{utils.setMarkComplete('Approved');\nutils.acceptRejectModuleContent();\n}}",
+      "textColor": "rgb(3, 179, 101)",
+      "widgetId": ""
+    },
+    "menuItem2": {
+      "iconColor": "#dc2626",
+      "iconName": "cross",
+      "id": "menuItem2",
+      "index": 1,
+      "isDisabled": false,
+      "isVisible": true,
+      "label": "Reject",
+      "onClick": "{{utils.setMarkComplete('Rejected')}}",
+      "textColor": "#dc2626",
+      "widgetId": ""
+    }
+  },
+  "menuItemsSource": "STATIC",
+  "menuVariant": "PRIMARY",
+  "mobileBottomRow": 5,
+  "mobileLeftColumn": 46,
+  "mobileRightColumn": 62,
+  "mobileTopRow": 1,
+  "parentColumnSpace": 8.329296874999999,
+  "parentId": "uh8kttqf4g",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "renderMode": "CANVAS",
+  "rightColumn": 62,
+  "topRow": 1,
+  "type": "MENU_BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "x54jgy2n0g",
+  "widgetName": "btn_markComplete"
+}

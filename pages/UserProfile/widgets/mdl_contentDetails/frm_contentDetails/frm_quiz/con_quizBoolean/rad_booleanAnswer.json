@@ -1,0 +1,70 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "alignment": "left",
+  "animateLoading": true,
+  "bottomRow": 17,
+  "boxShadow": "none",
+  "defaultOptionValue": "{{lst_quizQuestions.selectedItem && lst_quizQuestions.selectedItem.type === 'True or False' ? lst_quizQuestions.selectedItem.answer.toUpperCase() : ''}}",
+  "displayName": "Radio Group",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "defaultOptionValue"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicPropertyPathList": [
+    {
+      "key": "isRequired"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.ba2b2ee006e51a5c681d7964d7777481.svg",
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isInline": false,
+  "isLoading": false,
+  "isRequired": "",
+  "isVisible": true,
+  "key": "5o01p5fsel",
+  "label": "",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 3,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "mobileBottomRow": 15,
+  "mobileLeftColumn": 4,
+  "mobileRightColumn": 24,
+  "mobileTopRow": 9,
+  "options": [
+    {
+      "label": "True",
+      "value": "TRUE"
+    },
+    {
+      "label": "False",
+      "value": "FALSE"
+    }
+  ],
+  "originalBottomRow": 17,
+  "originalTopRow": 9,
+  "parentColumnSpace": 10.759802246093749,
+  "parentId": "5v2pcjobg9",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "rightColumn": 16,
+  "searchTags": [
+    "choice"
+  ],
+  "topRow": 9,
+  "type": "RADIO_GROUP_WIDGET",
+  "version": 1,
+  "widgetId": "wtyefl3mae",
+  "widgetName": "rad_booleanAnswer"
+}

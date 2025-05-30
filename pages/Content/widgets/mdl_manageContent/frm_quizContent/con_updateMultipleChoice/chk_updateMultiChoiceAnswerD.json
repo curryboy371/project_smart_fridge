@@ -1,0 +1,61 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "alignWidget": "LEFT",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 36,
+  "defaultCheckedState": "{{\nlst_updateQuiz.selectedItem && lst_updateQuiz.selectedItem.answer.split(',').some(a => a === inp_updateMultiChoiceD.text) ? true : false\n}}",
+  "displayName": "Checkbox",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "defaultCheckedState"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicPropertyPathList": [
+    {
+      "key": "defaultCheckedState"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.aaab032b43383e4fa53ffc0ef40c90ef.svg",
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "x7deli0tw8",
+  "label": "",
+  "labelPosition": "Left",
+  "leftColumn": 50,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 28,
+  "mobileLeftColumn": 48,
+  "mobileRightColumn": 60,
+  "mobileTopRow": 24,
+  "originalBottomRow": 36,
+  "originalTopRow": 32,
+  "parentColumnSpace": 8.077735900878906,
+  "parentId": "5q817v2j3g",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 53,
+  "searchTags": [
+    "boolean"
+  ],
+  "topRow": 32,
+  "type": "CHECKBOX_WIDGET",
+  "version": 1,
+  "widgetId": "11m9cwhbz7",
+  "widgetName": "chk_updateMultiChoiceAnswerD"
+}

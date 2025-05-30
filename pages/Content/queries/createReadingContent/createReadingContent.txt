@@ -1,0 +1,11 @@
+INSERT INTO reading_content
+  (title, content, course_subject_id, course_id, course_module_id, course_module_content_id)
+VALUES
+  (
+    {{ inp_newReadingTitle.text }},
+    {{ rte_newReadingContent.text }},
+    {{ sel_newSubject.selectedOptionValue }},
+		{{ sel_newCourse.selectedOptionValue }},
+		{{ sel_newModule.selectedOptionValue }},
+		{{ this.params.courseContentId }}
+  );

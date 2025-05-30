@@ -1,0 +1,57 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 137,
+  "boxShadow": "none",
+  "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "displayName": "Button",
+  "dynamicBindingPathList": [
+    {
+      "key": "buttonColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.7beb9123fb53027d9d6b778cdfe4caed.svg",
+  "isDefaultClickDisabled": true,
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "6nx53ib7ay",
+  "leftColumn": 20,
+  "minWidth": 120,
+  "mobileBottomRow": 122,
+  "mobileLeftColumn": 32,
+  "mobileRightColumn": 44,
+  "mobileTopRow": 118,
+  "onClick": "{{utils.addNewQuestion();}}",
+  "parentColumnSpace": 15.605013275146481,
+  "parentId": "s1eitlakfb",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 32,
+  "searchTags": [
+    "click",
+    "submit"
+  ],
+  "text": "ADD QUESTION",
+  "topRow": 133,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "d1669z871g",
+  "widgetName": "btn_addNewQuestion"
+}

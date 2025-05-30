@@ -1,0 +1,5 @@
+UPDATE quiz_content_question
+  SET question = {{rte_updateQuizQuestion.text}},
+	answer = {{this.params.answer}},
+	answer_options = {{this.params.answerOptions}}
+  WHERE id = {{ this.params.id }};

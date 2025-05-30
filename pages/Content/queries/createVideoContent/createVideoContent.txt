@@ -1,0 +1,12 @@
+INSERT INTO video_content
+  (title, video_url, duration, course_subject_id, course_id, course_module_id, course_module_content_id)
+VALUES
+  (
+    {{ inp_newVideoTitle.text }},
+    {{ inp_newVideoUrl.text }},
+		{{ inp_newVideoDuration.text }},
+    {{ sel_newSubject.selectedOptionValue }},
+		{{ sel_newCourse.selectedOptionValue }},
+		{{ sel_newModule.selectedOptionValue }},
+		{{ this.params.courseContentId }}
+  );

@@ -1,0 +1,12 @@
+INSERT INTO course_module_content
+  (title, mark_complete, content_type, course_subject_id, course_module_id, course_id)
+VALUES
+  (
+    {{ this.params.title }},
+    false,
+    {{ utils.newQuestionType }},
+		{{ sel_newSubject.selectedOptionValue }},
+		{{ sel_newModule.selectedOptionValue }},
+		{{ sel_newCourse.selectedOptionValue }}
+  )
+	RETURNING*;
