@@ -9,8 +9,7 @@ class UserProfileModel(BaseModel):
     id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
     username: str
     age: Optional[int] = None
-    sex: Optional[int] = None
-
+    gender: Optional[int] = None
     allergies: Optional[List[str]] = None
     preferredCategories: Optional[List[str]] = None
     notificationPreferences: Optional[Dict[str, Optional[str]]] = None

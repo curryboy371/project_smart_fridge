@@ -22,6 +22,4 @@ class TFConfigManager(TFSingletonBase):
 
     def getboolean(self, section, key, fallback=None):
         return self.config.getboolean(section, key, fallback=fallback)
-    
-
-config = TFConfigManager()
+  
