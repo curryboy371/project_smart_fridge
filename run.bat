@@ -1,10 +1,10 @@
 @echo off
 
-REM 가상환경 경로
+REM venv path
 set VENV_PATH=_pyenv
 
-REM 가상환경 활성화
+REM activate
 call %VENV_PATH%\Scripts\activate.bat
 
-REM uvicorn 서버 실행
+REM uvicorn server run
 uvicorn main:app --host 0.0.0.0 --port 8000

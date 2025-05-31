@@ -2,17 +2,19 @@ from typing import Optional, List, Dict
 from datetime import datetime
 from bson import ObjectId
 from pydantic import BaseModel, Field
+from models.model_base import PyObjectId
 
-    
 class FoodCategoryModel(BaseModel):
-    id: str = Field(alias="_id")  # 문자열 ID 사용 (예: "egg", "milk")
-    displayName: str
-    recommendedShelfLifeDays: Dict[str, int]
-    # 예: {"냉장": 7, "냉동": 30, "실온": 1}
+    id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
+    name: str
+    storageMethod: str                        # 보관 방식 (예: "Refrigerated")
+    shelfLifeDays: int                       # 보관 기간 (일수)
     allergenTags: Optional[List[str]] = None
-    nutrition: Optional[Dict[str, float]] = None
-    # 예: {"calories": 120.5, "protein": 8.0}
-    defaultExpireDays: Optional[int] = None
+    nutrition: Optional[List[str]] = None
+    desc: Optional[str] = None
 
     class Config:
+        arbitrary_types_allowed = True      # _id를 id로 자동 매핑
         validate_by_name=True
+        allow_population_by_field_name = True
+        json_encoders = {ObjectId: str}  # ObjectId 직렬화 대응

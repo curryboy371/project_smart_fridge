@@ -38,6 +38,7 @@ def create_app() -> FastAPI:
             logger.critical("Error MongoDB Connect Fail!!!.")
         else:
             logger.info("Success MongoDB Connect")
+            await db.create_collections()
 
 
         logger.info("Start complete")
@@ -48,7 +49,7 @@ def create_app() -> FastAPI:
 
     @app.get("/")
     async def root():
-        return {"message": "Hello, FastAPI"}
+        return {"message": "Connected FastAPI Server!!!"}
 
 
     

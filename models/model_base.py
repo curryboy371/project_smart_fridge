@@ -34,7 +34,7 @@ class UserModel(BaseModel):
     age: Optional[int] = None
 
     class Config:
-        arbitrary_types_allowed = True
+        arbitrary_types_allowed = True      # _id를 id로 자동 매핑
         json_encoders = {ObjectId: str}
         validate_by_name=True
 

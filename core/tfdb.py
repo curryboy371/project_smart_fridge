@@ -32,6 +32,24 @@ class TFDB(TFSingletonBase):
         self.fridge_item_collection = self.db.fridge_item
 
 
+
+    async def create_collections(self):
+        collections_to_create = [
+            "users",
+            "user_profile",
+            "food_category",
+            "fridge_item",
+        ]
+
+        existing_collections = await self.db.list_collection_names()
+
+        for collection in collections_to_create:
+            if collection not in existing_collections:
+                await self.db.create_collection(collection)
+                logger.info(f"Created collection: {collection}")
+            else:
+                logger.info(f"Collection already exists: {collection}")
+
     async def is_connected(self):
         try:
             await self.client.admin.command('ping')
