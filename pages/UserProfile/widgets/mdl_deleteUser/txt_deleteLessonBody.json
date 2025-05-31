@@ -1,11 +1,14 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 11,
+  "bottomRow": 14,
   "displayName": "Text",
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
+    },
+    {
+      "key": "text"
     }
   ],
   "dynamicHeight": "FIXED",
@@ -34,10 +37,10 @@
     "label"
   ],
   "shouldTruncate": false,
-  "text": "Are you sure you want to delete this lesson?",
+  "text": "\n정말 유저 정보를 지우겠습니까??\n{{ \nutils.state.currentData ? utils.state.currentData.username : \"Unknown User\" }}",
   "textAlign": "LEFT",
   "textColor": "#52525b",
-  "topRow": 7,
+  "topRow": 5,
   "truncateButtonColor": "#FFC13D",
   "type": "TEXT_WIDGET",
   "version": 1,

@@ -8,16 +8,8 @@
     "pluginType": "JS",
     "variables": [
       {
-        "name": "activeModule",
-        "value": "{}"
-      },
-      {
-        "name": "activeModuleContent",
-        "value": "{}"
-      },
-      {
-        "name": "markComplete",
-        "value": "null"
+        "name": "state",
+        "value": "{\n  modalMode: 'add',\n  currentData: null,\n  isModalOpen: false,\n  defaultAllergies: [],\n  defaultpreferredCategories: [],\n  defaultnotificationPreferences: []\n}"
       }
     ]
   }

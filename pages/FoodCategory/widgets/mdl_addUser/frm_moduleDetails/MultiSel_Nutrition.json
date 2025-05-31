@@ -1,0 +1,62 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 20,
+  "boxShadow": "none",
+  "defaultOptionValue": "{{ ((options, serverSideFiltering) => (  utils.state.defaultNutrition))(MultiSel_Nutrition.options, MultiSel_Nutrition.serverSideFiltering) }}",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "defaultOptionValue"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "isDisabled": false,
+  "isFilterable": true,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "y2hzkr54ev",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelText": "nutrition_info",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 23,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 26,
+  "mobileLeftColumn": 1,
+  "mobileRightColumn": 21,
+  "mobileTopRow": 19,
+  "needsErrorInfo": false,
+  "optionLabel": "name",
+  "optionValue": "value",
+  "parentColumnSpace": 10.5556640625,
+  "parentId": "fn1suqgpfa",
+  "parentRowSpace": 10,
+  "placeholderText": "Select option(s)",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 39,
+  "serverSideFiltering": false,
+  "sourceData": "[\n  {\n    \"name\": \"탄수화물\",\n    \"value\": \"CARBOHYDRATES\"\n  },\n  {\n    \"name\": \"단백질\",\n    \"value\": \"PROTEIN\"\n  },\n  {\n    \"name\": \"지방\",\n    \"value\": \"FAT\"\n  },\n  {\n    \"name\": \"비타민\",\n    \"value\": \"VITAMINS\"\n  },\n  {\n    \"name\": \"무기질\",\n    \"value\": \"MINERALS\"\n  },\n  {\n    \"name\": \"식이섬유\",\n    \"value\": \"FIBER\"\n  },\n  {\n    \"name\": \"수분\",\n    \"value\": \"WATER\"\n  },\n  {\n    \"name\": \"항산화물질\",\n    \"value\": \"ANTIOXIDANTS\"\n  },\n  {\n    \"name\": \"오메가-3 지방산\",\n    \"value\": \"OMEGA_3\"\n  },\n  {\n    \"name\": \"콜레스테롤\",\n    \"value\": \"CHOLESTEROL\"\n  }\n]",
+  "topRow": 13,
+  "type": "MULTI_SELECT_WIDGET_V2",
+  "version": 1,
+  "widgetId": "y9x8zsdr20",
+  "widgetName": "MultiSel_Nutrition"
+}

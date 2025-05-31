@@ -1,117 +1,141 @@
 export default {
-	getModules: async () => {
-		const modules = await fetchModules.run();
+	// 상태 객체
+	state: {
+		modalMode: 'add',      // 'add' 또는 'edit'
+		currentData: null,     // 편집 시 해당 데이터 저장
+		isModalOpen: false,    // 모달 열림 상태
+		
+		defaultAllergies: [],
+		defaultpreferredCategories: [],
+		defaultnotificationPreferences: []
+	},
+	
 
-		return modules.map(m => {
-			return {
-				Id: m.id,
-				Name: m.name,
-				Duration: m.duration,
-				Description: m.description,
-				CourseId: m.course_id,
-				SubjectId: m.course_subject_id,
-			}
-		})
+	// 사용자 추가 모드로 모델 열기
+	openAddModal: () => {
+		this.state.modalMode = 'add';
+		this.state.currentData = null;
+		this.state.isModalOpen = true;
+		
+		this.state.defaultAllergies = [];
+		this.state.defaultpreferredCategories = [];
+		this.state.defaultnotificationPreferences = [];
 	},
 
-	activeModule: {},
-	activeModuleContent: {},
-	markComplete: null,
-
-	setMarkComplete: (markComplete) => {
-		this.markComplete = markComplete;
+	// 사용자 편집 모드로 모달 열기 (id 또는 user data 받아서 처리)
+	openEditModal(userdata) {
+		this.state.modalMode = 'edit';
+		this.state.currentData = userdata;
+		this.state.isModalOpen = true;
+		
+		const toLabelValue = arr => 
+			Array.isArray(arr) 
+				? arr.map(code => ({ label: code, value: code })) 
+				: [];
+		
+		this.state.defaultAllergies = toLabelValue(userdata.allergies);
+		this.state.defaultpreferredCategories = toLabelValue(userdata.preferredCategories);
+		this.state.defaultnotificationPreferences = toLabelValue(userdata.notificationPreferences);
+		
 	},
 
-	setActiveModule: (activeModule) => {
-		this.activeModule = activeModule
+	// state 리셋
+	resetStateData: () => {
+		this.state.modalMode = '';
+		this.state.currentData = null;
+		this.state.isModalOpen = false;
+		
+		this.state.defaultAllergies = [];
+		this.state.defaultpreferredCategories = [];
+		this.state.defaultnotificationPreferences = [];
 	},
 
-	setActiveModuleContent: async (activeModuleContent) => {
-		const contentType = activeModuleContent.type;
-		let content;
+	// 사용자 목록 로드
+	loadUser: async () => {
+		await GET_user_profile.run();
+	},
 
-		const moduleContent = await fetchOneCourseModuleContent.run({
-			id: activeModuleContent.id
-		});
-
-		if (contentType === 'Reading Material') {
-			content = await fetchReadingContent.run({id: activeModuleContent.id});
+	editUser: async () => {
+		// 널 체크
+		if (!utils.state.currentData) {
+			showAlert("수정할 사용자 정보가 없습니다.", "warning");
+			console.log("currentData is null or undefined");
+			return;
 		}
-		if (contentType === 'Video') {
-			content = await fetchVideoContent.run({id: activeModuleContent.id});
-		}
-		if (contentType === 'Quiz') {
-			const quiz = await fetchQuizContent.run({id: activeModuleContent.id});
-			const quizQuestions = await fetchQuizQuestions.run({quizId: quiz[0].id});
-			content = [{
-				...quiz[0],
-				questions: quizQuestions
-			}]
-		}
-		this.activeModuleContent = {
-			activeModuleContent: moduleContent && moduleContent.length > 0 ? moduleContent.map(c => {
-				return {
-					id: c.id,
-					type: c.content_type,
-					name: c.title,
-					markComplete: c.mark_complete,
-					comment: c.comment
-				}
-			})[0] : undefined,
-			content: content.length > 0 ? content[0] : undefined,
-		}
-	},
 
-	acceptRejectModuleContent: async () => {
-		console.log('MC:', utils.markComplete, utils.activeModuleContent.activeModuleContent);
-		await patchModuleContent.run();
-		await this.getModules();
-		this.setActiveModuleContent(this.activeModuleContent.activeModuleContent);
-		showAlert('Module Content Updated!', 'success');
-	},
 
-	updateModule: async () => {
-		await patchModule.run();
-		await this.getModules();
-		showAlert('Module Updated', 'success');
-		closeModal('mdl_addModule');
-	},
 
-	addModule: async () => {
-		await createModule.run();
-		await this.getModules();
-		showAlert('Module Created', 'success');
-		closeModal('mdl_addModule');
+		try {
+			// 바디 미리 준비
+			const allergies = Array.isArray(MultiSel_Allergies.selectedOptions) ? MultiSel_Allergies.selectedOptions.map(item => item.value) : [];
+			const preferredCategories = Array.isArray(MultiSel_Preferred.selectedOptions) ? MultiSel_Preferred.selectedOptions.map(item => item.value) : [];
+			const notificationPreferences = Array.isArray(MultiSel_NonPreffered.selectedOptions) ? MultiSel_NonPreffered.selectedOptions.map(item => item.value) : [];
+			
+			const jsonres = {
+				id: utils.state.currentData._id,
+				username: inp_userName.text,
+				gender: sel_Gender.selectedOptionValue,
+				age: parseInt(inp_Age.text) || 0,
+				allergies: allergies,
+				preferredCategories: preferredCategories,
+				notificationPreferences: notificationPreferences,
+				desc: inp_userDesc?.text ?? ""
+			};
+
+			const response = await PUT_user_profile.run({body: jsonres});
+			showAlert("사용자 수정에 성공했습니다.", "success");
+			console.log("응답 데이터:", response);
+			await this.loadUser();
+		} catch (e) {
+			showAlert(e.message || "오류가 발생했습니다.", "error");
+			console.log("Error detail:", e);
+		}
+
 	},
 
 	addUser: async () => {
 		try {
+			
+			const allergies = Array.isArray(MultiSel_Allergies.selectedOptions) ? MultiSel_Allergies.selectedOptions.map(item => item.value) : [];
+			const preferredCategories = Array.isArray(MultiSel_Preferred.selectedOptions) ? MultiSel_Preferred.selectedOptions.map(item => item.value) : [];
+			const notificationPreferences = Array.isArray(MultiSel_NonPreffered.selectedOptions) ? MultiSel_NonPreffered.selectedOptions.map(item => item.value) : [];
+			
+			const jsonres = {
+				username: inp_userName.text,
+				gender: sel_Gender.selectedOptionValue,
+				age: parseInt(inp_Age.text) || 0,
+				allergies: allergies,
+				preferredCategories: preferredCategories,
+				notificationPreferences: notificationPreferences,
+				desc: inp_userDesc?.text ?? ""
+			};
+			
+			const response = await POST_user_profile.run({body: jsonres});
+			showAlert("사용자 등록에 성공했습니다.", "success");
+			console.log("응답 데이터:", response);
 
-			showAlert(`User ${MultiSel_Allergies.selectedOptions.map(item => item.value)}`, "info");
-			//showAlert(`User ${MultiSel_Allergies.options}`, " Add")
-
-			const response = await fetch('http://10.10.16.31:8000/user_profile', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					username: inp_userName.text, 
-					gender: sel_Gender.selectedOptionValue,
-					age: inp_Age.text,
-					allergies: MultiSel_Allergies.selectedOptions.map(item => item.value),
-					//preferredCategories: MultiSel_Preferred.selectedOptions.map(item => item.value),
-					//notificationPreferences: MultiSel_NonPreffered.selectedOptions.map(item => item.value),
-					//desc: inp_userDesc.text,
-
-				})
-			});
-			if (!response.ok) throw new Error('Failed to add user');
-			await this.getModules();
-			showAlert('User Created', 'success');
-			closeModal('mdl_addUser');
-		} 
-		catch (e) {
-			showAlert(e.message, 'error');
+			await this.loadUser();
 		}
-	}	
+		catch(e) {
+			showAlert(e.message || "오류가 발생했습니다.", "error");
+			console.log("Error detail:", e);
+		}
+	},
+
+	delete_user: async () => {
+
+		const id = utils.state.currentData._id;
+		try {
+			console.log("try delete user :", id);
+			const response = await DELETE_user_profile.run( {id:id} );
+			showAlert("사용자 제거에 성공했습니다.", "success");
+			console.log("응답 데이터:", response);
+			await this.loadUser();
+		}
+		catch(e) {
+			showAlert(e.message || "오류가 발생했습니다.", "error");
+			console.log("Error detail:", e);
+		}
+	},
 
 }

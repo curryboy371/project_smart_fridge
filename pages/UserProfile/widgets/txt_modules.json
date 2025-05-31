@@ -2,6 +2,7 @@
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 7,
+  "disableLink": "{{}}",
   "displayName": "Text",
   "dynamicBindingPathList": [
     {
@@ -15,6 +16,11 @@
     }
   ],
   "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicPropertyPathList": [
+    {
+      "key": "disableLink"
+    }
+  ],
   "dynamicTriggerPathList": [],
   "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
   "fontSize": "1.875rem",
@@ -33,7 +39,7 @@
   "mobileLeftColumn": 23,
   "mobileRightColumn": 39,
   "mobileTopRow": 3,
-  "originalBottomRow": 36,
+  "originalBottomRow": 7,
   "originalTopRow": 2,
   "overflow": "NONE",
   "parentColumnSpace": 18.0625,
@@ -48,7 +54,7 @@
     "label"
   ],
   "shouldTruncate": false,
-  "text": "User Profile\n",
+  "text": "유저 프로필 관리",
   "textAlign": "LEFT",
   "textColor": "#231F2",
   "topRow": 2,

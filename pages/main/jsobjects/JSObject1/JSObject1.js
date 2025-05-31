@@ -1,12 +1,12 @@
 export default {
-	myVar1: [],
-	myVar2: {},
-	myFun1 () {
-		//	write code here
-		//	this.myVar1 = [1,2,3]
-	},
-	async myFun2 () {
-		//	use async-await or promises
-		//	await storeValue('varName', 'hello world')
+
+	async ping() {
+		try {
+			const response = await PING.run();
+			showAlert(`Success: ${response.message}`); // 결과 보여주기
+		} 
+		catch (error) {
+			showAlert(`에러: ${error}`);
+		}
 	}
 }

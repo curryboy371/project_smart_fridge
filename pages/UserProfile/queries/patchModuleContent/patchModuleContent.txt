@@ -1,4 +1,0 @@
-UPDATE course_module_content
-  SET comment = {{inp_comment.text}},
-	mark_complete = {{utils.markComplete}}
-  WHERE id = {{ utils.activeModuleContent.activeModuleContent.id }};

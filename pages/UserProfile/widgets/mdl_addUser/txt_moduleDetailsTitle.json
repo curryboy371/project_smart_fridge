@@ -18,6 +18,7 @@
     }
   ],
   "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicPropertyPathList": [],
   "dynamicTriggerPathList": [],
   "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
   "fontSize": "1.25rem",
@@ -36,6 +37,8 @@
   "mobileLeftColumn": 1,
   "mobileRightColumn": 41,
   "mobileTopRow": 1,
+  "originalBottomRow": 5,
+  "originalTopRow": 1,
   "overflow": "NONE",
   "parentId": "c6y8usbzch",
   "renderMode": "CANVAS",
@@ -47,7 +50,7 @@
     "label"
   ],
   "shouldTruncate": false,
-  "text": "{{utils.activeModule && utils.activeModule.Id ? 'Module Details' : 'Add User'}}",
+  "text": "{{ utils.state.modalMode == \"add\" ? \"User Add\" : \"User Edit\" }}",
   "textAlign": "LEFT",
   "textColor": "#231F20",
   "topRow": 1,

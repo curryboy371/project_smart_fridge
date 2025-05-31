@@ -5,7 +5,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 41,
   "boxShadow": "none",
-  "defaultText": "{{utils.activeModule ? utils.activeModule.Description : ''}}",
+  "defaultText": "{{ utils.state.modalMode == \"add\" ? \"\" : utils.state.currentData.desc }}",
   "displayName": "Input",
   "dynamicBindingPathList": [
     {
