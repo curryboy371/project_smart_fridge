@@ -6,7 +6,7 @@ from core.tfdb import TFDB
 
 class UserProfileCRUD:
 
-    collection = TFDB.get_instance().user_profile_collection  # ⚠️ 컬렉션 이름 확인 필요
+    collection = TFDB.get_instance().user_profile_collection
 
     @classmethod
     async def create_user_profile(cls, user_profile: UserProfileModel) -> dict:
@@ -28,7 +28,8 @@ class UserProfileCRUD:
     async def get_user_profile(cls, user_id: str) -> Optional[dict]:
         if not ObjectId.is_valid(user_id):
             return None
-        user = await cls.collection.find_one({"_id": ObjectId(user_id)})
+        oid = ObjectId(user_id)
+        user = await cls.collection.find_one({"_id": oid})
         return user
 
     @classmethod
@@ -37,15 +38,17 @@ class UserProfileCRUD:
             return None
         user_dict = user_profile.dict(by_alias=True)
         user_dict.pop("_id", None)
-        result = await cls.collection.update_one({"_id": ObjectId(user_id)}, {"$set": user_dict})
+        oid = ObjectId(user_id)
+        result = await cls.collection.update_one({"_id": oid}, {"$set": user_dict})
         if result.matched_count == 0:
             return None
-        updated_user = await cls.collection.find_one({"_id": ObjectId(user_id)})
+        updated_user = await cls.collection.find_one({"_id": oid})
         return updated_user
 
     @classmethod
     async def delete_user_profile(cls, user_id: str) -> bool:
         if not ObjectId.is_valid(user_id):
             return False
-        result = await cls.collection.delete_one({"_id": ObjectId(user_id)})
+        oid = ObjectId(user_id)
+        result = await cls.collection.delete_one({"_id": oid})
         return result.deleted_count > 0

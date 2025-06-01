@@ -6,7 +6,7 @@ from core.tfdb import TFDB
 
 class FridgeItemCRUD:
 
-    collection = TFDB.get_instance().fridge_item_collection  # ⚠️ 컬렉션 이름 확인 필요
+    collection = TFDB.get_instance().fridge_item_collection
 
     @classmethod
     async def create_item(cls, item: FridgeItemModel) -> dict:
@@ -17,11 +17,9 @@ class FridgeItemCRUD:
         return created_item
 
     @classmethod
-    async def get_items(cls, user_id: str) -> List[dict]:
-        if not ObjectId.is_valid(user_id):
-            return []
+    async def get_items(cls) -> List[dict]:
         items = []
-        cursor = cls.collection.find({"userId": ObjectId(user_id)})
+        cursor = cls.collection.find()
         async for item in cursor:
             items.append(item)
         return items
@@ -30,8 +28,10 @@ class FridgeItemCRUD:
     async def get_item(cls, item_id: str) -> Optional[dict]:
         if not ObjectId.is_valid(item_id):
             return None
-        item = await cls.collection.find_one({"_id": ObjectId(item_id)})
+        oid = ObjectId(item_id)
+        item = await cls.collection.find_one({"_id": oid})
         return item
+    
 
     @classmethod
     async def update_item(cls, item_id: str, item: FridgeItemModel) -> Optional[dict]:
@@ -39,15 +39,18 @@ class FridgeItemCRUD:
             return None
         item_dict = item.dict(by_alias=True)
         item_dict.pop("_id", None)
-        result = await cls.collection.update_one({"_id": ObjectId(item_id)}, {"$set": item_dict})
+        oid = ObjectId(item_id)
+        result = await cls.collection.update_one({"_id": oid}, {"$set": item_dict})
         if result.matched_count == 0:
             return None
-        updated_item = await cls.collection.find_one({"_id": ObjectId(item_id)})
+        updated_item = await cls.collection.find_one({"_id": oid})
         return updated_item
 
     @classmethod
     async def delete_item(cls, item_id: str) -> bool:
         if not ObjectId.is_valid(item_id):
             return False
-        result = await cls.collection.delete_one({"_id": ObjectId(item_id)})
+        
+        oid = ObjectId(item_id)
+        result = await cls.collection.delete_one({"_id": oid})
         return result.deleted_count > 0
