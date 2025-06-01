@@ -7,20 +7,12 @@ from models.model_base import PyObjectId
 
 
 class FridgeItemModel(BaseModel):
-    id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
-    userId: PyObjectId
-    name: str
-    categoryId: str  # 또는 PyObjectId로 변경 가능
-    enteredAt: datetime
-    lastUsedAt: Optional[datetime] = None
-    usedCount: int = 0
-    expireAt: Optional[datetime] = None
-    memo: Optional[str] = None
-    storageType: str  # 냉장 / 냉동 / 실온
-    isUsedUp: bool = False
-
-    usageHistory: Optional[List[Dict[str, Optional[str]]]] = None
-    # usageHistory 예시: [{"usedAt": "2024-05-01", "note": "김치찌개로 사용"}]
+    id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id") 
+    name: str                                # 음식 이름 - food_category-name
+    usedCount: int = 0                       # 사용된 횟수
+    enteredAt: datetime                      # 냉장고에 들어온 날짜 및 시간
+    expireAt: Optional[datetime] = None      # 유통기한 또는 만료 날짜 (없다면 None)
+    desc: Optional[str] = None               # 음식에 대한 추가 설명
 
     class Config:
         arbitrary_types_allowed = True
