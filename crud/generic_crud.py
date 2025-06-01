@@ -20,6 +20,9 @@ class GenericCRUD:
             items.append(item)
         return items
 
+    async def get_by_name(self, name: str) -> Optional[dict]:
+        return await self.collection.find_one({"name": name})
+
     async def get_by_id(self, item_id: str) -> Optional[dict]:
         if not ObjectId.is_valid(item_id):
             return None

@@ -35,15 +35,38 @@ class FoodCategoryAPI():
         return category
 
     async def create_category(self, category: FoodCategoryModel):
+        # 중복 체크
+        existing = await self._crud.get_by_name(category.name)
+        if existing:
+            self._log.logger.info(f"duplicate {category.name}")
+            raise_conflict(detail="exist category name")
+
         created = await self._crud.create(category.dict(by_alias=True))
         if not created:
             raise_bad_request()
+            
+        self._log.logger.info(f"Category {category.id} create successfully")
         return created
 
     async def update_category(self, category: FoodCategoryModel):
+        # 중복 체크
+        existing_id = await self._crud.get_by_id(category.id)
+        if not existing_id:
+            self._log.logger.info(f"invalid id {category.id}")
+            raise_bad_request(detail="invalid id")
+        
+        existing_name = await self._crud.get_by_name(category.name)
+        if existing_name:
+            obj_id = existing_name["_id"]
+            if obj_id != category.id: # 기존에 있는 name으로 교체한 경우 중복
+                self._log.logger.info(f"duplicate {category.name}")
+                raise_conflict(detail="exist category name")
+        
         updated = await self._crud.update(category.id, category.dict(by_alias=True))
         if not updated:
             raise_bad_request()
+            
+        self._log.logger.info(f"Category {category.id} update successfully")    
         return updated
 
     async def delete_category(self, category_id: str):
