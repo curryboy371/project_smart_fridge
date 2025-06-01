@@ -1,75 +1,53 @@
 from fastapi import APIRouter
-from models.food_category import FoodCategoryModel
-from crud.food_category_crud import FoodCategoryCRUD
 from typing import List
-
+from models.food_category import FoodCategoryModel
+from crud.generic_crud import GenericCRUD
 from api.routes_exception import *
 from core.tflog import TFLoggerManager as TFLog
+from core import tfenums as en
 
-log = TFLog.get_instance()
-router = APIRouter(prefix="/food_category")
+class FoodCategoryAPI():
+    def __init__(self, enum_value: en.CollectionName):
+        self._enum_value = enum_value
+        self._log = TFLog.get_instance()
+        self._crud = GenericCRUD(enum_value)  # enum 값 넘겨서 초기화
 
-@router.get("/", response_model=List[FoodCategoryModel])
-async def get_categories():
-    return await FoodCategoryCRUD.get_categories()
+        self._router = APIRouter(prefix=f"/{self._enum_value.value}")
 
-@router.get("/{category_id}", response_model=FoodCategoryModel)
-async def get_category(category_id: str):
-    return await validate_category_id(category_id)
-
-@router.post("/", response_model=FoodCategoryModel)
-async def create_category(category: FoodCategoryModel):
-    category_id = category.id
-    name = category.name
-    log.logger.info(f"try create category id({category_id}), name({name})")
-
-    # 중복 Name 검사
-    exists_by_name = await FoodCategoryCRUD.get_category_by_name(name)
-    if exists_by_name:
-        log.logger.warning(f"duplicate name({name})")
-        raise_conflict(detail="Category Name already exists")
-
-    created = await FoodCategoryCRUD.create_category(category)
-    if not created:
-        log.logger.warning(f"failed create category id({category_id})")
-        raise_bad_request()
-
-    log.logger.info(f"success create category({category_id})")
-    return created
-
-@router.put("/", response_model=FoodCategoryModel)
-async def update_category(category: FoodCategoryModel):
-    category_id = category.id
-    name = category.name
-    log.logger.info(f"try update category id({category_id}), name({name})")
-
-    updated = await FoodCategoryCRUD.update_category(category_id, category)
-    if not updated:
-        log.logger.warning(f"failed update category id({category_id})")
-        raise_bad_request()
-
-    log.logger.info(f"success update category({category_id})")
-    return updated
-
-@router.delete("/{category_id}")
-async def delete_category(category_id: str):
-    log.logger.info(f"try delete category id({category_id})")
-
-    deleted = await FoodCategoryCRUD.delete_category(category_id)
-    if not deleted:
-        log.logger.warning(f"failed delete category({category_id})")
-        raise_bad_request()
-
-    log.logger.info(f"success delete category({category_id})")
-    return {"message": f"Category {category_id} deleted successfully"}
+        self._router.get("/", response_model=List[FoodCategoryModel])(self.get_categories)
+        self._router.get("/{category_id}", response_model=FoodCategoryModel)(self.get_category)
+        self._router.post("/", response_model=FoodCategoryModel)(self.create_category)
+        self._router.put("/", response_model=FoodCategoryModel)(self.update_category)
+        self._router.delete("/{category_id}")(self.delete_category)
 
 
-# 중복 검사용 함수
-async def validate_category_id(category_id: str):
-    category = await FoodCategoryCRUD.get_category(category_id)
-    if not category:
-        log.logger.warning(f"invalid category id({category_id})")
-        raise_not_found(detail="Category not found")
+    @property
+    def router(self):
+        return self._router
+    
+    async def get_categories(self):
+        return await self._crud.get_all()
 
-    return category
+    async def get_category(self, category_id: str):
+        category = await self._crud.get_by_id(category_id)
+        if not category:
+            raise_not_found()
+        return category
 
+    async def create_category(self, category: FoodCategoryModel):
+        created = await self._crud.create(category.dict(by_alias=True))
+        if not created:
+            raise_bad_request()
+        return created
+
+    async def update_category(self, category: FoodCategoryModel):
+        updated = await self._crud.update(category.id, category.dict(by_alias=True))
+        if not updated:
+            raise_bad_request()
+        return updated
+
+    async def delete_category(self, category_id: str):
+        deleted = await self._crud.delete(category_id)
+        if not deleted:
+            raise_bad_request()
+        return {"message": f"Category {category_id} deleted successfully"}

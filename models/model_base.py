@@ -4,7 +4,6 @@ from datetime import datetime
 from bson import ObjectId
 from pydantic import BaseModel, Field
 
-
 class PyObjectId(ObjectId):
     @classmethod
     def __get_validators__(cls):
@@ -24,18 +23,15 @@ class PyObjectId(ObjectId):
             core_schema.update(type="string")
             return core_schema
         return core_schema
-    
 
-#temp
-class UserModel(BaseModel):
+
+
+class SimpleModel(BaseModel):
     id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
-    username: str
-    email: str
-    age: Optional[int] = None
+    name: str
+    value: str
 
     class Config:
-        arbitrary_types_allowed = True      # _id를 id로 자동 매핑
+        arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
-        validate_by_name=True
-
-        
+        validate_by_name = True

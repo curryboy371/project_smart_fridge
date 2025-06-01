@@ -2,13 +2,13 @@ from typing import List, Optional
 from models.food_category import FoodCategoryModel
 from core.tfdb import TFDB
 from bson import ObjectId
+from core import tfenums as en
 
 from core.tflog import TFLoggerManager as TFLog
 
-log = TFLog.get_instance()
-class FoodCategoryCRUD:
-
-    collection = TFDB.get_instance().food_category_collection 
+class FoodCategoryCRUD():
+    
+    collection = TFDB.get_instance().get_collection(en.CollectionName.FOOD_CATEGORY)
 
     @classmethod
     async def create_category(cls, category: FoodCategoryModel) -> dict:

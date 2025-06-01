@@ -2,11 +2,11 @@ from typing import List, Optional
 from bson import ObjectId
 from models.user_profile import UserProfileModel
 from core.tfdb import TFDB
-
+from core import tfenums as en
 
 class UserProfileCRUD:
 
-    collection = TFDB.get_instance().user_profile_collection
+    collection = TFDB.get_instance().get_collection(en.CollectionName.USER_PROFILE)
 
     @classmethod
     async def create_user_profile(cls, user_profile: UserProfileModel) -> dict:

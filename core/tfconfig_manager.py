@@ -7,12 +7,13 @@ class TFConfigManager(TFSingletonBase):
         if self._initialized:
             return
         
+        super().__init__()
+        
         self.config = configparser.ConfigParser()
         if not os.path.exists(config_path):
             raise FileNotFoundError(f"Config file not found: {config_path}")
         
         self.config.read(config_path)
-        self._initialized = True
 
     def get(self, section, key, fallback=None):
         return self.config.get(section, key, fallback=fallback)

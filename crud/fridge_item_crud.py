@@ -2,11 +2,11 @@ from typing import List, Optional
 from bson import ObjectId
 from models.fridge_item import FridgeItemModel
 from core.tfdb import TFDB
-
+from core import tfenums as en
 
 class FridgeItemCRUD:
 
-    collection = TFDB.get_instance().fridge_item_collection
+    collection = TFDB.get_instance().get_collection(en.CollectionName.FRIDGE_ITEM)
 
     @classmethod
     async def create_item(cls, item: FridgeItemModel) -> dict:

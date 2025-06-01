@@ -12,11 +12,11 @@ class UserProfileModel(BaseModel):
     gender: str
     allergies: Optional[List[str]] = None
     preferredCategories: Optional[List[str]] = None
-    notificationPreferences: Optional[List[str]] = None
+    missingNutrients: Optional[List[str]] = None
     desc: Optional[str] = None
 
     class Config:
-        arbitrary_types_allowed = True
+        arbitrary_types_allowed = True      # _id를 id로 자동 매핑
         json_encoders = {ObjectId: str}
         validate_by_name=True
 

@@ -2,6 +2,8 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from core.singlebone_base import TFSingletonBase
 from core.tflog import TFLoggerManager as TFLog
 from core.tfconfig_manager import TFConfigManager as TFConfig
+from core import tfenums as en
+from core.tfenums import CollectionName
 
 logger = TFLog.get_instance().get_logger()
 
@@ -24,26 +26,24 @@ class TFDB(TFSingletonBase):
 
         self.client = AsyncIOMotorClient(uri)
         self.db = self.client[dbname]
-
-        # db collection 
-        self.user_collection = self.db.users
-        self.user_profile_collection = self.db.user_profile
-        self.food_category_collection = self.db.food_category
-        self.fridge_item_collection = self.db.fridge_item
-
-
-
+        
+        self.collections = {
+            en.CollectionName.USER_PROFILE: self.db.user_profile,
+            en.CollectionName.FOOD_CATEGORY: self.db.food_category,
+            en.CollectionName.FRIDGE_ITEM: self.db.fridge_item,
+            en.CollectionName.NUTRITION: self.db.nutrition,
+            en.CollectionName.ALLERGIES: self.db.allergies,
+            en.CollectionName.STORAGE_METHOD: self.db.storage_method,            
+            en.CollectionName.FOOD_SIMPLE_CATEGORY: self.db.food_simple_category, 
+        }
+        
     async def create_collections(self):
-        collections_to_create = [
-            "users",
-            "user_profile",
-            "food_category",
-            "fridge_item",
-        ]
+        
+        collection_list = [c.value for c in en.CollectionName]
 
         existing_collections = await self.db.list_collection_names()
 
-        for collection in collections_to_create:
+        for collection in collection_list:
             if collection not in existing_collections:
                 await self.db.create_collection(collection)
                 logger.info(f"Created collection: {collection}")
@@ -57,3 +57,6 @@ class TFDB(TFSingletonBase):
         except Exception as e:
             logger.critical("MongoDB 연결 실패:", e)
             return False
+        
+    def get_collection(self, name: en.CollectionName):
+        return self.collections[name]
