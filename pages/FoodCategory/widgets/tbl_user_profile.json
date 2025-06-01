@@ -32,6 +32,7 @@
     }
   },
   "columnOrder": [
+    "food_category",
     "name",
     "storageMethod",
     "shelfLifeDays",
@@ -42,12 +43,13 @@
     "customColumn2",
     "_id"
   ],
-  "columnUpdatedAt": 1748704702037,
+  "columnUpdatedAt": 1748769261211,
   "columnWidthMap": {
+    "allergenTags": 203,
     "customColumn1": 114,
-    "desc": 467,
+    "desc": 566,
     "notificationPreferences": 221,
-    "nutrition": 250,
+    "nutrition": 270,
     "preferredCategories": 278
   },
   "customIsLoading": false,
@@ -93,9 +95,6 @@
       "key": "primaryColumns.customColumn1.boxShadow"
     },
     {
-      "key": "tableData"
-    },
-    {
       "key": "primaryColumns.name.computedValue"
     },
     {
@@ -109,17 +108,23 @@
     },
     {
       "key": "primaryColumns.nutrition.computedValue"
-    }
-  ],
-  "dynamicPropertyPathList": [
+    },
     {
       "key": "tableData"
     },
+    {
+      "key": "primaryColumns.food_category.computedValue"
+    }
+  ],
+  "dynamicPropertyPathList": [
     {
       "key": "primaryColumns.customColumn1.isDisabled"
     },
     {
       "key": "primaryColumns.customColumn2.isDisabled"
+    },
+    {
+      "key": "tableData"
     }
   ],
   "dynamicTriggerPathList": [
@@ -178,7 +183,7 @@
       "isDiscardVisible": true,
       "isEditable": false,
       "isSaveVisible": true,
-      "isVisible": true,
+      "isVisible": false,
       "label": "_id",
       "notation": "standard",
       "originalId": "_id",
@@ -326,6 +331,40 @@
       "notation": "standard",
       "originalId": "desc",
       "sticky": "",
+      "textSize": "0.875rem",
+      "thousandSeparator": true,
+      "validation": {},
+      "verticalAlignment": "CENTER",
+      "width": 150
+    },
+    "food_category": {
+      "alias": "food_category",
+      "allowCellWrapping": false,
+      "allowSameOptionsInNewRow": true,
+      "cellBackground": "",
+      "columnType": "text",
+      "computedValue": "{{tbl_user_profile.processedTableData.map((currentRow, currentIndex) => ( currentRow[\"food_category\"]))}}",
+      "currencyCode": "USD",
+      "decimals": 0,
+      "enableFilter": true,
+      "enableSort": true,
+      "fontStyle": "",
+      "horizontalAlignment": "LEFT",
+      "id": "food_category",
+      "index": 2,
+      "isCellEditable": false,
+      "isCellVisible": true,
+      "isDerived": false,
+      "isDisabled": false,
+      "isDiscardVisible": true,
+      "isEditable": false,
+      "isSaveVisible": true,
+      "isVisible": true,
+      "label": "food_category",
+      "notation": "standard",
+      "originalId": "food_category",
+      "sticky": "",
+      "textColor": "",
       "textSize": "0.875rem",
       "thousandSeparator": true,
       "validation": {},

@@ -30,6 +30,10 @@
     {
       "id": "FoodCategory",
       "isDefault": false
+    },
+    {
+      "id": "Food",
+      "isDefault": false
     }
   ]
 }

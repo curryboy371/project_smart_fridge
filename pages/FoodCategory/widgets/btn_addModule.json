@@ -34,7 +34,7 @@
   "mobileLeftColumn": 36,
   "mobileRightColumn": 52,
   "mobileTopRow": 4,
-  "onClick": "{{utils.openAddModal();\nshowModal(mdl_addUser.name);}}",
+  "onClick": "{{utils.openAddModal();\nshowModal(mdl_addUser.name).then(() => {});}}",
   "originalBottomRow": 19,
   "originalTopRow": 12,
   "parentColumnSpace": 18.203125,

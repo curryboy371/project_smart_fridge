@@ -37,17 +37,18 @@
     "gender",
     "allergies",
     "preferredCategories",
-    "notificationPreferences",
     "desc",
-    "_id",
+    "missingNutrients",
     "customColumn1",
-    "customColumn2"
+    "customColumn2",
+    "_id"
   ],
-  "columnUpdatedAt": 1748684515554,
+  "columnUpdatedAt": 1748771874271,
   "columnWidthMap": {
     "customColumn1": 114,
+    "missingNutrients": 251,
     "notificationPreferences": 221,
-    "preferredCategories": 278
+    "preferredCategories": 229
   },
   "customIsLoading": false,
   "customIsLoadingValue": "",
@@ -89,9 +90,6 @@
       "key": "primaryColumns.preferredCategories.computedValue"
     },
     {
-      "key": "primaryColumns.notificationPreferences.computedValue"
-    },
-    {
       "key": "primaryColumns.desc.computedValue"
     },
     {
@@ -111,6 +109,9 @@
     },
     {
       "key": "primaryColumns.customColumn1.boxShadow"
+    },
+    {
+      "key": "primaryColumns.missingNutrients.computedValue"
     }
   ],
   "dynamicPropertyPathList": [
@@ -393,19 +394,21 @@
       "verticalAlignment": "CENTER",
       "width": 150
     },
-    "notificationPreferences": {
-      "alias": "notificationPreferences",
+    "missingNutrients": {
+      "alias": "missingNutrients",
       "allowCellWrapping": false,
       "allowSameOptionsInNewRow": true,
+      "cellBackground": "",
       "columnType": "text",
-      "computedValue": "{{tbl_user_profile.processedTableData.map((currentRow, currentIndex) => ( currentRow[\"notificationPreferences\"]))}}",
+      "computedValue": "{{tbl_user_profile.processedTableData.map((currentRow, currentIndex) => ( currentRow[\"missingNutrients\"]))}}",
       "currencyCode": "USD",
       "decimals": 0,
       "enableFilter": true,
       "enableSort": true,
+      "fontStyle": "",
       "horizontalAlignment": "LEFT",
-      "id": "notificationPreferences",
-      "index": 6,
+      "id": "missingNutrients",
+      "index": 7,
       "isCellEditable": false,
       "isCellVisible": true,
       "isDerived": false,
@@ -414,10 +417,11 @@
       "isEditable": false,
       "isSaveVisible": true,
       "isVisible": true,
-      "label": "notificationPreferences",
+      "label": "missingNutrients",
       "notation": "standard",
-      "originalId": "notificationPreferences",
+      "originalId": "missingNutrients",
       "sticky": "",
+      "textColor": "",
       "textSize": "0.875rem",
       "thousandSeparator": true,
       "validation": {},
@@ -491,7 +495,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 57,
   "searchKey": "",
-  "tableData": "{{GET_user_profile.data}}",
+  "tableData": "{{GET.data}}",
   "textSize": "0.875rem",
   "topRow": 20,
   "totalRecordsCount": 0,

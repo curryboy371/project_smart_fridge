@@ -15,6 +15,11 @@
       "key": "borderRadius"
     }
   ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
   "dynamicTriggerPathList": [
     {
       "key": "onClick"
@@ -34,9 +39,9 @@
   "mobileLeftColumn": 36,
   "mobileRightColumn": 52,
   "mobileTopRow": 4,
-  "onClick": "{{utils.openAddModal();\nshowModal(mdl_addUser.name);}}",
-  "originalBottomRow": 16,
-  "originalTopRow": 9,
+  "onClick": "{{\nutils.openAddModal();\n\nshowModal(mdl_addUser.name);\n}}",
+  "originalBottomRow": 18,
+  "originalTopRow": 11,
   "parentColumnSpace": 18.203125,
   "parentId": "0",
   "parentRowSpace": 10,

@@ -1,6 +1,6 @@
 {
-  "gitSyncId": "6839bb95990a0a494d89660e_742ea9d3-07e7-4c91-a8b6-c9ded9f6038d",
-  "id": "UserProfile_PUT_user_profile",
+  "gitSyncId": "6839bb95990a0a494d89660e_14487b36-036f-4a67-b6f7-b0e1d62f0e45",
+  "id": "UserProfile_POST",
   "pluginId": "restapi-plugin",
   "pluginType": "API",
   "unpublishedAction": {
@@ -18,7 +18,7 @@
         "apiContentType": "application/json"
       },
       "headers": [],
-      "httpMethod": "PUT",
+      "httpMethod": "POST",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
       "path": "user_profile/",
@@ -42,7 +42,7 @@
         "key": "body"
       }
     ],
-    "name": "PUT_user_profile",
+    "name": "POST",
     "pageId": "UserProfile",
     "runBehaviour": "MANUAL",
     "userSetOnLoad": false

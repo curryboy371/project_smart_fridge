@@ -65,7 +65,7 @@
     "dropdown"
   ],
   "serverSideFiltering": false,
-  "sourceData": "{{ [\n\t{ label: \"Male\", value: \"male\" },\n\t{ label: \"Female\", value: \"female\" }\n] }}",
+  "sourceData": "{{ [\n\t{ label: \"male\", value: \"male\" },\n\t{ label: \"female\", value: \"female\" }\n] }}",
   "topRow": 1,
   "type": "SELECT_WIDGET",
   "version": 1,

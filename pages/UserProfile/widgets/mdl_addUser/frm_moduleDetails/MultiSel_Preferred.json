@@ -14,6 +14,9 @@
     },
     {
       "key": "defaultOptionValue"
+    },
+    {
+      "key": "sourceData"
     }
   ],
   "dynamicHeight": "FIXED",
@@ -43,8 +46,8 @@
   "mobileRightColumn": 21,
   "mobileTopRow": 19,
   "needsErrorInfo": false,
-  "optionLabel": "name",
-  "optionValue": "code",
+  "optionLabel": "label",
+  "optionValue": "value",
   "parentColumnSpace": 10.5556640625,
   "parentId": "fn1suqgpfa",
   "parentRowSpace": 10,
@@ -53,7 +56,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 38,
   "serverSideFiltering": false,
-  "sourceData": "[\n  {\n    \"name\": \"Fruits\",\n    \"code\": \"FRUITS\"\n  },\n  {\n    \"name\": \"Meat\",\n    \"code\": \"MEAT\"\n  },\n  {\n    \"name\": \"Seafood\",\n    \"code\": \"SEAFOOD\"\n  },\n  {\n    \"name\": \"Desserts\",\n    \"code\": \"DESSERTS\"\n  },\n  {\n    \"name\": \"Vegetables\",\n    \"code\": \"VEGETABLES\"\n  }\n]",
+  "sourceData": "{{ utils.categoryTable.food_simple}}",
   "topRow": 19,
   "type": "MULTI_SELECT_WIDGET_V2",
   "version": 1,

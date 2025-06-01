@@ -4,10 +4,13 @@
   "borderRadius": "0.375rem",
   "bottomRow": 21,
   "boxShadow": "none",
-  "defaultOptionValue": "{{ ((options, serverSideFiltering) => (  utils.state.defaultAllergies ))(MultiSel_Allergies.options, MultiSel_Allergies.serverSideFiltering) }}",
+  "defaultOptionValue": "{{ ((options, serverSideFiltering) => (  utils.state.defaultAllergies))(MultiSel_Allergies.options, MultiSel_Allergies.serverSideFiltering) }}",
   "dynamicBindingPathList": [
     {
       "key": "accentColor"
+    },
+    {
+      "key": "sourceData"
     },
     {
       "key": "defaultOptionValue"
@@ -50,7 +53,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 21,
   "serverSideFiltering": false,
-  "sourceData": "[\n  {\n    \"name\": \"Milk\",\n    \"value\": \"MILK\"\n  },\n  {\n    \"name\": \"Egg\",\n    \"value\": \"EGG\"\n  },\n  {\n    \"name\": \"Peanut\",\n    \"value\": \"PEANUT\"\n  },\n  {\n    \"name\": \"Shrimp\",\n    \"value\": \"SHRIMP\"\n  },\n  {\n    \"name\": \"Peach\",\n    \"value\": \"PEACH\"\n  },\n  {\n    \"name\": \"Crab\",\n    \"value\": \"CRAB\"\n  },\n  {\n    \"name\": \"Kiwi\",\n    \"value\": \"KIWI\"\n  },\n\t{\n    \"name\": \"Milk\",\n    \"value\": \"Milk\"\n  }\n]",
+  "sourceData": "{{ \nutils.categoryTable.allergies\n}}",
   "topRow": 13,
   "type": "MULTI_SELECT_WIDGET_V2",
   "version": 1,

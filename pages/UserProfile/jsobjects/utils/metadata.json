@@ -9,7 +9,11 @@
     "variables": [
       {
         "name": "state",
-        "value": "{\n  modalMode: 'add',\n  currentData: null,\n  isModalOpen: false,\n  defaultAllergies: [],\n  defaultpreferredCategories: [],\n  defaultnotificationPreferences: []\n}"
+        "value": "{\n  modalMode: 'add',\n  currentData: null,\n  isModalOpen: false,\n  defaultAllergies: [],\n  defaultpreferredCategories: [],\n  defaultmissingNutrients: []\n}"
+      },
+      {
+        "name": "categoryTable",
+        "value": "{\n  allergies: [],\n  nutrition: [],\n  storage_method: [],\n  food_simple: []\n}"
       }
     ]
   }

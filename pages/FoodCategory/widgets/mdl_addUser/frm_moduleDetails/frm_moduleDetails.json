@@ -59,7 +59,7 @@
   "isLoading": false,
   "isVisible": true,
   "key": "px0t9ff4z8",
-  "leftColumn": 1,
+  "leftColumn": 0,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 10,
   "minWidth": 450,
@@ -75,7 +75,7 @@
   "positioning": "fixed",
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
-  "rightColumn": 63,
+  "rightColumn": 62,
   "searchTags": [
     "group"
   ],

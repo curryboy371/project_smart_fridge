@@ -36,7 +36,7 @@
   "labelStyle": "BOLD",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 30,
+  "leftColumn": 45,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -51,7 +51,7 @@
   "renderMode": "CANVAS",
   "resetOnSubmit": true,
   "responsiveBehavior": "fill",
-  "rightColumn": 43,
+  "rightColumn": 58,
   "searchTags": [
     "form",
     "text input",

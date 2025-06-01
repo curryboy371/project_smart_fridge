@@ -11,6 +11,9 @@
     },
     {
       "key": "defaultOptionValue"
+    },
+    {
+      "key": "sourceData"
     }
   ],
   "dynamicHeight": "FIXED",
@@ -40,7 +43,7 @@
   "mobileRightColumn": 21,
   "mobileTopRow": 19,
   "needsErrorInfo": false,
-  "optionLabel": "name",
+  "optionLabel": "label",
   "optionValue": "value",
   "parentColumnSpace": 10.5556640625,
   "parentId": "fn1suqgpfa",
@@ -50,7 +53,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 20,
   "serverSideFiltering": false,
-  "sourceData": "[\n  {\n    \"name\": \"Milk\",\n    \"value\": \"MILK\"\n  },\n  {\n    \"name\": \"Egg\",\n    \"value\": \"EGG\"\n  },\n  {\n    \"name\": \"Peanut\",\n    \"value\": \"PEANUT\"\n  },\n  {\n    \"name\": \"Shrimp\",\n    \"value\": \"SHRIMP\"\n  },\n  {\n    \"name\": \"Peach\",\n    \"value\": \"PEACH\"\n  },\n  {\n    \"name\": \"Crab\",\n    \"value\": \"CRAB\"\n  },\n  {\n    \"name\": \"Kiwi\",\n    \"value\": \"KIWI\"\n  }\n]",
+  "sourceData": "{{ utils.categoryTable.allergies}}",
   "topRow": 19,
   "type": "MULTI_SELECT_WIDGET_V2",
   "version": 1,

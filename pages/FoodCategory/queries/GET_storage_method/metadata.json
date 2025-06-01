@@ -1,6 +1,6 @@
 {
-  "gitSyncId": "68353d7be9e51751500a63c7_d5f885f0-06dd-41f7-939c-e52d93870aa9",
-  "id": "UserProfile_GET_user_profile",
+  "gitSyncId": "6839bb95990a0a494d89660e_5a3c9ed8-f627-4a65-ac4d-1184a962be78",
+  "id": "FoodCategory_GET_storage_method",
   "pluginId": "restapi-plugin",
   "pluginType": "API",
   "unpublishedAction": {
@@ -16,7 +16,7 @@
       "httpMethod": "GET",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "/user_profile/",
+      "path": "storage_method/",
       "pluginSpecifiedTemplates": [
         {
           "value": true
@@ -33,9 +33,9 @@
       "pluginId": "restapi-plugin"
     },
     "dynamicBindingPathList": [],
-    "name": "GET_user_profile",
-    "pageId": "UserProfile",
-    "runBehaviour": "ON_PAGE_LOAD",
+    "name": "GET_storage_method",
+    "pageId": "FoodCategory",
+    "runBehaviour": "MANUAL",
     "userSetOnLoad": false
   }
 }

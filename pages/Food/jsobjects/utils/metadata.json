@@ -1,0 +1,16 @@
+{
+  "gitSyncId": "6839bb95990a0a494d89660e_a17cc54e-ae2e-4fa7-9502-6bb6a567e7e7",
+  "id": "Food_utils",
+  "unpublishedCollection": {
+    "name": "utils",
+    "pageId": "Food",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "state",
+        "value": "{\n  modalMode: 'add',\n  currentData: null,\n  isModalOpen: false,\n  defaultAllergies: [],\n  defaultNutrition: []\n}"
+      }
+    ]
+  }
+}

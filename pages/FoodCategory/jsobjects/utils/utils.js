@@ -10,8 +10,43 @@ export default {
 	},
 
 
+	categoryTable: {
+		allergies: [],
+		nutrition: [],
+		storage_method: [],
+		food_simple: [],
+	},
+
+	loadCategoryTable: async () => {
+
+		const nutrition_data = await GET_nutrition.run();
+		this.categoryTable.nutrition = nutrition_data.map(item => ({
+			label: item.name,
+			value: item.value
+		}));
+
+		const allergies_data = await GET_allergies.run();
+		this.categoryTable.allergies = allergies_data.map(item => ({
+			label: item.name,
+			value: item.value
+		}));
+
+		const storage_data = await GET_storage_method.run();
+		this.categoryTable.storage_method = storage_data.map(item => ({
+			label: item.name,
+			value: item.value
+		}));
+
+		const food_simple_data = await GET_food_simple_category.run();
+		this.categoryTable.food_simple = food_simple_data.map(item => ({
+			label: item.name,
+			value: item.value
+		}));
+	},
+
+
 	// 사용자 추가 모드로 모델 열기
-	openAddModal: () => {
+	openAddModal () {
 		this.state.modalMode = 'add';
 		this.state.currentData = null;
 		this.state.isModalOpen = true;
@@ -60,19 +95,20 @@ export default {
 			const nutrition = Array.isArray(MultiSel_Nutrition.selectedOptions)
 			? MultiSel_Nutrition.selectedOptions.map(item => item.value)
 			: [];
-			
+
 			console.log("id", utils.state.currentData._id);
 
 			const jsonres = {
 				id: utils.state.currentData._id,
-				name: sel_CategoryName.selectedOptionValue,
+				name: inp_FoodName.text,
+				food_category: sel_FoodCategory.selectedOptionValue,
 				storageMethod: sel_StorageMethod.selectedOptionValue,
 				shelfLifeDays: parseInt(inp_ShelfLife.text) || 0,
 				allergenTags: allergenTags,
 				nutrition: nutrition,
 				desc: inp_CategoryDesc?.text ?? ""
 			};
-			
+
 			console.log("jsonres",jsonres);
 
 			const response = await PUT.run({ body: jsonres });  // PUT 또는 PATCH 사용
@@ -99,7 +135,8 @@ export default {
 			: [];
 
 			const jsonres = {
-				name: sel_CategoryName.selectedOptionValue,
+				name: inp_FoodName.text,
+				food_category: sel_FoodCategory.selectedOptionValue,
 				storageMethod: sel_StorageMethod.selectedOptionValue,
 				shelfLifeDays: parseInt(inp_ShelfLife.text) || 0,
 				allergenTags: allergenTags,
