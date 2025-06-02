@@ -24,58 +24,39 @@ class RouterManager(TFSingletonBase):
         super().__init__()
         
         crudMgr = CrudManager.get_instance()
-
         self.routers = {}
         
-        # TODO 좀 더 쉽게 초기화 할 수 있을까
-        
-        # GPT
+        # Non Colllection API
         self.main_api = MainAPI()
         self.chatgpt_api = ChatGPTAPI()
         
-        # 각 API 인스턴스 생성 (enum 타입 그대로 전달)
-        evalue = en.CollectionName.FOOD_CATEGORY
-        self.food_category_api = FoodCategoryAPI(evalue)
-        self.routers[evalue.value] = self.food_category_api.router
-        crudMgr.set_crud(evalue, self.food_category_api.crud)
+        # Model이 정해진 Collection
+        main_collections = {
+            en.CollectionName.USER_PROFILE: UserProfileAPI,
+            en.CollectionName.FRIDGE_ITEM: FridgeItemAPI,
+            en.CollectionName.FRIDGE_LOG: FridgeLogAPI,
+            en.CollectionName.FOOD_CATEGORY: FoodCategoryAPI,
+        }
+        
+        for evalue, APICls in main_collections.items():
+            instance = APICls(evalue)
+            self.routers[evalue.value] = instance.router
+            crudMgr.set_crud(evalue, instance.crud)
+            setattr(self, f"{evalue.name.lower()}_api", instance)
 
-        evalue = en.CollectionName.USER_PROFILE
-        self.user_profile_api = UserProfileAPI(evalue)
-        self.routers[evalue.value] = self.user_profile_api.router
-        crudMgr.set_crud(evalue, self.user_profile_api.crud)
+        # 공통 Model Simple Collection
+        simple_collections = [
+            en.CollectionName.ALLERGIES,
+            en.CollectionName.FOOD_SIMPLE_CATEGORY,
+            en.CollectionName.NUTRITION,
+            en.CollectionName.STORAGE_METHOD,
+        ]
 
-        evalue = en.CollectionName.FRIDGE_ITEM
-        self.fridge_item_api = FridgeItemAPI(evalue)
-        self.routers[evalue.value] = self.fridge_item_api.router
-        crudMgr.set_crud(evalue, self.fridge_item_api.crud)
-
-
-        evalue = en.CollectionName.FRIDGE_LOG
-        self.fridge_log_api = FridgeLogAPI(evalue)
-        self.routers[evalue.value] = self.fridge_log_api.router
-        crudMgr.set_crud(evalue, self.fridge_log_api.crud)
-
-
-        evalue = en.CollectionName.ALLERGIES
-        self.allergies_api = BaseAPI(SimpleModel, evalue)
-        self.routers[evalue.value] = self.allergies_api.router
-        crudMgr.set_crud(evalue, self.allergies_api.crud)
-
-        evalue = en.CollectionName.FOOD_SIMPLE_CATEGORY
-        self.food_simple_category_api = BaseAPI(SimpleModel, evalue)
-        self.routers[evalue.value] = self.food_simple_category_api.router
-        crudMgr.set_crud(evalue, self.food_simple_category_api.crud)
-
-        evalue = en.CollectionName.NUTRITION
-        self.nutrition_api = BaseAPI(SimpleModel, evalue)
-        self.routers[evalue.value] = self.nutrition_api.router
-        crudMgr.set_crud(evalue, self.nutrition_api.crud)
-
-        evalue = en.CollectionName.STORAGE_METHOD
-        self.storage_method_api = BaseAPI(SimpleModel, evalue)
-        self.routers[evalue.value] = self.storage_method_api.router
-        crudMgr.set_crud(evalue, self.storage_method_api.crud)
-
+        for evalue in simple_collections:
+            api_instance = BaseAPI(SimpleModel, evalue)
+            self.routers[evalue.value] = api_instance.router
+            crudMgr.set_crud(evalue, api_instance.crud)
+            setattr(self, f"{evalue.name.lower()}_api", api_instance)
 
 
     def include_routers(self, app: FastAPI):

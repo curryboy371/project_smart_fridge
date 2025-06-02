@@ -27,16 +27,11 @@ class TFDB(TFSingletonBase):
         self.client = AsyncIOMotorClient(uri)
         self.db = self.client[dbname]
         
+        # collection enum key로 세팅
         self.collections = {
-            en.CollectionName.USER_PROFILE: self.db.user_profile,
-            en.CollectionName.FOOD_CATEGORY: self.db.food_category,
-            en.CollectionName.FRIDGE_ITEM: self.db.fridge_item,
-            en.CollectionName.FRIDGE_LOG: self.db.fridge_log,
-            en.CollectionName.NUTRITION: self.db.nutrition,
-            en.CollectionName.ALLERGIES: self.db.allergies,
-            en.CollectionName.STORAGE_METHOD: self.db.storage_method,            
-            en.CollectionName.FOOD_SIMPLE_CATEGORY: self.db.food_simple_category, 
+            e: self.db[e.value] for e in en.CollectionName
         }
+                
         
     async def create_collections(self):
         

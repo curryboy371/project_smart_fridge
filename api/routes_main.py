@@ -8,9 +8,6 @@ from video.camera_manager import CameraManager
 from core.tflog import TFLoggerManager as TFLog
 
 from fastapi.responses import StreamingResponse
-import cv2
-import time
-
 
 
 class MainAPI(SimpleBaseAPI):
