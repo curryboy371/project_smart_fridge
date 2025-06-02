@@ -9,17 +9,19 @@ from core import tfenums as en
 from typing import Optional
 from models.model_base import TFBaseMdoel
 
+# Crud를 사용 안하는 API
 class SimpleBaseAPI:
     def __init__(self, tag: str):
         self._log = TFLog.get_instance()
         self._tag = tag
         prefix = f"/{self._tag}"
         self._router = APIRouter(prefix=prefix, tags=[self._tag])
-
+        
     @property
     def router(self):
         return self._router
 
+# Crud를 사용하는 API
 class BaseAPI:
     def __init__(self, model: Type[TFBaseMdoel], enum_value: en.CollectionName, tag: str = None):
         self._model = model
@@ -27,8 +29,9 @@ class BaseAPI:
         self._log = TFLog.get_instance()
         self._crud = GenericCRUD(enum_value)
 
-        self._tag = f"/{self._enum_value.value}" if not tag else tag
-        self._router = APIRouter(prefix=self._tag, tags=[self._enum_value.value])
+        self._tag = self._enum_value.value if not tag else tag
+        prefix = f"/{self._enum_value.value}"
+        self._router = APIRouter(prefix=prefix, tags=[self._tag])
 
         self._router.get("/", response_model=List[self._model])(self.get_all)
 
@@ -49,40 +52,3 @@ class BaseAPI:
 
     async def get_all(self):
          return await self._crud.get_all()
-
-    # async def get_by_id(self, item_id: str):
-    #     item = await self._crud.get_by_id(item_id)
-    #     if not item:
-    #         raise_not_found()
-    #     return item
-
-    # async def create(self, item: TFBaseMdoel):
-    #     self._log.logger.info(f"[{self._tag}] Try create {item.id}")
-    #     created = await self._crud.create(item.dict(by_alias=True))
-    #     if not created:
-    #         raise_bad_request()
-
-    #     self._log.logger.info(f"[{self._tag}] create {item.id}")
-    #     return created
-
-    # async def update(self, item: TFBaseMdoel):
-    #     self._log.logger.info(f"[{self._tag}] Try update {item.id}")
-    #     existing = await self._crud.get_by_id(item.id)
-    #     if not existing:
-    #         raise_bad_request(detail="Invalid ID")
-
-    #     updated = await self._crud.update(item.id, item.dict(by_alias=True))
-    #     if not updated:
-    #         raise_bad_request()
-
-    #     self._log.logger.info(f"[{self._tag}] update {item.id}")
-    #     return updated
-
-    # async def delete(self, item_id: str):
-    #     self._log.logger.info(f"[{self._tag}] Try delete {item_id}")
-    #     deleted = await self._crud.delete(item_id)
-    #     if not deleted:
-    #         raise_bad_request()
-
-    #     self._log.logger.info(f"[{self._tag}] delete {item_id}")
-    #     return {"message": f"Item {item_id} deleted successfully"}

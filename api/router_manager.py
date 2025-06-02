@@ -3,8 +3,8 @@ from core import tfenums as en
 from api.routes_exception import *
 from core.singlebone_base import TFSingletonBase
 
+from api.routes_base import SimpleBaseAPI, BaseAPI
 from api.routes_main import MainAPI
-from api.routes_simple import GetOnlyAPI
 from api.routes_food_category import FoodCategoryAPI
 from api.routes_user_profile import UserProfileAPI
 from api.routes_fridge_item import FridgeItemAPI
@@ -57,22 +57,22 @@ class RouterManager(TFSingletonBase):
 
 
         evalue = en.CollectionName.ALLERGIES
-        self.allergies_api = GetOnlyAPI(evalue, SimpleModel)
+        self.allergies_api = BaseAPI(SimpleModel, evalue)
         self.routers[evalue.value] = self.allergies_api.router
         crudMgr.set_crud(evalue, self.allergies_api.crud)
 
         evalue = en.CollectionName.FOOD_SIMPLE_CATEGORY
-        self.food_simple_category_api = GetOnlyAPI(evalue, SimpleModel)
+        self.food_simple_category_api = BaseAPI(SimpleModel, evalue)
         self.routers[evalue.value] = self.food_simple_category_api.router
         crudMgr.set_crud(evalue, self.food_simple_category_api.crud)
 
         evalue = en.CollectionName.NUTRITION
-        self.nutrition_api = GetOnlyAPI(evalue, SimpleModel)
+        self.nutrition_api = BaseAPI(SimpleModel, evalue)
         self.routers[evalue.value] = self.nutrition_api.router
         crudMgr.set_crud(evalue, self.nutrition_api.crud)
 
         evalue = en.CollectionName.STORAGE_METHOD
-        self.storage_method_api = GetOnlyAPI(evalue, SimpleModel)
+        self.storage_method_api = BaseAPI(SimpleModel, evalue)
         self.routers[evalue.value] = self.storage_method_api.router
         crudMgr.set_crud(evalue, self.storage_method_api.crud)
 

@@ -28,12 +28,6 @@ class ChatGPTAPI(SimpleBaseAPI):
         self.open_ai = AsyncOpenAI(api_key=api_key)
 
         self._router.post("/", response_model=ChatResponse)(self.chat_with_gpt)
-        self._router.get("/", response_model=ChatResponse)(self.test_chat_with_gpt)
-
-
-    async def test_chat_with_gpt(self):
-        self._log.logger.info("test chat gpt!!")
-        return {"response": f"test!!! GPT"}
 
     async def chat_with_gpt(self, request: ChatRequest):
         self._log.logger.info("chat chat gpt request")

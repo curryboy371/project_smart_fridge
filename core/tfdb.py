@@ -60,4 +60,9 @@ class TFDB(TFSingletonBase):
             return False
         
     def get_collection(self, name: en.CollectionName):
+        
+        if name not in self.collections:
+            logger.error(f"invalid collection {name}")
+            raise KeyError(f"Unknown collection key: {name}")
+        
         return self.collections[name]
