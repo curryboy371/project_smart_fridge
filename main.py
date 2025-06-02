@@ -25,7 +25,7 @@ def create_app() -> FastAPI:
 
     # 환경변수 로드
     load_dotenv()
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
     logger = TFLog().get_logger() 
     routerMgr = RouterManager().get_instance()
@@ -59,22 +59,7 @@ def create_app() -> FastAPI:
     async def root():
         now = datetime.now()
         return {"time": now.strftime("%Y-%m-%d %H:%M:%S")}
-
-
-    @app.post("/chat")
-    async def chat_with_gpt(request: ChatRequest):
-        try:
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",  # 또는 gpt-4 등
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": request.message}
-                ]
-            )
-            return {"response": response.choices[0].message["content"]}
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
         
-        return app
+    return app
 
 app = create_app()

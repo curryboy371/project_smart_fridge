@@ -1,5 +1,6 @@
 
 from typing import Dict
+from typing import Optional
 from crud.generic_crud import GenericCRUD
 from core import tfenums as en
 from core.singlebone_base import TFSingletonBase
@@ -21,7 +22,7 @@ class CrudManager(TFSingletonBase):
     def set_crud(self, evalue : en.CollectionName, crud):
         self.cruds[evalue] = crud
 
-    def get_crud(self, evalue: en.CollectionName) -> GenericCRUD | None:
+    def get_crud(self, evalue: en.CollectionName) -> Optional[GenericCRUD]:
         return self.cruds.get(evalue)
     
     async def create_fridge_log_template(self, created: dict, event_type: en.EventType) -> dict:

@@ -37,6 +37,7 @@ class FoodCategoryAPI(BaseAPI):
 
     async def update_category(self, category: FoodCategoryModel):
         # 중복 체크
+        id = category.id
         existing_id = await self._crud.get_by_id(id)
         if not existing_id:
             self._log.logger.info(f"invalid id {id}")
