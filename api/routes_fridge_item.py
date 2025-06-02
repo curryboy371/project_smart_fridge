@@ -55,6 +55,7 @@ class FridgeItemAPI():
         if item.entered_dt is None:
             item.entered_dt = datetime.utcnow()
 
+        # food cateogy 정보 세팅팅
         food_category_crud = CrudManager.get_instance().get_crud(en.CollectionName.FOOD_CATEGORY)
         if food_category_crud:
             data = await food_category_crud.get_by_name(item.name)
@@ -71,6 +72,13 @@ class FridgeItemAPI():
             self._log.logger.warning(f"failed create fridge item id({item_id})")
             raise_bad_request()
 
+        # fridge log
+        fridge_log_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_LOG)
+        log_data = await CrudManager.get_instance().create_fridge_log_template(created, en.EventType.INBOUND)
+        created_log = await fridge_log_crud.create(log_data)
+        if not created_log:
+            self._log.logger.error(f"failed create fridge log({item_id})")
+        
         self._log.logger.info(f"success create fridge item id({item_id})")
         return created
 

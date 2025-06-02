@@ -31,6 +31,7 @@ class TFDB(TFSingletonBase):
             en.CollectionName.USER_PROFILE: self.db.user_profile,
             en.CollectionName.FOOD_CATEGORY: self.db.food_category,
             en.CollectionName.FRIDGE_ITEM: self.db.fridge_item,
+            en.CollectionName.FRIDGE_LOG: self.db.fridge_log,
             en.CollectionName.NUTRITION: self.db.nutrition,
             en.CollectionName.ALLERGIES: self.db.allergies,
             en.CollectionName.STORAGE_METHOD: self.db.storage_method,            

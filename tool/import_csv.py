@@ -66,6 +66,7 @@ async def import_collection():
         CollectionName.USER_PROFILE,
         CollectionName.FOOD_CATEGORY,
         CollectionName.FRIDGE_ITEM,
+        CollectionName.FRIDGE_LOG,      # log는 지워줌
     ]
     
     for col in collections:

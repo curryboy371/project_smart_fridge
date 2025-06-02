@@ -3,6 +3,7 @@ from typing import Dict
 from crud.generic_crud import GenericCRUD
 from core import tfenums as en
 from core.singlebone_base import TFSingletonBase
+from datetime import datetime
 
 class CrudManager(TFSingletonBase):
     """
@@ -22,3 +23,17 @@ class CrudManager(TFSingletonBase):
 
     def get_crud(self, evalue: en.CollectionName) -> GenericCRUD | None:
         return self.cruds.get(evalue)
+    
+    async def create_fridge_log_template(self, created: dict, event_type: en.EventType) -> dict:
+        """
+        냉장고 로그 생성용 템플릿 반환 함수
+        """
+        return {
+            "name": created.get("name"),
+            "food_id": str(created.get("_id")),
+            "food_category": created.get("food_category"),
+            "event_type": event_type.value,
+            "timestamp": datetime.now(),
+            "entered_dt": created.get("entered_dt"),
+            "expire_dt": created.get("expire_dt")
+        }

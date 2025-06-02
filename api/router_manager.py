@@ -7,6 +7,7 @@ from api.routes_simple import GetOnlyAPI
 from api.routes_food_category import FoodCategoryAPI
 from api.routes_user_profile import UserProfileAPI
 from api.routes_fridge_item import FridgeItemAPI
+from api.routes_fridge_log import FridgeLogAPI
 
 
 from models.model_base import SimpleModel
@@ -41,6 +42,13 @@ class RouterManager(TFSingletonBase):
         self.fridge_item_api = FridgeItemAPI(evalue)
         self.routers[evalue.value] = self.fridge_item_api.router
         crudMgr.set_crud(evalue, self.fridge_item_api.crud)
+
+
+        evalue = en.CollectionName.FRIDGE_LOG
+        self.fridge_log_api = FridgeLogAPI(evalue)
+        self.routers[evalue.value] = self.fridge_log_api.router
+        crudMgr.set_crud(evalue, self.fridge_log_api.crud)
+
 
         evalue = en.CollectionName.ALLERGIES
         self.allergies_api = GetOnlyAPI(evalue, SimpleModel)

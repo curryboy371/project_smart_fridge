@@ -1,7 +1,7 @@
 import logging
 from logging.handlers import RotatingFileHandler
 import os
-
+from datetime import datetime
 from core.singlebone_base import TFSingletonBase
 
 """
@@ -14,7 +14,7 @@ logger.critical("치명적 에러, 즉시 조치 필요")
 
 class TFLoggerManager(TFSingletonBase):
 
-    def __init__(self, name="TF", log_dir="logs", log_file="server.log", max_bytes=5*1024*1024, backup_count=3):
+    def __init__(self, name="TF", log_dir="logs", max_bytes=5*1024*1024, backup_count=3):
         self.logger = logging.getLogger(name)
         self.logger.setLevel(logging.INFO)
         
@@ -23,6 +23,9 @@ class TFLoggerManager(TFSingletonBase):
             "[%(asctime)s] [%(levelname)s] %(name)s - %(message)s",
             datefmt="%Y-%m-%d %H:%M:%S"
         )
+
+        now = datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_file = f"server_{now}.log"
         
         # 콘솔 핸들러
         console_handler = logging.StreamHandler()
