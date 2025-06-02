@@ -3,6 +3,7 @@ from core import tfenums as en
 from api.routes_exception import *
 from core.singlebone_base import TFSingletonBase
 
+from api.routes_main import MainAPI
 from api.routes_simple import GetOnlyAPI
 from api.routes_food_category import FoodCategoryAPI
 from api.routes_user_profile import UserProfileAPI
@@ -27,6 +28,11 @@ class RouterManager(TFSingletonBase):
         self.routers = {}
         
         # TODO 좀 더 쉽게 초기화 할 수 있을까
+        
+        # GPT
+        self.main_api = MainAPI()
+        self.chatgpt_api = ChatGPTAPI()
+        
         # 각 API 인스턴스 생성 (enum 타입 그대로 전달)
         evalue = en.CollectionName.FOOD_CATEGORY
         self.food_category_api = FoodCategoryAPI(evalue)
@@ -70,10 +76,12 @@ class RouterManager(TFSingletonBase):
         self.routers[evalue.value] = self.storage_method_api.router
         crudMgr.set_crud(evalue, self.storage_method_api.crud)
 
-        # GPT
-        self.chatgpt_api = ChatGPTAPI()
+
 
     def include_routers(self, app: FastAPI):
+        
+        #main router
+        app.include_router(self.main_api.router)
         
         #gpt router
         app.include_router(self.chatgpt_api.router)
@@ -81,4 +89,3 @@ class RouterManager(TFSingletonBase):
         # collection router
         for router in self.routers.values():
             app.include_router(router)
-            print(f"include {router}")

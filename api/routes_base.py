@@ -13,7 +13,8 @@ class SimpleBaseAPI:
     def __init__(self, tag: str):
         self._log = TFLog.get_instance()
         self._tag = tag
-        self._router = APIRouter(prefix=f"/{tag}", tags=[self._tag])
+        prefix = f"/{self._tag}"
+        self._router = APIRouter(prefix=prefix, tags=[self._tag])
 
     @property
     def router(self):

@@ -26,7 +26,6 @@ def create_app() -> FastAPI:
     # 환경변수 로드
     load_dotenv()
 
-
     logger = TFLog().get_logger() 
     routerMgr = RouterManager().get_instance()
     
@@ -51,14 +50,6 @@ def create_app() -> FastAPI:
     async def shutdown_event():
         logger.info("End main")
 
-    @app.get("/")
-    async def root():
-        return {"message": "Connected FastAPI Server!!!"}
-
-    @app.get("/time")
-    async def root():
-        now = datetime.now()
-        return {"time": now.strftime("%Y-%m-%d %H:%M:%S")}
         
     return app
 
