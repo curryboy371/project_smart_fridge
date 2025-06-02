@@ -21,7 +21,7 @@
       "httpMethod": "DELETE",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "/fridge_item/",
+      "path": "fridge_item/{{this.params.id}}",
       "pluginSpecifiedTemplates": [
         {
           "value": true
@@ -37,7 +37,11 @@
       "name": "FastAPI",
       "pluginId": "restapi-plugin"
     },
-    "dynamicBindingPathList": [],
+    "dynamicBindingPathList": [
+      {
+        "key": "path"
+      }
+    ],
     "name": "DELETE",
     "pageId": "Food",
     "runBehaviour": "MANUAL",

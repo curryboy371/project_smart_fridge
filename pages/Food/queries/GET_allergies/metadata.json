@@ -1,6 +1,6 @@
 {
-  "gitSyncId": "6839bb95990a0a494d89660e_2d9385f1-da08-43a8-8942-16c2cf03f43e",
-  "id": "Food_GET",
+  "gitSyncId": "68353d7be9e51751500a63c7_0479677e-0b04-4441-b952-4cdf7576e163",
+  "id": "Food_GET_allergies",
   "pluginId": "restapi-plugin",
   "pluginType": "API",
   "unpublishedAction": {
@@ -16,7 +16,7 @@
       "httpMethod": "GET",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "fridge_item/",
+      "path": "allergies/",
       "pluginSpecifiedTemplates": [
         {
           "value": true
@@ -33,9 +33,9 @@
       "pluginId": "restapi-plugin"
     },
     "dynamicBindingPathList": [],
-    "name": "GET",
+    "name": "GET_allergies",
     "pageId": "Food",
-    "runBehaviour": "ON_PAGE_LOAD",
+    "runBehaviour": "MANUAL",
     "userSetOnLoad": false
   }
 }

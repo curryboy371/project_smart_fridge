@@ -42,7 +42,7 @@
   "labelText": "보관 방법",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 16,
+  "leftColumn": 32,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -60,12 +60,12 @@
   "placeholderText": "Select option",
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
-  "rightColumn": 29,
+  "rightColumn": 45,
   "searchTags": [
     "dropdown"
   ],
   "serverSideFiltering": false,
-  "sourceData": "{{ [\n\t{ label: \"냉장\", value: \"Refrigerated\" },\n\t{ label: \"냉동\", value: \"Frozen\" },\n\t{ label: \"실온\", value: \"Room\"}\n] }}",
+  "sourceData": "{{ \nutils.categoryTable.storage_method\n}}",
   "topRow": 2,
   "type": "SELECT_WIDGET",
   "version": 1,

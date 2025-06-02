@@ -37,7 +37,7 @@
     "label"
   ],
   "shouldTruncate": false,
-  "text": "\n정말 유저 정보를 지우겠습니까??\n{{ \nutils.state.currentData ? utils.state.currentData.name : \"Unknown User\" }}",
+  "text": "\n정말 음식 정보를 지우겠습니까??\n{{ \nutils.state.currentData ? utils.state.currentData.name : \"Unknown User\" }}",
   "textAlign": "LEFT",
   "textColor": "#52525b",
   "topRow": 5,

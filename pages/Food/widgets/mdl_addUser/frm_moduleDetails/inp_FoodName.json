@@ -5,7 +5,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 9,
   "boxShadow": "none",
-  "defaultText": "{{ utils.state.modalMode == \"add\" ? \"\" : utils.state.currentData.shelfLifeDays }}",
+  "defaultText": "{{ utils.state.modalMode == \"add\" ? \"\" : utils.state.currentData.name }}",
   "displayName": "Input",
   "dynamicBindingPathList": [
     {
@@ -23,20 +23,20 @@
   "hideCard": false,
   "iconAlign": "left",
   "iconSVG": "/static/media/icon.9f505595da61a34f563dba82adeb06ec.svg",
-  "inputType": "NUMBER",
+  "inputType": "TEXT",
   "isDeprecated": false,
   "isDisabled": false,
   "isLoading": false,
   "isRequired": true,
   "isVisible": true,
   "key": "09svys3ytz",
-  "label": "보관 일수",
+  "label": "음식 이름",
   "labelAlignment": "left",
   "labelPosition": "Top",
   "labelStyle": "BOLD",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 30,
+  "leftColumn": 1,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -51,7 +51,7 @@
   "renderMode": "CANVAS",
   "resetOnSubmit": true,
   "responsiveBehavior": "fill",
-  "rightColumn": 43,
+  "rightColumn": 14,
   "searchTags": [
     "form",
     "text input",
@@ -63,6 +63,6 @@
   "topRow": 2,
   "type": "INPUT_WIDGET_V2",
   "version": 2,
-  "widgetId": "x05velee1d",
-  "widgetName": "inp_ShelfLife"
+  "widgetId": "0lvhe8tnzi",
+  "widgetName": "inp_FoodName"
 }

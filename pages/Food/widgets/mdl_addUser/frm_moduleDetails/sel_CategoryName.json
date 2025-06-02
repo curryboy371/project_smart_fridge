@@ -4,7 +4,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 9,
   "boxShadow": "none",
-  "defaultOptionValue": "{{ ((options, serverSideFiltering) => (  utils.state.modalMode == \"add\" ? [] : utils.state.currentData.name ))(sel_CategoryName.options, sel_CategoryName.serverSideFiltering) }}",
+  "defaultOptionValue": "{{ ((options, serverSideFiltering) => (  utils.state.modalMode == \"add\" ? [] : utils.state.currentData.food_category ))(sel_CategoryName.options, sel_CategoryName.serverSideFiltering) }}",
   "displayName": "Select",
   "dynamicBindingPathList": [
     {
@@ -48,7 +48,7 @@
   "labelText": "음식 카테고리",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 1,
+  "leftColumn": 17,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -66,12 +66,12 @@
   "placeholderText": "Select option",
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
-  "rightColumn": 14,
+  "rightColumn": 30,
   "searchTags": [
     "dropdown"
   ],
   "serverSideFiltering": false,
-  "sourceData": "{{ [\n\t{ label: \"사과\", value: \"apple\" },\n\t{ label: \"바나나\", value: \"banana\" },\n\t{ label: \"복숭아\", value: \"peach\" },\n\t{ label: \"우유\", value: \"Milk\" }\n] }}",
+  "sourceData": "{{ \nutils.categoryTable.food_simple\n}}",
   "topRow": 2,
   "type": "SELECT_WIDGET",
   "version": 1,

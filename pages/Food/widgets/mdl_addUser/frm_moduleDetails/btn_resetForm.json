@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 51,
+  "bottomRow": 52,
   "boxShadow": "none",
   "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
   "buttonVariant": "SECONDARY",
@@ -35,8 +35,8 @@
   "mobileRightColumn": 46,
   "mobileTopRow": 33,
   "onClick": "{{resetWidget(\"frm_moduleDetails\", true);}}",
-  "originalBottomRow": 42,
-  "originalTopRow": 38,
+  "originalBottomRow": 52,
+  "originalTopRow": 48,
   "parentId": "fn1suqgpfa",
   "placement": "CENTER",
   "recaptchaType": "V3",
@@ -49,7 +49,7 @@
     "submit"
   ],
   "text": "Reset",
-  "topRow": 47,
+  "topRow": 48,
   "type": "BUTTON_WIDGET",
   "version": 1,
   "widgetId": "nxu40solic",

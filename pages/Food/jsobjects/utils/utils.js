@@ -9,20 +9,62 @@ export default {
 		defaultNutrition: []
 	},
 
+	categoryTable: {
+		isInit: false, 
+		allergies: [],
+		nutrition: [],
+		storage_method: [],
+		food_simple: [],
+	},
+
+	loadCategoryTable: async (bForce = false) => {
+		if (this.categoryTable.isInit && !bForce) {
+			return;
+		}
+
+		const nutrition_data = await GET_nutrition.run();
+		this.categoryTable.nutrition = nutrition_data.map(item => ({
+			label: item.name,
+			value: item.value
+		}));
+
+		const allergies_data = await GET_allergies.run();
+		this.categoryTable.allergies = allergies_data.map(item => ({
+			label: item.name,
+			value: item.value
+		}));
+
+		const storage_data = await GET_storage_method.run();
+		this.categoryTable.storage_method = storage_data.map(item => ({
+			label: item.name,
+			value: item.value
+		}));
+
+		const food_simple_data = await GET_food_simple_category.run();
+		this.categoryTable.food_simple = food_simple_data.map(item => ({
+			label: item.name,
+			value: item.value
+		}));
+
+		this.categoryTable.isInit = true;
+	},
+
 
 	// 사용자 추가 모드로 모델 열기
-	openAddModal: () => {
+	async openAddModal () {
+
+		await this.loadCategoryTable();
 		this.state.modalMode = 'add';
 		this.state.currentData = null;
 		this.state.isModalOpen = true;
 
 		this.state.defaultAllergies = [];
 		this.state.defaultNutrition = [];
-
 	},
 
 	// 사용자 편집 모드로 모달 열기 (id 또는 user data 받아서 처리)
-	openEditModal(userdata) {
+	async openEditModal(userdata) {
+		await this.loadCategoryTable();
 		this.state.modalMode = 'edit';
 		this.state.currentData = userdata;
 		this.state.isModalOpen = true;
@@ -53,30 +95,22 @@ export default {
 
 	editUser: async () => {
 		try {
-			const allergenTags = Array.isArray(MultiSel_Allergies.selectedOptions)
-			? MultiSel_Allergies.selectedOptions.map(item => item.value)
-			: [];
 
-			const nutrition = Array.isArray(MultiSel_Nutrition.selectedOptions)
-			? MultiSel_Nutrition.selectedOptions.map(item => item.value)
-			: [];
-			
 			console.log("id", utils.state.currentData._id);
-
 			const jsonres = {
 				id: utils.state.currentData._id,
-				name: sel_CategoryName.selectedOptionValue,
+				name: inp_FoodName.text,
+				food_category: sel_CategoryName.selectedOptionValue,
 				storageMethod: sel_StorageMethod.selectedOptionValue,
-				shelfLifeDays: parseInt(inp_ShelfLife.text) || 0,
-				allergenTags: allergenTags,
-				nutrition: nutrition,
+				entered_dt: inp_Entered_DT.text,
+				expire_dt: inp_Expire_DT.text,
 				desc: inp_CategoryDesc?.text ?? ""
 			};
-			
+
 			console.log("jsonres",jsonres);
 
 			const response = await PUT.run({ body: jsonres });  // PUT 또는 PATCH 사용
-			showAlert("카테고리 수정에 성공했습니다.", "success");
+			showAlert("음식 수정에 성공했습니다.", "success");
 			console.log("수정된 데이터:", response);
 
 			await this.loadUser();  // 수정 후 리스트 갱신
@@ -90,25 +124,18 @@ export default {
 
 	addUser: async () => {
 		try {
-			const allergenTags = Array.isArray(MultiSel_Allergies.selectedOptions)
-			? MultiSel_Allergies.selectedOptions.map(item => item.value)
-			: [];
-
-			const nutrition = Array.isArray(MultiSel_Nutrition.selectedOptions)
-			? MultiSel_Nutrition.selectedOptions.map(item => item.value)
-			: [];
 
 			const jsonres = {
-				name: sel_CategoryName.selectedOptionValue,
+				name: inp_FoodName.text,
+				food_category: sel_CategoryName.selectedOptionValue,
 				storageMethod: sel_StorageMethod.selectedOptionValue,
-				shelfLifeDays: parseInt(inp_ShelfLife.text) || 0,
-				allergenTags: allergenTags,
-				nutrition: nutrition,
+				entered_dt: inp_Entered_DT.text,
+				expire_dt: inp_Expire_DT.text,
 				desc: inp_CategoryDesc?.text ?? ""
 			};
 
 			const response = await POST.run({ body: jsonres });
-			showAlert("카테고리 등록에 성공했습니다.", "success");
+			showAlert("음식 등록에 성공했습니다.", "success");
 			console.log("응답 데이터:", response);
 
 			await this.loadUser();
