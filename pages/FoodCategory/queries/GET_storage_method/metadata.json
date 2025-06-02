@@ -16,7 +16,7 @@
       "httpMethod": "GET",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "storage_method/",
+      "path": "/storage_method/",
       "pluginSpecifiedTemplates": [
         {
           "value": true

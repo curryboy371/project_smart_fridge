@@ -13,7 +13,7 @@
       },
       {
         "name": "categoryTable",
-        "value": "{\n  allergies: [],\n  nutrition: [],\n  storage_method: [],\n  food_simple: []\n}"
+        "value": "{\n  isInit: false,\n  allergies: [],\n  nutrition: [],\n  storage_method: [],\n  food_simple: []\n}"
       }
     ]
   }

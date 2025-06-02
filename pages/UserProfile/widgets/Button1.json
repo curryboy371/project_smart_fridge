@@ -31,7 +31,7 @@
   "mobileRightColumn": 29,
   "mobileTopRow": 13,
   "needsErrorInfo": false,
-  "onClick": "{{utils.loadCategoryTable();}}",
+  "onClick": "{{utils.loadCategoryTable('true');}}",
   "originalBottomRow": 17,
   "originalTopRow": 13,
   "parentColumnSpace": 30.40625,

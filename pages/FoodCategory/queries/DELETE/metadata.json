@@ -21,7 +21,7 @@
       "httpMethod": "DELETE",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "food_category/{{this.params.id}}",
+      "path": "/food_category/{{this.params.id}}",
       "pluginSpecifiedTemplates": [
         {
           "value": true

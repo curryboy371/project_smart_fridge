@@ -21,7 +21,7 @@
       "httpMethod": "POST",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "food_category/",
+      "path": "/food_category/",
       "pluginSpecifiedTemplates": [
         {
           "value": true

@@ -16,7 +16,7 @@
       "httpMethod": "GET",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "food_simple_category/",
+      "path": "/food_simple_category/",
       "pluginSpecifiedTemplates": [
         {
           "value": true

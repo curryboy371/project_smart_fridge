@@ -11,13 +11,17 @@ export default {
 	},
 
 	categoryTable: {
+		isInit: false, 
 		allergies: [],
 		nutrition: [],
 		storage_method: [],
 		food_simple: [],
 	},
 
-	loadCategoryTable: async () => {
+	loadCategoryTable: async (bForce = false) => {
+		if (this.categoryTable.isInit && !bForce) {
+			return;
+		}
 
 		const nutrition_data = await GET_nutrition.run();
 		this.categoryTable.nutrition = nutrition_data.map(item => ({
@@ -42,12 +46,15 @@ export default {
 			label: item.name,
 			value: item.value
 		}));
+
+		this.categoryTable.isInit = true;
 	},
 
 
 
 	// 사용자 추가 모드로 모델 열기
-	openAddModal() {
+	async openAddModal() {
+		await this.loadCategoryTable();
 		this.state.modalMode = 'add';
 		this.state.currentData = null;
 		this.state.isModalOpen = true;
@@ -58,7 +65,8 @@ export default {
 	},
 
 	// 사용자 편집 모드로 모달 열기 (id 또는 user data 받아서 처리)
-	openEditModal(userdata) {
+	async openEditModal(userdata) {
+		await this.loadCategoryTable();
 		this.state.modalMode = 'edit';
 		this.state.currentData = userdata;
 		this.state.isModalOpen = true;

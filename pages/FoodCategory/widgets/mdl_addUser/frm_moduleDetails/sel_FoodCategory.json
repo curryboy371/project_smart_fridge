@@ -45,7 +45,7 @@
   "labelText": "음식 카테고리",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 1,
+  "leftColumn": 0,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -63,7 +63,7 @@
   "placeholderText": "Select option",
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
-  "rightColumn": 14,
+  "rightColumn": 13,
   "searchTags": [
     "dropdown"
   ],

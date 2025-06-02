@@ -6,7 +6,12 @@
   "unpublishedAction": {
     "actionConfiguration": {
       "encodeParamsToggle": true,
-      "jsArguments": [],
+      "jsArguments": [
+        {
+          "name": "bForce",
+          "value": "{{false}}"
+        }
+      ],
       "paginationType": "NONE",
       "timeoutInMillisecond": 10000
     },

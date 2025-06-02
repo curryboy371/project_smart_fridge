@@ -16,7 +16,7 @@
       "httpMethod": "GET",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "nutrition/",
+      "path": "/nutrition/",
       "pluginSpecifiedTemplates": [
         {
           "value": true
