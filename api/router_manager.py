@@ -8,6 +8,7 @@ from api.routes_food_category import FoodCategoryAPI
 from api.routes_user_profile import UserProfileAPI
 from api.routes_fridge_item import FridgeItemAPI
 from api.routes_fridge_log import FridgeLogAPI
+from api.routes_chatgpt import ChatGPTAPI
 
 
 from models.model_base import SimpleModel
@@ -26,7 +27,6 @@ class RouterManager(TFSingletonBase):
         self.routers = {}
         
         # TODO 좀 더 쉽게 초기화 할 수 있을까
-
         # 각 API 인스턴스 생성 (enum 타입 그대로 전달)
         evalue = en.CollectionName.FOOD_CATEGORY
         self.food_category_api = FoodCategoryAPI(evalue)
@@ -69,10 +69,16 @@ class RouterManager(TFSingletonBase):
         self.storage_method_api = GetOnlyAPI(evalue, SimpleModel)
         self.routers[evalue.value] = self.storage_method_api.router
         crudMgr.set_crud(evalue, self.storage_method_api.crud)
-        
+
+        # GPT
+        self.chatgpt_api = ChatGPTAPI()
 
     def include_routers(self, app: FastAPI):
         
+        #gpt router
+        app.include_router(self.chatgpt_api.router)
+
+        # collection router
         for router in self.routers.values():
             app.include_router(router)
             print(f"include {router}")

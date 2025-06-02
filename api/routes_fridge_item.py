@@ -1,6 +1,6 @@
 from fastapi import APIRouter
+from api.routes_base import BaseAPI
 from models.fridge_item import FridgeItemModel
-from crud.generic_crud import GenericCRUD
 from typing import List
 
 from typing import Optional
@@ -14,37 +14,19 @@ from crud.crud_manager import CrudManager
 
 from fastapi import Query
 
-
-class FridgeItemAPI():
+class FridgeItemAPI(BaseAPI):
     def __init__(self, enum_value: en.CollectionName):
-        self._enum_value = enum_value
-        self._log = TFLog.get_instance()
-        self._crud = GenericCRUD(enum_value)  # GenericCRUD 사용, enum 값 넘겨서 초기화
+        super().__init__(model=FridgeItemModel, enum_value=enum_value)
 
-        # API 경로 등록
-        self._router = APIRouter(prefix=f"/{self._enum_value.value}")
+        self._router.get("/expired", response_model=List[self._model])(self.get_expired_items)
+        self._router.get("/expiring-soon", response_model=List[self._model])(self.get_expiring_soon_items)
+        self._router.get("/{item_id}", response_model=self._model)(self.get_item)
 
-        self._router.get("/", response_model=List[FridgeItemModel])(self.get_items)
-        self._router.get("/expired", response_model=List[FridgeItemModel])(self.get_expired_items)
-        self._router.get("/expiring-soon", response_model=List[FridgeItemModel])(self.get_expiring_soon_items)
-        self._router.get("/{item_id}", response_model=FridgeItemModel)(self.get_item)
-
-        self._router.post("/", response_model=FridgeItemModel)(self.create_item)
-        self._router.post("/multiple", response_model=List[FridgeItemModel])(self.create_items)
-        self._router.put("/", response_model=FridgeItemModel)(self.update_item)
+        self._router.post("/", response_model=self._model)(self.create_item)
+        self._router.post("/multiple", response_model=List[self._model])(self.create_items)
+        self._router.put("/", response_model=self._model)(self.update_item)
         self._router.delete("/{item_id}")(self.delete_item)
 
-    @property
-    def router(self):
-        return self._router
-    
-    @property
-    def crud(self):
-        return self._crud
-
-    async def get_items(self):
-        return await self._crud.get_all()
-    
     async def get_expired_items(self):
         return await self._crud.get_expired_items()
     

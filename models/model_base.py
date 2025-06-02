@@ -25,11 +25,8 @@ class PyObjectId(ObjectId):
         return core_schema
 
 
-
-class SimpleModel(BaseModel):
+class TFBaseMdoel(BaseModel):
     id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
-    name: str
-    value: str
 
     class Config:
         arbitrary_types_allowed = True
@@ -38,3 +35,8 @@ class SimpleModel(BaseModel):
             datetime: lambda v: v.strftime("%Y-%m-%d %H:%M:%S")
         }
         validate_by_name = True
+
+
+class SimpleModel(TFBaseMdoel):
+    name: str
+    value: str
