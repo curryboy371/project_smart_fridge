@@ -34,6 +34,10 @@
     {
       "id": "Food",
       "isDefault": false
+    },
+    {
+      "id": "FridgeLog",
+      "isDefault": false
     }
   ]
 }
