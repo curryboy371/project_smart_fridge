@@ -25,6 +25,11 @@ class FoodCategoryAPI():
     def router(self):
         return self._router
     
+    @property
+    def crud(self):
+        return self._crud
+    
+    
     async def get_categories(self):
         return await self._crud.get_all()
 

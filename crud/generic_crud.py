@@ -1,41 +1,44 @@
 from core.tfdb import TFDB
 from core import tfenums as en
 from bson import ObjectId
-from typing import List, Optional
+from typing import List, Optional, Any, Dict
+from datetime import datetime
 
 class GenericCRUD:
     def __init__(self, collection_enum: en.CollectionName):
         self.collection = TFDB.get_instance().get_collection(collection_enum)
 
-    async def create(self, item: dict) -> dict:
-        item.pop("_id", None)  # MongoDB 자동 생성 ID 제거
-        result = await self.collection.insert_one(item)
+    async def create(self, data: dict) -> dict:
+        data.pop("_id", None)  # MongoDB 자동 생성 ID 제거
+        result = await self.collection.insert_one(data)
         created = await self.collection.find_one({"_id": result.inserted_id})
         return created
 
     async def get_all(self) -> List[dict]:
         items = []
         cursor = self.collection.find()
-        async for item in cursor:
-            items.append(item)
+        async for data in cursor:
+            items.append(data)
         return items
 
     async def get_by_name(self, name: str) -> Optional[dict]:
-        return await self.collection.find_one({"name": name})
+        data = await self.collection.find_one({"name": name})
+        return data
+
 
     async def get_by_id(self, item_id: str) -> Optional[dict]:
         if not ObjectId.is_valid(item_id):
             return None
         oid = ObjectId(item_id)
-        item = await self.collection.find_one({"_id": oid})
-        return item
+        data = await self.collection.find_one({"_id": oid})
+        return data
 
-    async def update(self, item_id: str, item: dict) -> Optional[dict]:
+    async def update(self, item_id: str, data: dict) -> Optional[dict]:
         if not ObjectId.is_valid(item_id):
             return None
-        item.pop("_id", None)
+        data.pop("_id", None)
         oid = ObjectId(item_id)
-        await self.collection.update_one({"_id": oid}, {"$set": item})
+        await self.collection.update_one({"_id": oid}, {"$set": data})
         updated = await self.collection.find_one({"_id": oid})
         return updated
 

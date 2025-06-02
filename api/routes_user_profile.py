@@ -25,6 +25,10 @@ class UserProfileAPI:
     @property
     def router(self):
         return self._router
+    
+    @property
+    def crud(self):
+        return self._crud
 
     async def get_profiles(self):
         return await self._crud.get_all()

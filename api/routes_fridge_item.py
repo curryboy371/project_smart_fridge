@@ -3,9 +3,15 @@ from models.fridge_item import FridgeItemModel
 from crud.generic_crud import GenericCRUD
 from typing import List
 
+from typing import Optional
+from datetime import datetime, timedelta
+
 from api.routes_exception import *
 from core import tfenums as en
 from core.tflog import TFLoggerManager as TFLog
+
+from crud.crud_manager import CrudManager
+
 
 
 class FridgeItemAPI():
@@ -26,6 +32,10 @@ class FridgeItemAPI():
     @property
     def router(self):
         return self._router
+    
+    @property
+    def crud(self):
+        return self._crud
 
     async def get_items(self):
         return await self._crud.get_all()
@@ -40,6 +50,21 @@ class FridgeItemAPI():
     async def create_item(self, item: FridgeItemModel):
         item_id = item.id
         self._log.logger.info(f"try create fridge item id({item_id})")
+
+        # 입고 날짜가 없다면 현재 시간으로 설정
+        if item.entered_dt is None:
+            item.entered_dt = datetime.utcnow()
+
+        food_category_crud = CrudManager.get_instance().get_crud(en.CollectionName.FOOD_CATEGORY)
+        if food_category_crud:
+            data = await food_category_crud.get_by_name(item.name)
+            if data:
+                item.food_category = data["food_category"]
+                item.storageMethod = data["storageMethod"]
+
+                # 유통기한이 없다면 카테고리 값 설정
+                if item.expire_dt is None:
+                    item.expire_dt = item.entered_dt + timedelta(days=data["shelfLifeDays"])
 
         created = await self._crud.create(item.dict(by_alias=True))
         if not created:

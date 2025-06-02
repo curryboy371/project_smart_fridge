@@ -33,5 +33,8 @@ class SimpleModel(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
+        json_encoders = {
+            ObjectId: str,
+            datetime: lambda v: v.strftime("%Y-%m-%d %H:%M:%S")
+        }
         validate_by_name = True

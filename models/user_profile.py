@@ -17,7 +17,10 @@ class UserProfileModel(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True      # _id를 id로 자동 매핑
-        json_encoders = {ObjectId: str}
+        json_encoders = {
+            ObjectId: str,
+            datetime: lambda v: v.strftime("%Y-%m-%d %H:%M:%S")
+        }
         validate_by_name=True
 
 
