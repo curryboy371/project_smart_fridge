@@ -1,3 +1,0 @@
-UPDATE quiz_content
-  SET title = {{inp_updateQuizTitle.text}}
-  WHERE id = {{ utils.moduleContent.content.id }};

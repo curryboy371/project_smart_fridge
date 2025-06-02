@@ -1,6 +1,6 @@
 {
-  "gitSyncId": "6839bb95990a0a494d89660e_d2c1d0d3-a8c5-4d0c-87a5-2fafe5a50502",
-  "id": "main_PING",
+  "gitSyncId": "683d9acdc648eb7fbab2a0e6_65b06b59-54b3-452d-9125-653d5329351d",
+  "id": "Content_Api1",
   "pluginId": "restapi-plugin",
   "pluginType": "API",
   "unpublishedAction": {
@@ -16,7 +16,7 @@
       "httpMethod": "GET",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "main/",
+      "path": "",
       "pluginSpecifiedTemplates": [
         {
           "value": true
@@ -33,8 +33,8 @@
       "pluginId": "restapi-plugin"
     },
     "dynamicBindingPathList": [],
-    "name": "PING",
-    "pageId": "main",
+    "name": "Api1",
+    "pageId": "Content",
     "runBehaviour": "MANUAL",
     "userSetOnLoad": false
   }

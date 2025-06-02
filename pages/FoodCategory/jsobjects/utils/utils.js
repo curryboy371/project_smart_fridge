@@ -128,8 +128,10 @@ export default {
 			await this.loadUser();  // 수정 후 리스트 갱신
 			this.state.isModalOpen = false;  // 모달 닫기
 		} catch (e) {
-			showAlert(e.message || "수정 중 오류가 발생했습니다.", "error");
+			const errorMessage = e?.response?.data?.detail || e.detail || "수정 중 오류가 발생했습니다.";
+			showAlert(errorMessage, "error");
 			console.log("Error detail:", e);
+			console.log(JSON.stringify(e, null, 2));
 		}
 	},
 

@@ -16,7 +16,7 @@
       "httpMethod": "GET",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "time",
+      "path": "main/time/",
       "pluginSpecifiedTemplates": [
         {
           "value": true
