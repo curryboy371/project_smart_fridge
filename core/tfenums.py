@@ -11,7 +11,15 @@ class CollectionName(Enum):
     FOOD_SIMPLE_CATEGORY = "food_simple_category"   # type-간단 음식 종류
 
 
+# 냉장고 이벤트 ( 입고, 출고, 폐기 )
 class EventType(Enum):
     INBOUND = "INBOUND"
     CONSUMED = "CONSUMED"
     DISCARDED = "DISCARDED"
+    
+    
+class FridgePosition(Enum):
+    TOP_LEFT = 0
+    TOP_RIGHT = 1
+    BOTTOM_LEFT = 2
+    BOTTOM_RIGHT = 3

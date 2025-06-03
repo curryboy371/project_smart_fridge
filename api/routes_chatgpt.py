@@ -1,6 +1,6 @@
 # api/chatgpt_router.py
 from fastapi import APIRouter, HTTPException
-from api.routes_exception import *
+import utils.exceptions
 from api.routes_base import SimpleBaseAPI
 from pydantic import BaseModel
 from fastapi import Query
@@ -37,7 +37,7 @@ class ChatGPTAPI(SimpleBaseAPI):
             return {"response": content}
         except Exception as e:
             self._log.logger.error(f"GPT API Error: {e}")
-            raise_bad_request(detail=str(e)) 
+            utils.exceptions.raise_bad_request(detail=str(e)) 
 
 
 # GPT 서비스 함수

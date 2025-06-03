@@ -41,6 +41,7 @@ async def import_categorys():
             continue
 
         # 기존 문서 삭제
+        print("delete collection data")
         await collection.delete_many({})
 
         with open(filepath, newline='', encoding='utf-8') as csvfile:
@@ -81,6 +82,7 @@ async def import_collection():
 
         # 기존 문서 삭제
         await collection.delete_many({})
+        print("delete collection data")
 
         # CSV 읽어 문서 삽입
         try:
@@ -145,8 +147,10 @@ if __name__ == "__main__":
     mode = sys.argv[1].lower()
 
     if mode == "simple":
+        print("import simple data")
         asyncio.run(import_categorys())
     elif mode == "collection":
+        print("import collection data")
         asyncio.run(import_collection())
     else:
         print(f"알 수 없는 인자: {mode}")

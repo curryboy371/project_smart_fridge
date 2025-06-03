@@ -1,12 +1,11 @@
 # api/chatgpt_router.py
-from api.routes_exception import *
+import utils.exceptions
 from api.routes_base import SimpleBaseAPI
 
 from datetime import datetime
 
 from video.camera_manager import CameraManager
-from core.tflog import TFLoggerManager as TFLog
-
+from utils.validators import format_datetime
 from fastapi.responses import StreamingResponse
 
 
@@ -26,7 +25,9 @@ class MainAPI(SimpleBaseAPI):
     # 서버시간 반환
     async def main_time(self):
         now = datetime.now()
-        return {"time": now.strftime("%Y-%m-%d %H:%M:%S")}
+        return {"time": format_datetime(now, fmt="second"), 
+                "hour": format_datetime(now, fmt="hour")
+                }
     
     # 서버 스트리밍 반환
     def main_stream(self):

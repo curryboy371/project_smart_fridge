@@ -3,11 +3,8 @@ from fastapi import APIRouter
 from typing import List, Type
 from pydantic import BaseModel
 from core.tflog import TFLoggerManager as TFLog
-from api.routes_exception import *
-from crud.generic_crud import GenericCRUD
 from core import tfenums as en
 from typing import Optional
-from models.model_base import TFBaseMdoel
 
 # Crud를 사용 안하는 API
 class SimpleBaseAPI:
@@ -23,13 +20,13 @@ class SimpleBaseAPI:
 
 # Crud를 사용하는 API
 class BaseAPI:
-    def __init__(self, model: Type[TFBaseMdoel], enum_value: en.CollectionName, tag: str = None):
+    def __init__(self, model, crud_class, enum_value):
         self._model = model
         self._enum_value = enum_value
         self._log = TFLog.get_instance()
-        self._crud = GenericCRUD(enum_value)
+        self._crud = crud_class(enum_value)
 
-        self._tag = self._enum_value.value if not tag else tag
+        self._tag = self._enum_value.value
         prefix = f"/{self._enum_value.value}"
         self._router = APIRouter(prefix=prefix, tags=[self._tag])
 

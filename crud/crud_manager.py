@@ -6,6 +6,8 @@ from core import tfenums as en
 from core.singlebone_base import TFSingletonBase
 from datetime import datetime
 
+import utils.validators
+
 class CrudManager(TFSingletonBase):
     """
     crud에 접근하여 db 조회를 하기 위한 crud 관리 manager
@@ -34,7 +36,7 @@ class CrudManager(TFSingletonBase):
             "food_id": str(created.get("_id")),
             "food_category": created.get("food_category"),
             "event_type": event_type.value,
-            "timestamp": datetime.now(),
+            "timestamp": utils.validators.format_datetime(datetime.utcnow(), fmt="second"),
             "entered_dt": created.get("entered_dt"),
             "expire_dt": created.get("expire_dt")
         }

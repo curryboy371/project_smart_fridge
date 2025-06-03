@@ -3,6 +3,7 @@ from typing import Optional, List, Dict
 from datetime import datetime
 from bson import ObjectId
 from pydantic import BaseModel, Field
+import utils.validators
 
 class PyObjectId(ObjectId):
     @classmethod
@@ -28,13 +29,14 @@ class PyObjectId(ObjectId):
 class TFBaseMdoel(BaseModel):
     id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
 
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
+    model_config = {
+        "arbitrary_types_allowed": True,
+        "json_encoders": {
             ObjectId: str,
-            datetime: lambda v: v.strftime("%Y-%m-%d %H:%M:%S")
-        }
-        validate_by_name = True
+        },
+        "populate_by_name": True,     # validate_by_name의 v2 버전
+        "validate_assignment": True
+    }
 
 
 class SimpleModel(TFBaseMdoel):

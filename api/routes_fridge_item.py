@@ -1,22 +1,21 @@
-from fastapi import APIRouter
 from api.routes_base import BaseAPI
 from models.fridge_item import FridgeItemModel
 from typing import List
 
-from typing import Optional
 from datetime import datetime, timedelta
 
-from api.routes_exception import *
+import utils.exceptions
 from core import tfenums as en
-from core.tflog import TFLoggerManager as TFLog
+
+from typing import List, Type
 
 from crud.crud_manager import CrudManager
 
-from fastapi import Query
+import utils.validators
 
 class FridgeItemAPI(BaseAPI):
-    def __init__(self, enum_value: en.CollectionName):
-        super().__init__(model=FridgeItemModel, enum_value=enum_value)
+    def __init__(self, model, crud_class, enum_value):
+        super().__init__(model, crud_class, enum_value)
 
         self._router.get("/expired", response_model=List[self._model])(self.get_expired_items)
         self._router.get("/expiring-soon", response_model=List[self._model])(self.get_expiring_soon_items)
@@ -26,6 +25,8 @@ class FridgeItemAPI(BaseAPI):
         self._router.post("/multiple", response_model=List[self._model])(self.create_items)
         self._router.put("/", response_model=self._model)(self.update_item)
         self._router.delete("/{item_id}")(self.delete_item)
+        
+        self._time_format = "hour"
 
     async def get_expired_items(self):
         return await self._crud.get_expired_items()
@@ -39,17 +40,28 @@ class FridgeItemAPI(BaseAPI):
         item = await self._crud.get_by_id(item_id)
         if not item:
             self._log.logger.warning(f"invalid fridge item id({item_id})")
-            raise_not_found(detail="Fridge item not found")
+            utils.exceptions.raise_not_found(detail="Fridge item not found")
         return item
 
     async def create_item(self, item: FridgeItemModel):
         item_id = item.id
         self._log.logger.info(f"try create fridge item id({item_id})")
 
+        # 같은 위치에 음식이 존재하는지
+        fridge_item_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_ITEM)
+        same_position_items = await fridge_item_crud.get_position_item(item.position)
+        
+        if same_position_items:
+            self._log.logger.warning(f"There is already another food item at that position ({item.position})")
+            utils.exceptions.raise_conflict(detail="There is already another food item at that position")
+
         # 입고 날짜가 없다면 현재 시간으로 설정
         if item.entered_dt is None:
-            item.entered_dt = datetime.utcnow()
-
+            formatted = utils.validators.format_datetime(datetime.utcnow(), fmt=self._time_format)
+            item.entered_dt = formatted
+        else:
+            utils.validators.validate_datetime_string(item.entered_dt, fmt=self._time_format)
+                
         # food cateogy 정보 세팅팅
         food_category_crud = CrudManager.get_instance().get_crud(en.CollectionName.FOOD_CATEGORY)
         if food_category_crud:
@@ -60,12 +72,23 @@ class FridgeItemAPI(BaseAPI):
 
                 # 유통기한이 없다면 카테고리 값 설정
                 if item.expire_dt is None:
-                    item.expire_dt = item.entered_dt + timedelta(days=data["shelfLifeDays"])
+                    try:
+                        utils.validators.validate_datetime_string(item.entered_dt, fmt=self._time_format)
+                        entered_dt_obj = utils.validators.strptime_datetime(item.entered_dt, fmt=self._time_format)
+                    except ValueError as e:
+                        self._log.logger.error(f"Invalid entered_dt: {e}")
+                        utils.exceptions.raise_bad_request(detail=str(e))
+
+                    expire_dt_obj = entered_dt_obj + timedelta(days=data["shelfLifeDays"])
+                    item.expire_dt = utils.validators.format_datetime(expire_dt_obj, fmt=self._time_format)
+                else:
+                    if utils.validators.validate_datetime_string(item.entered_dt, fmt=self._time_format):
+                        utils.exceptions.raise_bad_request(detail="invalid expire_dt")           
 
         created = await self._crud.create(item.dict(by_alias=True))
         if not created:
             self._log.logger.warning(f"failed create fridge item id({item_id})")
-            raise_bad_request()
+            utils.exceptions.raise_bad_request()
 
         # fridge log
         fridge_log_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_LOG)
@@ -73,8 +96,10 @@ class FridgeItemAPI(BaseAPI):
         created_log = await fridge_log_crud.create(log_data)
         if not created_log:
             self._log.logger.error(f"failed create fridge log({item_id})")
+
         
         self._log.logger.info(f"success create fridge item id({item_id})")
+        
         return created
     
 
@@ -108,7 +133,7 @@ class FridgeItemAPI(BaseAPI):
             created = await self._crud.create(item.dict(by_alias=True))
             if not created:
                 self._log.logger.warning(f"failed create fridge item id({item_id})")
-                raise_bad_request()
+                utils.exceptions.raise_bad_request()
 
             # fridge log
             fridge_log_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_LOG)
@@ -129,7 +154,7 @@ class FridgeItemAPI(BaseAPI):
         updated = await self._crud.update(item_id, item.dict(by_alias=True))
         if not updated:
             self._log.logger.warning(f"failed update fridge item id({item_id})")
-            raise_bad_request()
+            utils.exceptions.raise_bad_request()
 
         self._log.logger.info(f"success update fridge item id({item_id})")
         return updated
@@ -140,7 +165,7 @@ class FridgeItemAPI(BaseAPI):
         item = await self._crud.get_by_id(item_id)
         if not item:
             self._log.logger.warning(f"invalid fridge item id({item_id})")
-            raise_not_found(detail="Fridge item not found")
+            utils.exceptions.raise_not_found(detail="Fridge item not found")
 
         # fridge log
         fridge_log_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_LOG)
@@ -152,7 +177,7 @@ class FridgeItemAPI(BaseAPI):
         deleted = await self._crud.delete(item_id)
         if not deleted:
             self._log.logger.warning(f"failed delete fridge item id({item_id})")
-            raise_bad_request()
+            utils.exceptions.raise_bad_request()
 
 
         self._log.logger.info(f"success delete fridge item id({item_id})")

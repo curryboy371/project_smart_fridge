@@ -3,7 +3,7 @@ from datetime import datetime
 from bson import ObjectId
 from pydantic import BaseModel, Field
 from models.model_base import TFBaseMdoel
-#from models.model_base import PyObjectId
+
 
 class UserProfileModel(TFBaseMdoel):
     #id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
@@ -14,13 +14,3 @@ class UserProfileModel(TFBaseMdoel):
     preferredCategories: Optional[List[str]] = None
     missingNutrients: Optional[List[str]] = None
     desc: Optional[str] = None
-
-    # class Config:
-    #     arbitrary_types_allowed = True      # _id를 id로 자동 매핑
-    #     json_encoders = {
-    #         ObjectId: str,
-    #         datetime: lambda v: v.strftime("%Y-%m-%d %H:%M:%S")
-    #     }
-    #     validate_by_name=True
-
-
