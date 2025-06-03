@@ -23,3 +23,4 @@ class FridgePosition(Enum):
     TOP_RIGHT = 1
     BOTTOM_LEFT = 2
     BOTTOM_RIGHT = 3
+    MAX = 4

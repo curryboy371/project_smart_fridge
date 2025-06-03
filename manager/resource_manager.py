@@ -1,8 +1,15 @@
 import cv2
-import time
+import numpy as np
+import os
+from typing import Optional
 from core.singlebone_base import TFSingletonBase
 from manager.tfconfig_manager import TFConfigManager as TFConfig
 from core.tflog import TFLoggerManager as TFLog
+import asyncio
+
+from manager.crud_manager import CrudManager
+from crud.fridge_item_crud import FridgeItemCRUD
+import core.tfenums as en
 
 class ResourceManager(TFSingletonBase):
     def __init__(self):
@@ -12,8 +19,10 @@ class ResourceManager(TFSingletonBase):
         super().__init__()
         self._log = TFLog.get_instance().get_logger()
         self._config = TFConfig.get_instance()
+        self._stream_lock = asyncio.Lock()
         
         self._init_video()
+        self._init_image()
 
     def __del__(self):
         if self._video.isOpened():
@@ -48,34 +57,77 @@ class ResourceManager(TFSingletonBase):
             self._default_img = cv2.resize(src=default_img, dsize=[self._img_width, self._img_height])
         
 
-    def frame_generator(self):
+    async def frame_generator(self):
         """
         StreamingResponse에 사용되는 프레임 제너레이터
         """
-        while True:
-            success, frame = self._video.read()
-            if not success:
-                self._video.set(cv2.CAP_PROP_POS_FRAMES, 0)
-                continue
+        async with self._stream_lock:
+            while True:
+                success, frame = self._video.read()
+                if not success:
+                    self._video.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                    continue
+        
+                resized = cv2.resize(frame, (self._video_width, self._video_height))
+                _, jpeg = cv2.imencode('.jpg', resized)
+                frame_bytes = jpeg.tobytes()
 
-            resized = cv2.resize(frame, (self._video_width, self._video_height))
-            _, jpeg = cv2.imencode('.jpg', resized)
-            frame_bytes = jpeg.tobytes()
-
-            yield (b"--frame\r\n"
-                   b"Content-Type: image/jpeg\r\n\r\n" + frame_bytes + b"\r\n")
-            time.sleep(1 / self._video_fps)
+                yield (b"--frame\r\n"
+                    b"Content-Type: image/jpeg\r\n\r\n" + frame_bytes + b"\r\n")
+                await asyncio.sleep(1 / self._video_fps)
 
 
-    def load_fridge_image(self) -> bytes:
+    async def load_fridge_image(self) -> Optional[bytes]:
         """
         이미지를 생성, JPEG 바이트로 반환
         """
 
-        #resized = cv2.resize(image, (self._video_width, self._video_height))
-        success, jpeg = cv2.imencode('.jpg', self._default_img)
+        #냉장고 상황 확인
+        fridge_item_crud = CrudManager().get_instance().get_crud(en.CollectionName.FRIDGE_ITEM)
+        image_grid = []
+        
+
+        
+        for i in range(en.FridgePosition.MAX.value):
+            item = await fridge_item_crud.get_position_item(i)
+
+            # 이미지 존재 여부 확인
+            filename = f"{i}.jpg"
+            filepath = os.path.join(self._img_path, filename)
+            if item and self._img_path and os.path.exists(filepath):
+                img = cv2.imread(filepath)
+            else:
+                img = self._default_img
+                print(f"Default image used for position {i}")
+                            
+            if img is None:
+                self._log.error(f"image load fail: position={i}")
+                img = np.ones((240, 320, 3), dtype=np.uint8) * 200  # 완전한 fallback 이미지
+            
+                
+            # 리사이즈
+            resized = cv2.resize(img, (320, 240))
+            image_grid.append(resized)
+            
+        
+        # 2행 2열로 합치기
+        top_row = np.hstack((image_grid[0], image_grid[1]))  # 좌상 + 우상
+        bottom_row = np.hstack((image_grid[2], image_grid[3]))  # 좌하 + 우하
+        combined = np.vstack((top_row, bottom_row))  # 위아래 붙이기
+        
+        
+        # 십자 경계선 그리기
+        h, w = combined.shape[:2]
+        center_x = w // 2
+        center_y = h // 2
+        
+        cv2.line(combined, (center_x, 0), (center_x, h), (0, 0, 255), thickness=4)
+        cv2.line(combined, (0, center_y), (w, center_y), (0, 0, 255), thickness=4)
+        
+        # JPEG 인코딩
+        success, jpeg = cv2.imencode('.jpg', combined)
         if not success:
-            self._log.error(f"failed to encode image")
+            self._log.error("fail image encoding")
             return None
 
         return jpeg.tobytes()

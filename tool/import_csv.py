@@ -5,8 +5,8 @@ import os
 import asyncio
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from core.tfdb import TFDB
-from core.tfconfig_manager import TFConfigManager as TFConfig
+from manager.tfdb_manager import TFDB
+from manager.tfconfig_manager import TFConfigManager as TFConfig
 from core.tfenums import CollectionName
 
 from pymongo.errors import BulkWriteError

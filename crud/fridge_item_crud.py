@@ -8,10 +8,9 @@ class FridgeItemCRUD(GenericCRUD):
     def __init__(self, collection_enum: en.CollectionName):
         super().__init__(collection_enum)
 
-    async def get_position_item(self, position) -> List[dict]:
+    async def get_position_item(self, position) -> Optional[dict]:
         query = {"position": position.value if hasattr(position, "value") else position}
-        cursor = self.collection.find(query)
-        return [doc async for doc in cursor]
+        return await self.collection.find_one(query)
 
     async def get_expired_items(self) -> List[dict]:
         now = datetime.now()

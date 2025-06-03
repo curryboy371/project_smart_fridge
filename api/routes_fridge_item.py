@@ -49,9 +49,9 @@ class FridgeItemAPI(BaseAPI):
 
         # 같은 위치에 음식이 존재하는지
         fridge_item_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_ITEM)
-        same_position_items = await fridge_item_crud.get_position_item(item.position)
-        
-        if same_position_items:
+        same_position_item = await fridge_item_crud.get_position_item(item.position)
+
+        if same_position_item is not None:
             self._log.logger.warning(f"There is already another food item at that position ({item.position})")
             utils.exceptions.raise_conflict(detail="There is already another food item at that position")
 
