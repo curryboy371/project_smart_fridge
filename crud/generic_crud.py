@@ -1,4 +1,4 @@
-from core.tfdb import TFDB
+from manager.tfdb_manager import TFDB
 from core import tfenums as en
 from bson import ObjectId
 from typing import List, Optional, Any, Dict

@@ -9,7 +9,7 @@ from core import tfenums as en
 
 from typing import List, Type
 
-from crud.crud_manager import CrudManager
+from manager.crud_manager import CrudManager
 
 import utils.validators
 

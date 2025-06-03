@@ -1,7 +1,7 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 from core.singlebone_base import TFSingletonBase
 from core.tflog import TFLoggerManager as TFLog
-from core.tfconfig_manager import TFConfigManager as TFConfig
+from manager.tfconfig_manager import TFConfigManager as TFConfig
 from core import tfenums as en
 from core.tfenums import CollectionName
 

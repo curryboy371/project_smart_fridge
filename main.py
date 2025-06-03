@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from core.tflog import TFLoggerManager as TFLog
-from core.tfdb import TFDB
-from api.router_manager import RouterManager
+from manager.tfdb_manager import TFDB
+from manager.router_manager import RouterManager
 
 from datetime import datetime
 

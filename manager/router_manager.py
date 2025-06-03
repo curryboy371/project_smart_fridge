@@ -19,7 +19,7 @@ from crud.generic_crud import GenericCRUD
 from crud.fridge_item_crud import FridgeItemCRUD
 
 from models.model_base import SimpleModel
-from crud.crud_manager import CrudManager
+from manager.crud_manager import CrudManager
 
 
 class RouterManager(TFSingletonBase):
