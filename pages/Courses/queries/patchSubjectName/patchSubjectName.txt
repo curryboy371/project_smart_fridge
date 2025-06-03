@@ -1,3 +1,0 @@
-UPDATE course_subject
-  SET name = {{inp_subjectTitle.text}}
-  WHERE id = {{ utils.subject.Id }};

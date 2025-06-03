@@ -40,9 +40,10 @@
     "desc",
     "customColumn1",
     "customColumn2",
-    "_id"
+    "_id",
+    "position"
   ],
-  "columnUpdatedAt": 1748831886014,
+  "columnUpdatedAt": 1748943345656,
   "columnWidthMap": {
     "customColumn1": 169,
     "desc": 127,
@@ -110,6 +111,9 @@
     },
     {
       "key": "primaryColumns.expire_dt.computedValue"
+    },
+    {
+      "key": "primaryColumns.position.computedValue"
     }
   ],
   "dynamicPropertyPathList": [
@@ -427,6 +431,40 @@
       "label": "name",
       "notation": "standard",
       "originalId": "name",
+      "sticky": "",
+      "textColor": "",
+      "textSize": "0.875rem",
+      "thousandSeparator": true,
+      "validation": {},
+      "verticalAlignment": "CENTER",
+      "width": 150
+    },
+    "position": {
+      "alias": "position",
+      "allowCellWrapping": false,
+      "allowSameOptionsInNewRow": true,
+      "cellBackground": "",
+      "columnType": "number",
+      "computedValue": "{{tbl_user_profile.processedTableData.map((currentRow, currentIndex) => ( currentRow[\"position\"]))}}",
+      "currencyCode": "USD",
+      "decimals": 0,
+      "enableFilter": true,
+      "enableSort": true,
+      "fontStyle": "",
+      "horizontalAlignment": "LEFT",
+      "id": "position",
+      "index": 6,
+      "isCellEditable": false,
+      "isCellVisible": true,
+      "isDerived": false,
+      "isDisabled": false,
+      "isDiscardVisible": true,
+      "isEditable": false,
+      "isSaveVisible": true,
+      "isVisible": true,
+      "label": "position",
+      "notation": "standard",
+      "originalId": "position",
       "sticky": "",
       "textColor": "",
       "textSize": "0.875rem",

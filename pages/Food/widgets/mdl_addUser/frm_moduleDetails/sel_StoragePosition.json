@@ -4,7 +4,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 9,
   "boxShadow": "none",
-  "defaultOptionValue": "{{ ((options, serverSideFiltering) => (  utils.state.modalMode == \"add\" ? [] : utils.state.currentData.storageMethod ))(sel_StorageMethod.options, sel_StorageMethod.serverSideFiltering) }}",
+  "defaultOptionValue": "{{ ((options, serverSideFiltering) => (  utils.state.modalMode == \"add\" ? [] : utils.state.currentData.position ))(sel_StoragePosition.options, sel_StoragePosition.serverSideFiltering) }}",
   "displayName": "Select",
   "dynamicBindingPathList": [
     {
@@ -12,9 +12,6 @@
     },
     {
       "key": "borderRadius"
-    },
-    {
-      "key": "sourceData"
     },
     {
       "key": "defaultOptionValue"
@@ -39,10 +36,10 @@
   "labelAlignment": "left",
   "labelPosition": "Top",
   "labelStyle": "BOLD",
-  "labelText": "보관 방법",
+  "labelText": "위치",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 31,
+  "leftColumn": 47,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -60,15 +57,15 @@
   "placeholderText": "Select option",
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
-  "rightColumn": 44,
+  "rightColumn": 60,
   "searchTags": [
     "dropdown"
   ],
   "serverSideFiltering": false,
-  "sourceData": "{{ \nutils.categoryTable.storage_method\n}}",
+  "sourceData": "[\n  { \"label\": \"0(좌상)\", \"value\": 0 },\n  { \"label\": \"1(우상)\", \"value\": 1 },\n  { \"label\": \"2(좌하)\", \"value\": 2 },\n  { \"label\": \"3(우하)\", \"value\": 3 }\n]",
   "topRow": 2,
   "type": "SELECT_WIDGET",
   "version": 1,
-  "widgetId": "kldk7b645r",
-  "widgetName": "sel_StorageMethod"
+  "widgetId": "40oscnxwbk",
+  "widgetName": "sel_StoragePosition"
 }

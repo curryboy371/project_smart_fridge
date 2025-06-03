@@ -5,9 +5,11 @@ export default {
 		currentData: null,     // 편집 시 해당 데이터 저장
 		isModalOpen: false,    // 모달 열림 상태
 
+		server_time: '',
 		defaultAllergies: [],
 		defaultNutrition: []
 	},
+
 
 	categoryTable: {
 		isInit: false, 
@@ -21,6 +23,10 @@ export default {
 		if (this.categoryTable.isInit && !bForce) {
 			return;
 		}
+
+		const response = await GET_time.run();
+		this.state.server_time = response.time; 
+		this.state.server_time_hour = response.hour; 
 
 		const nutrition_data = await GET_nutrition.run();
 		this.categoryTable.nutrition = nutrition_data.map(item => ({
@@ -102,8 +108,9 @@ export default {
 				name: inp_FoodName.text,
 				food_category: sel_CategoryName.selectedOptionValue,
 				storageMethod: sel_StorageMethod.selectedOptionValue,
-				entered_dt: inp_Entered_DT.text,
-				expire_dt: inp_Expire_DT.text,
+				position: sel_StoragePosition.selectedOptionValue,
+				entered_dt: inp_Entered_DT.text ? inp_Entered_DT.text : null,
+				expire_dt: inp_Expire_DT.text ? inp_Expire_DT.text : null,
 				desc: inp_CategoryDesc?.text ?? ""
 			};
 
@@ -125,14 +132,19 @@ export default {
 	addUser: async () => {
 		try {
 
+
 			const jsonres = {
 				name: inp_FoodName.text,
 				food_category: sel_CategoryName.selectedOptionValue,
 				storageMethod: sel_StorageMethod.selectedOptionValue,
-				entered_dt: inp_Entered_DT.text,
-				expire_dt: inp_Expire_DT.text,
+				position: sel_StoragePosition.selectedOptionValue,
+				entered_dt: inp_Entered_DT.text ? inp_Entered_DT.text : null,
+				expire_dt: inp_Expire_DT.text ? inp_Expire_DT.text : null,
+
 				desc: inp_CategoryDesc?.text ?? ""
 			};
+
+			console.log("jsonres",jsonres);
 
 			const response = await POST.run({ body: jsonres });
 			showAlert("음식 등록에 성공했습니다.", "success");

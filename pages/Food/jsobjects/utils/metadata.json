@@ -9,7 +9,7 @@
     "variables": [
       {
         "name": "state",
-        "value": "{\n  modalMode: 'add',\n  currentData: null,\n  isModalOpen: false,\n  defaultAllergies: [],\n  defaultNutrition: []\n}"
+        "value": "{\n  modalMode: 'add',\n  currentData: null,\n  isModalOpen: false,\n  server_time: '',\n  defaultAllergies: [],\n  defaultNutrition: []\n}"
       },
       {
         "name": "categoryTable",

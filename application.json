@@ -12,10 +12,6 @@
   "icon": "bicycle",
   "pages": [
     {
-      "id": "Courses",
-      "isDefault": false
-    },
-    {
       "id": "UserProfile",
       "isDefault": false
     },

@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 8,
+  "bottomRow": 80,
   "displayName": "Text",
   "dynamicBindingPathList": [
     {
@@ -33,8 +33,8 @@
   "mobileLeftColumn": 23,
   "mobileRightColumn": 39,
   "mobileTopRow": 3,
-  "originalBottomRow": 8,
-  "originalTopRow": 3,
+  "originalBottomRow": 80,
+  "originalTopRow": 75,
   "overflow": "NONE",
   "parentColumnSpace": 18.0625,
   "parentId": "0",
@@ -48,13 +48,13 @@
     "label"
   ],
   "shouldTruncate": false,
-  "text": "실시간 냉장고",
+  "text": "냉장고 상황",
   "textAlign": "LEFT",
   "textColor": "#231F2",
-  "topRow": 3,
+  "topRow": 75,
   "truncateButtonColor": "{{appsmith.theme.colors.primaryColor}}",
   "type": "TEXT_WIDGET",
   "version": 1,
-  "widgetId": "ib25x7axp5",
-  "widgetName": "txt_content"
+  "widgetId": "gz986032qh",
+  "widgetName": "txt_contentCopy"
 }
