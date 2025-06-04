@@ -8,6 +8,7 @@ import os
 import openai
 from openai import AsyncOpenAI
 
+
 from core.tflog import TFLoggerManager as TFLog
 
 class ChatRequest(BaseModel):
@@ -27,6 +28,7 @@ class ChatGPTAPI(SimpleBaseAPI):
         
         self.open_ai = AsyncOpenAI(api_key=api_key)
 
+        self._router.get("/", response_model=ChatResponse)(self.chat_with_gpt_test)
         self._router.post("/", response_model=ChatResponse)(self.chat_with_gpt)
 
     async def chat_with_gpt(self, request: ChatRequest):
@@ -38,6 +40,20 @@ class ChatGPTAPI(SimpleBaseAPI):
         except Exception as e:
             self._log.logger.error(f"GPT API Error: {e}")
             utils.exceptions.raise_bad_request(detail=str(e)) 
+
+    async def chat_with_gpt_test(self):
+        self._log.logger.info("chat chat gpt request test")
+        return {"response": "gpt text test gpt text testgpt text testgpt text testgpt text testgpt text testgpt text testgpt text test"
+        "gpt text testgpt text testgpt text testgpt text testgpt text testgpt text test"
+        "gpt text testgpt text testgpt text testgpt text testgpt text test"
+        "gpt text testgpt text testgpt text testgpt text test"
+        "gpt text testgpt text testgpt text testgpt text test"
+        "gpt text testgpt text testgpt text testgpt text test"
+        "gpt text testgpt text testgpt text testgpt text testgpt text test"
+        "gpt text testgpt text testgpt text testgpt text testgpt text test"
+        "gpt text testgpt text testgpt text testgpt text testgpt text test"
+        }
+    
 
 
 # GPT 서비스 함수

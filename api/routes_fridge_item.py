@@ -47,6 +47,8 @@ class FridgeItemAPI(BaseAPI):
         item_id = item.id
         self._log.logger.info(f"try create fridge item id({item_id})")
 
+        now = datetime.utcnow()
+
         # 같은 위치에 음식이 존재하는지
         fridge_item_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_ITEM)
         same_position_item = await fridge_item_crud.get_position_item(item.position)
@@ -57,7 +59,7 @@ class FridgeItemAPI(BaseAPI):
 
         # 입고 날짜가 없다면 현재 시간으로 설정
         if item.entered_dt is None:
-            formatted = utils.validators.format_datetime(datetime.utcnow(), fmt=self._time_format)
+            formatted = utils.validators.format_datetime(now, fmt=self._time_format)
             item.entered_dt = formatted
         else:
             utils.validators.validate_datetime_string(item.entered_dt, fmt=self._time_format)
@@ -83,7 +85,12 @@ class FridgeItemAPI(BaseAPI):
                     item.expire_dt = utils.validators.format_datetime(expire_dt_obj, fmt=self._time_format)
                 else:
                     if utils.validators.validate_datetime_string(item.entered_dt, fmt=self._time_format):
-                        utils.exceptions.raise_bad_request(detail="invalid expire_dt")           
+                        utils.exceptions.raise_bad_request(detail="invalid expire_dt")          
+            else: # 카테고리가 없는 경우
+                item.food_category = "ETC"
+                expire_dt_obj = now + timedelta(days=7) # default 유통기한
+                item.expire_dt = utils.validators.format_datetime(expire_dt_obj, fmt=self._time_format)
+
 
         created = await self._crud.create(item.dict(by_alias=True))
         if not created:
@@ -107,9 +114,11 @@ class FridgeItemAPI(BaseAPI):
         
         # 아이템을 리스트로 받는 경우는 입출고를 동시에 수행함
         # 기존의 아이템과 비교하는 절차가 수행되어야 함
-
+        now = datetime.now()
         createds = []
         food_category_crud = CrudManager.get_instance().get_crud(en.CollectionName.FOOD_CATEGORY)
+        fridge_item_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_ITEM)
+        fridge_log_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_LOG)
 
         for item in items:
             item_id = item.id
@@ -130,13 +139,42 @@ class FridgeItemAPI(BaseAPI):
                     if item.expire_dt is None:
                         item.expire_dt = item.entered_dt + timedelta(days=data["shelfLifeDays"])
 
+            # 동일 위치 아이템 체크
+            existing_item = await fridge_item_crud.get_position_item(item.position)
+            if existing_item is not None:
+                if existing_item["name"] == item.name:
+                    self._log.logger.info(f"same food exists at position({item.position}), skip")
+                    continue
+                else:
+                    # 다른 음식인 경우 처리 (소비 또는 폐기 처리)
+                    existing_expire_dt = existing_item.get("expire_dt")
+                    expire_dt = utils.validators.strptime_datetime(existing_expire_dt, fmt=self._time_format)
+
+                    # 유통기한이 남으면 소비, 지나면 버림
+                    log_event_type = en.EventType.CONSUMED
+                    if expire_dt and expire_dt < now:
+                        log_event_type = en.EventType.DISCARD
+
+                    # 기존 음식 제거
+                    id = existing_item["_id"]
+                    deleted = await self._crud.delete(id)
+                    if not deleted:
+                        self._log.logger.warning(f"failed delete existing fridge item id({id})")
+                        utils.exceptions.raise_bad_request()
+
+                    # 로깅
+                    log_data = await CrudManager.get_instance().create_fridge_log_template(existing_item, log_event_type)
+                    await fridge_log_crud.create(log_data)
+
+                    self._log.logger.info(f"exsisting item delete({item.id})")
+
+
             created = await self._crud.create(item.dict(by_alias=True))
             if not created:
                 self._log.logger.warning(f"failed create fridge item id({item_id})")
                 utils.exceptions.raise_bad_request()
 
             # fridge log
-            fridge_log_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_LOG)
             log_data = await CrudManager.get_instance().create_fridge_log_template(created, en.EventType.INBOUND)
             created_log = await fridge_log_crud.create(log_data)
             if not created_log:
