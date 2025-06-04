@@ -19,10 +19,19 @@ class ResourceManager(TFSingletonBase):
         super().__init__()
         self._log = TFLog.get_instance().get_logger()
         self._config = TFConfig.get_instance()
+        self._proxy_frame = None
         self._stream_lock = asyncio.Lock()
         
         self._init_video()
         self._init_image()
+
+    @property
+    def proxy_frame(self):
+        return self._proxy_frame
+    
+    @proxy_frame.setter
+    def proxy_frame(self, value: bytes):
+        self._proxy_frame = value
 
     def __del__(self):
         if self._video.isOpened():
@@ -76,6 +85,19 @@ class ResourceManager(TFSingletonBase):
                     b"Content-Type: image/jpeg\r\n\r\n" + frame_bytes + b"\r\n")
                 await asyncio.sleep(1 / self._video_fps)
 
+
+    async def proxy_frame_generator(self):
+        """
+        외부에서 받은 최신 프레임(self._last_frame)을 지속적으로 반환
+        """
+        async with self._stream_lock:
+            while True:
+                if self._proxy_frame:
+                    yield (b"--frame\r\n"
+                        b"Content-Type: image/jpeg\r\n\r\n" +
+                        self._proxy_frame +
+                        b"\r\n")
+                await asyncio.sleep(1 / self._video_fps)
 
     async def load_fridge_image(self) -> Optional[bytes]:
         """
