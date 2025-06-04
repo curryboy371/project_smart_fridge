@@ -10,8 +10,8 @@ import utils.exceptions
 from core import tfenums as en
 
 from typing import List, Type
-from crud.generic_crud import GenericCRUD
-
+from crud.fridge_log_crud import FridgeLogCRUD
+from fastapi import Query
 import utils.validators
 
 
@@ -21,10 +21,16 @@ class FridgeLogAPI(BaseAPI):
         super().__init__(model, crud_class, enum_value)
 
         # API 경로 등록
+
+        self._router.get("/event", response_model=List[self._model])(self.get_logs_by_event)
         self._router.get("/{id}", response_model=self._model)(self.get_datas)
+        
         self._router.post("/", response_model=self._model)(self.create_data)
         self._router.put("/", response_model=self._model)(self.update_data)
         self._router.delete("/{id}")(self.delete_data)
+
+    async def get_logs_by_event(self, event_type: str = Query(...)):
+        return await self._crud.get_logs_by_event(event_type)
 
     async def get_datas(self):
         return await self._crud.get_all()

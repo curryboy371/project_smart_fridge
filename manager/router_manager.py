@@ -17,6 +17,7 @@ from models.fridge_item import FridgeItemModel
 
 from crud.generic_crud import GenericCRUD
 from crud.fridge_item_crud import FridgeItemCRUD
+from crud.fridge_log_crud import FridgeLogCRUD
 
 from models.model_base import SimpleModel
 from manager.crud_manager import CrudManager
@@ -44,7 +45,7 @@ class RouterManager(TFSingletonBase):
         main_config_list = [
             (en.CollectionName.USER_PROFILE,   UserProfileAPI, UserProfileModel, GenericCRUD),
             (en.CollectionName.FRIDGE_ITEM,    FridgeItemAPI, FridgeItemModel, FridgeItemCRUD),
-            (en.CollectionName.FRIDGE_LOG,     FridgeLogAPI, FridgeLogModel, GenericCRUD),
+            (en.CollectionName.FRIDGE_LOG,     FridgeLogAPI, FridgeLogModel, FridgeLogCRUD),
             (en.CollectionName.FOOD_CATEGORY,  FoodCategoryAPI, FoodCategoryModel, GenericCRUD),
          ]
         
