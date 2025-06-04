@@ -33,7 +33,7 @@
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
   "rightColumn": 63,
-  "source": "http://10.10.16.31:8000/main/stream",
+  "source": "http://10.10.16.31:8000/main/proxy_stream",
   "topRow": 0,
   "type": "IFRAME_WIDGET",
   "version": 1,
