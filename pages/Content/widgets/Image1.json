@@ -13,7 +13,7 @@
   "enableDownload": false,
   "enableRotation": false,
   "flexVerticalAlignment": "start",
-  "image": "http://192.168.56.1:8000/main/image",
+  "image": "http://10.10.16.31:8000/main/image",
   "imageShape": "RECTANGLE",
   "isLoading": false,
   "isVisible": true,

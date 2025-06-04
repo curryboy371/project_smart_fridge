@@ -1,17 +1,12 @@
 {
-  "gitSyncId": "68353d7be9e51751500a63c7_2be883eb-7068-45f4-b06c-7281e345d397",
-  "id": "Content_utils.setShowNewQuestion",
+  "gitSyncId": "68353d7be9e51751500a63c7_f5fcdef0-b3ae-4441-8269-a672591770d6",
+  "id": "Content_utils.click_recipe",
   "pluginId": "js-plugin",
   "pluginType": "JS",
   "unpublishedAction": {
     "actionConfiguration": {
       "encodeParamsToggle": true,
-      "isAsync": false,
-      "jsArguments": [
-        {
-          "name": "isShowNewQuestion"
-        }
-      ],
+      "jsArguments": [],
       "paginationType": "NONE",
       "timeoutInMillisecond": 10000
     },
@@ -27,8 +22,8 @@
         "key": "body"
       }
     ],
-    "fullyQualifiedName": "utils.setShowNewQuestion",
-    "name": "setShowNewQuestion",
+    "fullyQualifiedName": "utils.click_recipe",
+    "name": "click_recipe",
     "pageId": "Content",
     "runBehaviour": "MANUAL",
     "userSetOnLoad": false
