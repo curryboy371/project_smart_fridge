@@ -10,6 +10,7 @@ import asyncio
 from manager.crud_manager import CrudManager
 from crud.fridge_item_crud import FridgeItemCRUD
 import core.tfenums as en
+from pathlib import Path
 
 class ResourceManager(TFSingletonBase):
     def __init__(self):
@@ -101,55 +102,29 @@ class ResourceManager(TFSingletonBase):
 
     async def load_fridge_image(self) -> Optional[bytes]:
         """
-        이미지를 생성, JPEG 바이트로 반환
+        냉장고 모든 자리가 채워져 있으면 composited.jpg, 비어 있으면 empty.jpg 반환
         """
+        fridge_item_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_ITEM)
 
-        #냉장고 상황 확인
-        fridge_item_crud = CrudManager().get_instance().get_crud(en.CollectionName.FRIDGE_ITEM)
-        image_grid = []
-        
+        bfridge_empty = True
 
+        items = await fridge_item_crud.get_all()
+        bfridge_empty = len(items) == 0
         
-        for i in range(en.FridgePosition.MAX.value):
-            item = await fridge_item_crud.get_position_item(i)
+        img_path = Path("./resource/empty.jpg") if bfridge_empty else Path("./resource/composited.jpg")
+        print(img_path)
+        if not img_path.exists():
+            self._log.error(f"Image file not found: {img_path}")
+            return None
 
-            # 이미지 존재 여부 확인
-            filename = f"{i}.jpg"
-            filepath = os.path.join(self._img_path, filename)
-            if item and self._img_path and os.path.exists(filepath):
-                img = cv2.imread(filepath)
-            else:
-                img = self._default_img
-                print(f"Default image used for position {i}")
-                            
-            if img is None:
-                self._log.error(f"image load fail: position={i}")
-                img = np.ones((240, 320, 3), dtype=np.uint8) * 200  # 완전한 fallback 이미지
-            
-                
-            # 리사이즈
-            resized = cv2.resize(img, (320, 240))
-            image_grid.append(resized)
-            
-        
-        # 2행 2열로 합치기
-        top_row = np.hstack((image_grid[0], image_grid[1]))  # 좌상 + 우상
-        bottom_row = np.hstack((image_grid[2], image_grid[3]))  # 좌하 + 우하
-        combined = np.vstack((top_row, bottom_row))  # 위아래 붙이기
-        
-        
-        # 십자 경계선 그리기
-        h, w = combined.shape[:2]
-        center_x = w // 2
-        center_y = h // 2
-        
-        cv2.line(combined, (center_x, 0), (center_x, h), (0, 0, 255), thickness=4)
-        cv2.line(combined, (0, center_y), (w, center_y), (0, 0, 255), thickness=4)
-        
-        # JPEG 인코딩
-        success, jpeg = cv2.imencode('.jpg', combined)
+        image = cv2.imread(str(img_path))
+        if image is None:
+            self._log.error(f"Failed to load image from {img_path}")
+            return None
+
+        success, jpeg = cv2.imencode('.jpg', image)
         if not success:
-            self._log.error("fail image encoding")
+            self._log.error("Failed to encode image to JPEG")
             return None
 
         return jpeg.tobytes()

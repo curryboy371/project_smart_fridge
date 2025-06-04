@@ -11,6 +11,8 @@ from fastapi import Response
 import utils.exceptions
 from fastapi import UploadFile, File
 import asyncio
+from pathlib import Path
+import shutil
 
 from manager.tfconfig_manager import TFConfigManager as TFConfig
 
@@ -31,6 +33,7 @@ class MainAPI(SimpleBaseAPI):
         self._router.get("/proxy_stream")(self.main_stream_proxy)
 
         self._router.post("/recv_frame")(self.receive_frame)
+        self._router.post("/recv_image")(self.receive_image)
         
 
     # 서버 연결 체크
@@ -48,6 +51,18 @@ class MainAPI(SimpleBaseAPI):
     async def receive_frame(self, image: UploadFile):
         ResourceManager.get_instance().proxy_frame = await image.read()  # 파일 내용을 메모리에 저장
         return {"status": "received"}
+    
+    
+    # ras에서 이미지 얻음
+    async def receive_image(self, file: UploadFile = File(...)):
+        
+        save_path = Path("resource/composited.jpg")
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with save_path.open("wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        return {"status": "success", "path": save_path}
 
     # 프록시 스트리밍 반환 ( frame to Web)
     async def main_stream_proxy(self):
@@ -64,3 +79,5 @@ class MainAPI(SimpleBaseAPI):
             utils.exceptions.raise_bad_request(detail="image is none")
             
         return Response(content=image, media_type="image/jpeg")
+    
+    
