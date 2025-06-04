@@ -1,6 +1,6 @@
 {
-  "gitSyncId": "68353d7be9e51751500a63c7_1a4b070f-4659-4935-9de4-a8a5f840483d",
-  "id": "FridgeLog_GET",
+  "gitSyncId": "683fda08c3cf647fcef97cf5_e612ea03-f85e-4594-ba8b-acd5e2d56f1b",
+  "id": "FridgeLog_GET_LOG_DISCARDED",
   "pluginId": "restapi-plugin",
   "pluginType": "API",
   "unpublishedAction": {
@@ -16,13 +16,18 @@
       "httpMethod": "GET",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "fridge_log/",
+      "path": "fridge_log/event",
       "pluginSpecifiedTemplates": [
         {
           "value": true
         }
       ],
-      "queryParameters": [],
+      "queryParameters": [
+        {
+          "key": "event_type",
+          "value": "DISCARDED"
+        }
+      ],
       "timeoutInMillisecond": 10000
     },
     "confirmBeforeExecute": false,
@@ -33,9 +38,9 @@
       "pluginId": "restapi-plugin"
     },
     "dynamicBindingPathList": [],
-    "name": "GET",
+    "name": "GET_LOG_DISCARDED",
     "pageId": "FridgeLog",
-    "runBehaviour": "MANUAL",
+    "runBehaviour": "ON_PAGE_LOAD",
     "userSetOnLoad": false
   }
 }

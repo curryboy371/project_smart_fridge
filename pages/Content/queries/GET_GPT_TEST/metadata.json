@@ -1,6 +1,6 @@
 {
-  "gitSyncId": "68353d7be9e51751500a63c7_1a4b070f-4659-4935-9de4-a8a5f840483d",
-  "id": "FridgeLog_GET",
+  "gitSyncId": "683fda08c3cf647fcef97cf5_98b6901e-efa2-4e21-a80b-4d4bf0b3c668",
+  "id": "Content_GET_GPT_TEST",
   "pluginId": "restapi-plugin",
   "pluginType": "API",
   "unpublishedAction": {
@@ -16,7 +16,7 @@
       "httpMethod": "GET",
       "httpVersion": "HTTP11",
       "paginationType": "NONE",
-      "path": "fridge_log/",
+      "path": "gpt/test",
       "pluginSpecifiedTemplates": [
         {
           "value": true
@@ -33,8 +33,8 @@
       "pluginId": "restapi-plugin"
     },
     "dynamicBindingPathList": [],
-    "name": "GET",
-    "pageId": "FridgeLog",
+    "name": "GET_GPT_TEST",
+    "pageId": "Content",
     "runBehaviour": "MANUAL",
     "userSetOnLoad": false
   }

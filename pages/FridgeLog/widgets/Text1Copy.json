@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 69,
+  "bottomRow": 52,
   "dynamicBindingPathList": [
     {
       "key": "truncateButtonColor"
@@ -11,9 +11,6 @@
     },
     {
       "key": "borderRadius"
-    },
-    {
-      "key": "text"
     }
   ],
   "dynamicHeight": "AUTO_HEIGHT",
@@ -23,33 +20,33 @@
   "fontStyle": "BOLD",
   "isLoading": false,
   "isVisible": true,
-  "key": "1pahy3n3ep",
-  "leftColumn": 29,
+  "key": "h534r249in",
+  "leftColumn": 0,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
-  "mobileBottomRow": 16,
-  "mobileLeftColumn": 33,
-  "mobileRightColumn": 49,
-  "mobileTopRow": 12,
+  "mobileBottomRow": 14,
+  "mobileLeftColumn": 1,
+  "mobileRightColumn": 17,
+  "mobileTopRow": 10,
   "needsErrorInfo": false,
-  "originalBottomRow": 87,
-  "originalTopRow": 20,
+  "originalBottomRow": 52,
+  "originalTopRow": 48,
   "overflow": "NONE",
   "parentColumnSpace": 20.25,
   "parentId": "0",
   "parentRowSpace": 10,
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
-  "rightColumn": 63,
+  "rightColumn": 16,
   "shouldTruncate": false,
-  "text": "{{ utils.recipe}}",
+  "text": "소비",
   "textAlign": "LEFT",
   "textColor": "#231F20",
-  "topRow": 20,
+  "topRow": 48,
   "truncateButtonColor": "{{appsmith.theme.colors.primaryColor}}",
   "type": "TEXT_WIDGET",
   "version": 1,
-  "widgetId": "p3u1nqk4jc",
-  "widgetName": "Text1"
+  "widgetId": "jiaypl4acq",
+  "widgetName": "Text1Copy"
 }
