@@ -1,12 +1,12 @@
 {
-  "gitSyncId": "68353d7be9e51751500a63c7_76ac4676-dd37-4170-8e84-236f6c6284ad",
+  "gitSyncId": "683d9acdc648eb7fbab2a0e6_9e661ef6-8c44-4df7-af45-19761b77806f",
   "unpublishedPage": {
     "isHidden": false,
     "layouts": [
       {
         "dsl": {
           "backgroundColor": "none",
-          "bottomRow": 1180,
+          "bottomRow": 1090,
           "canExtend": true,
           "containerStyle": "none",
           "detachFromLayout": true,
@@ -26,7 +26,7 @@
         }
       }
     ],
-    "name": "Content",
-    "slug": "content"
+    "name": "Cam",
+    "slug": "cam"
   }
 }
