@@ -134,7 +134,7 @@ class FridgeItemAPI(BaseAPI):
                     utils.exceptions.raise_bad_request(detail=str(e))
 
                 # 이벤트 타입 결정
-                event_type = en.EventType.DISCARD if expire_dt and expire_dt < now else en.EventType.CONSUMED
+                event_type = en.EventType.DISCARDED if expire_dt and expire_dt < now else en.EventType.CONSUMED
 
                 # 기존 아이템 삭제
                 deleted = await self._crud.delete(existing["_id"])
@@ -199,7 +199,7 @@ class FridgeItemAPI(BaseAPI):
                     # 유통기한이 남으면 소비, 지나면 버림
                     log_event_type = en.EventType.CONSUMED
                     if expire_dt and expire_dt < now:
-                        log_event_type = en.EventType.DISCARD
+                        log_event_type = en.EventType.DISCARDED
 
                     # 기존 음식 제거
                     id = existing_item["_id"]
