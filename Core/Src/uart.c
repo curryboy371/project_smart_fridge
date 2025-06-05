@@ -1,7 +1,21 @@
 #include "uart.h"
-#include "string.h"
-#include "led.h"
+
+
 #include <stdio.h>
+
+volatile int event;
+
+void set_event(int _event) {
+
+	event = _event;
+}
+
+int get_event() {
+
+	return event;
+}
+
+
 
 /*
 
