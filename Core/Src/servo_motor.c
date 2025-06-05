@@ -1,4 +1,5 @@
 #include "servo_motor.h"
+#include "uart.h"
 #include "main.h"
 
 extern volatile float distance;
@@ -35,7 +36,7 @@ void servo_motor_update(void)
         lost_timer = 0;
         if(detect_timer >= 2000 && state == 0)
         {
-            servo_motor_set_angle(90);
+            servo_motor_set_angle(110);
             state = 1;
         }
     }
@@ -45,7 +46,9 @@ void servo_motor_update(void)
         detect_timer = 0;
         if(lost_timer >= 2000 && state == 1)
         {
-            servo_motor_set_angle(0);
+        	// evnet
+        	set_event(1);
+            servo_motor_set_angle(30);
             state = 0;
         }
     }

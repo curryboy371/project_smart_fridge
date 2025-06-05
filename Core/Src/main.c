@@ -734,6 +734,7 @@ void StartDefaultTask(void *argument)
           if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET)
           {
         	  set_event(1);
+        	  osDelay(300);
           }
       }
 
@@ -800,6 +801,7 @@ void LCDTask(void *argument)
 {
   /* USER CODE BEGIN LCDTask */
   /* Infinite loop */
+  char buf[32];  // 크기는 상황에 따라 적절히 조정
   for(;;)
   {
 		// 0번 라인 초기화 후 출력
