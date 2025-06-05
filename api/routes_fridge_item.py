@@ -168,6 +168,10 @@ class FridgeItemAPI(BaseAPI):
                 try:
                     utils.validators.validate_datetime_string(item.entered_dt, fmt=self._time_format)
                     entered_dt_obj = utils.validators.strptime_datetime(item.entered_dt, fmt=self._time_format)
+                    shelf_life_days = category_data.get("shelfLifeDays", 7)  # 기본값 7일
+                    expire_dt_obj = entered_dt_obj + timedelta(days=shelf_life_days)       
+                    item.expire_dt = utils.validators.format_datetime(expire_dt_obj, fmt=self._time_format)            
+                        
                 except ValueError as e:
                     self._log.logger.error(f"Invalid entered_dt: {e}")
                     utils.exceptions.raise_bad_request(detail=str(e))
@@ -176,6 +180,7 @@ class FridgeItemAPI(BaseAPI):
                 item.food_category = "ETC"
                 item.storageMethod = "REFRIGERATED"
                 expire_dt_obj = now + timedelta(days=7) # default 유통기한
+                print("default expire set", expire_dt)
                 item.expire_dt = utils.validators.format_datetime(expire_dt_obj, fmt=self._time_format)            
                         
 
@@ -187,6 +192,7 @@ class FridgeItemAPI(BaseAPI):
                     continue
                 else:
                     # 다른 음식인 경우 처리 (소비 또는 폐기 처리)
+                    print("exsisting expire dt", existing_item)
                     existing_expire_dt = existing_item.get("expire_dt")
                     expire_dt = utils.validators.strptime_datetime(existing_expire_dt, fmt=self._time_format)
 
