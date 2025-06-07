@@ -132,7 +132,7 @@ class CameraManager:
                 self.last_frame = frame
                 
                 # 위치 분할 십자
-                draw_center_cross(frame, self.width, self.height)
+                draw_center_cross(frame)
 
                 cv2.imshow(self.window_name, frame)
                 await asyncio.sleep(1 / self.fps)
@@ -152,6 +152,7 @@ def draw_center_cross(frame: np.ndarray, color=(0, 0, 255), thickness=2) -> None
     center_y = height // 2
     cv2.line(frame, (center_x, 0), (center_x, height), color, thickness)
     cv2.line(frame, (0, center_y), (width, center_y), color, thickness)
+
 
 def get_position(x1, y1, x2, y2, frame_width, frame_height):
     """

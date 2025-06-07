@@ -33,14 +33,12 @@ async def main():
     try:
         while True:
             
-            await server_api.send_frame(camera_mgr.get_stream_frame())
+            #await server_api.send_frame(camera_mgr.get_stream_frame())
             
-            # key = cv2.waitKey(5) & 0xFF
-            # if key == ord('q'):
-            #     print("종료")
-            #     break
-            # elif key == ord('w'):
-            #     serial_reader.callback()
+            key = cv2.waitKey(5) & 0xFF
+            if key == ord('w'):
+               serial_reader.callback()
+               
             await asyncio.sleep(0.01)  # CPU 점유율 방지
 
     except asyncio.CancelledError:
