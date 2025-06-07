@@ -1,0 +1,2 @@
+../Core/Src/uart.c:6:6:set_event	1
+../Core/Src/uart.c:11:5:get_event	1

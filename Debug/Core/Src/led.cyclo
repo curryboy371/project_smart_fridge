@@ -1,0 +1,9 @@
+../Core/Src/led.c:3:6:led_all_on	1
+../Core/Src/led.c:16:6:led_all_off	1
+../Core/Src/led.c:29:6:shift_left_ledon	2
+../Core/Src/led.c:50:6:shift_right_ledon	2
+../Core/Src/led.c:71:6:shift_left_keep_ledon	2
+../Core/Src/led.c:91:6:shift_right_keep_ledon	2
+../Core/Src/led.c:110:6:flower_on	2
+../Core/Src/led.c:142:6:flower_off	2
+../Core/Src/led.c:163:6:led_main	1
