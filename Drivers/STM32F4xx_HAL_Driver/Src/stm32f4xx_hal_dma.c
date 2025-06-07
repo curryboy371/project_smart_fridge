@@ -83,6 +83,7 @@
   ******************************************************************************
   * @attention
   *
+<<<<<<< HEAD
   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
@@ -90,6 +91,14 @@
   * the "License"; You may not use this file except in compliance with the
   * License. You may obtain a copy of the License at:
   *                        opensource.org/licenses/BSD-3-Clause
+=======
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file in
+  * the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   *
   ******************************************************************************
   */ 
@@ -602,7 +611,11 @@ HAL_StatusTypeDef HAL_DMA_Abort_IT(DMA_HandleTypeDef *hdma)
   * @param  hdma          pointer to a DMA_HandleTypeDef structure that contains
   *                        the configuration information for the specified DMA Stream.
   * @param  CompleteLevel Specifies the DMA level complete.
+<<<<<<< HEAD
   * @note   The polling mode is kept in this version for legacy. it is recommanded to use the IT model instead.
+=======
+  * @note   The polling mode is kept in this version for legacy. it is recommended to use the IT model instead.
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   *         This model could be used for debug purpose.
   * @note   The HAL_DMA_PollForTransfer API cannot be used in circular and double buffering mode (automatic circular mode). 
   * @param  Timeout       Timeout duration.
@@ -959,9 +972,15 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
   * @brief  Register callbacks
   * @param  hdma                 pointer to a DMA_HandleTypeDef structure that contains
   *                               the configuration information for the specified DMA Stream.
+<<<<<<< HEAD
   * @param  CallbackID           User Callback identifer
   *                               a DMA_HandleTypeDef structure as parameter.
   * @param  pCallback            pointer to private callbacsk function which has pointer to 
+=======
+  * @param  CallbackID           User Callback identifier
+  *                               a DMA_HandleTypeDef structure as parameter.
+  * @param  pCallback            pointer to private callback function which has pointer to 
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   *                               a DMA_HandleTypeDef structure as parameter.
   * @retval HAL status
   */                      
@@ -1002,6 +1021,11 @@ HAL_StatusTypeDef HAL_DMA_RegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_Call
       break;
 
     default:
+<<<<<<< HEAD
+=======
+      /* Return error status */
+      status =  HAL_ERROR;
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
       break;
     }
   }
@@ -1021,7 +1045,11 @@ HAL_StatusTypeDef HAL_DMA_RegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_Call
   * @brief  UnRegister callbacks
   * @param  hdma                 pointer to a DMA_HandleTypeDef structure that contains
   *                               the configuration information for the specified DMA Stream.
+<<<<<<< HEAD
   * @param  CallbackID           User Callback identifer
+=======
+  * @param  CallbackID           User Callback identifier
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   *                               a HAL_DMA_CallbackIDTypeDef ENUM as parameter.
   * @retval HAL status
   */              
@@ -1302,4 +1330,7 @@ static HAL_StatusTypeDef DMA_CheckFifoParam(DMA_HandleTypeDef *hdma)
   * @}
   */
 
+<<<<<<< HEAD
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

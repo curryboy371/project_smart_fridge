@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ../Core/Src/main.c:154:1:__io_putchar	1
 ../Core/Src/main.c:168:5:main	1
 ../Core/Src/main.c:292:6:SystemClock_Config	3
@@ -18,3 +19,25 @@
 ../Core/Src/main.c:837:6:DHT11Task	1
 ../Core/Src/main.c:861:6:HAL_TIM_PeriodElapsedCallback	3
 ../Core/Src/main.c:883:6:Error_Handler	1
+=======
+../Core/Src/main.c:151:1:__io_putchar	1
+../Core/Src/main.c:165:5:main	1
+../Core/Src/main.c:293:6:SystemClock_Config	3
+../Core/Src/main.c:340:13:MX_I2C1_Init	2
+../Core/Src/main.c:374:13:MX_SPI2_Init	2
+../Core/Src/main.c:412:13:MX_TIM2_Init	4
+../Core/Src/main.c:457:13:MX_TIM3_Init	6
+../Core/Src/main.c:515:13:MX_TIM5_Init	4
+../Core/Src/main.c:564:13:MX_TIM11_Init	2
+../Core/Src/main.c:595:13:MX_USART1_UART_Init	2
+../Core/Src/main.c:628:13:MX_USART2_UART_Init	2
+../Core/Src/main.c:661:13:MX_GPIO_Init	1
+../Core/Src/main.c:725:6:StartDefaultTask	3
+../Core/Src/main.c:753:6:UARTTask	2
+../Core/Src/main.c:781:6:UltrasonicTask	1
+../Core/Src/main.c:800:6:LCDTask	1
+../Core/Src/main.c:829:6:ServoTask	1
+../Core/Src/main.c:848:6:DHT11Task	1
+../Core/Src/main.c:872:6:HAL_TIM_PeriodElapsedCallback	3
+../Core/Src/main.c:895:6:Error_Handler	1
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

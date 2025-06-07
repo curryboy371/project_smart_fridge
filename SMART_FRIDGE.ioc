@@ -4,7 +4,11 @@ CAD.pinconfig=
 CAD.provider=
 FREERTOS.FootprintOK=true
 FREERTOS.IPParameters=Tasks01,configUSE_NEWLIB_REENTRANT,FootprintOK
+<<<<<<< HEAD
 FREERTOS.Tasks01=defaultTask,24,256,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL;UART,8,256,UARTTask,Default,NULL,Dynamic,NULL,NULL;ULTRASONIC,8,256,UltrasonicTask,Default,NULL,Dynamic,NULL,NULL;LCD,8,256,LCDTask,Default,NULL,Dynamic,NULL,NULL;SERVO_MOTOR,8,256,ServoTask,Default,NULL,Dynamic,NULL,NULL;DHT11,8,256,DHT11Task,Default,NULL,Dynamic,NULL,NULL
+=======
+FREERTOS.Tasks01=defaultTask,24,128,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL;UART,8,128,UARTTask,Default,NULL,Dynamic,NULL,NULL;ULTRASONIC,8,128,UltrasonicTask,Default,NULL,Dynamic,NULL,NULL;LCD,8,128,LCDTask,Default,NULL,Dynamic,NULL,NULL;SERVO_MOTOR,8,128,ServoTask,Default,NULL,Dynamic,NULL,NULL;DHT11,8,128,DHT11Task,Default,NULL,Dynamic,NULL,NULL
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 FREERTOS.configUSE_NEWLIB_REENTRANT=1
 File.Version=6
 GPIO.groupedBy=Group By Peripherals
@@ -67,8 +71,13 @@ Mcu.PinsNb=37
 Mcu.ThirdPartyNb=0
 Mcu.UserConstants=
 Mcu.UserName=STM32F411RETx
+<<<<<<< HEAD
 MxCube.Version=6.3.0
 MxDb.Version=DB.6.0.30
+=======
+MxCube.Version=6.14.1
+MxDb.Version=DB.6.0.141
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 NVIC.BusFault_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:false\:false
 NVIC.DebugMonitor_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:false\:false
 NVIC.ForceEnableDMAVector=true
@@ -87,7 +96,10 @@ NVIC.TIM1_UP_TIM10_IRQn=true\:15\:0\:false\:false\:true\:false\:false\:true\:tru
 NVIC.TIM3_IRQn=true\:5\:0\:false\:false\:true\:true\:true\:true\:true
 NVIC.TimeBase=TIM1_UP_TIM10_IRQn
 NVIC.TimeBaseIP=TIM10
+<<<<<<< HEAD
 NVIC.USART1_IRQn=true\:5\:0\:false\:false\:true\:true\:true\:true\:true
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 NVIC.USART2_IRQn=true\:5\:0\:false\:false\:true\:true\:true\:true\:true
 NVIC.UsageFault_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:false\:false
 PA0-WKUP.GPIOParameters=GPIO_Label
@@ -209,7 +221,11 @@ ProjectManager.CustomerFirmwarePackage=
 ProjectManager.DefaultFWLocation=true
 ProjectManager.DeletePrevious=true
 ProjectManager.DeviceId=STM32F411RETx
+<<<<<<< HEAD
 ProjectManager.FirmwarePackage=STM32Cube FW_F4 V1.26.2
+=======
+ProjectManager.FirmwarePackage=STM32Cube FW_F4 V1.28.2
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 ProjectManager.FreePins=false
 ProjectManager.HalAssertFull=false
 ProjectManager.HeapSize=0x200

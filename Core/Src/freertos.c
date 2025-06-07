@@ -58,4 +58,7 @@
 
 /* USER CODE END Application */
 
+<<<<<<< HEAD
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

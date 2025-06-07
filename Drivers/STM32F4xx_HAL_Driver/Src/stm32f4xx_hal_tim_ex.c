@@ -10,6 +10,20 @@
   *           + Time Complementary signal break and dead time configuration
   *           + Time Master and Slave synchronization configuration
   *           + Timer remapping capabilities configuration
+<<<<<<< HEAD
+=======
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   @verbatim
   ==============================================================================
                       ##### TIMER Extended features #####
@@ -64,6 +78,7 @@
 
   @endverbatim
   ******************************************************************************
+<<<<<<< HEAD
   * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
@@ -75,6 +90,8 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -135,7 +152,11 @@ static void TIM_CCxNChannelCmd(TIM_TypeDef *TIMx, uint32_t Channel, uint32_t Cha
   * @param  sConfig TIM Hall Sensor configuration structure
   * @retval HAL status
   */
+<<<<<<< HEAD
 HAL_StatusTypeDef HAL_TIMEx_HallSensor_Init(TIM_HandleTypeDef *htim, TIM_HallSensor_InitTypeDef *sConfig)
+=======
+HAL_StatusTypeDef HAL_TIMEx_HallSensor_Init(TIM_HandleTypeDef *htim, const TIM_HallSensor_InitTypeDef *sConfig)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 {
   TIM_OC_InitTypeDef OC_Config;
 
@@ -151,6 +172,10 @@ HAL_StatusTypeDef HAL_TIMEx_HallSensor_Init(TIM_HandleTypeDef *htim, TIM_HallSen
   assert_param(IS_TIM_CLOCKDIVISION_DIV(htim->Init.ClockDivision));
   assert_param(IS_TIM_AUTORELOAD_PRELOAD(htim->Init.AutoReloadPreload));
   assert_param(IS_TIM_IC_POLARITY(sConfig->IC1Polarity));
+<<<<<<< HEAD
+=======
+  assert_param(IS_TIM_PERIOD(htim, htim->Init.Period));
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   assert_param(IS_TIM_IC_PRESCALER(sConfig->IC1Prescaler));
   assert_param(IS_TIM_IC_FILTER(sConfig->IC1Filter));
 
@@ -501,7 +526,11 @@ HAL_StatusTypeDef HAL_TIMEx_HallSensor_Start_DMA(TIM_HandleTypeDef *htim, uint32
   else if ((channel_1_state == HAL_TIM_CHANNEL_STATE_READY)
            && (complementary_channel_1_state == HAL_TIM_CHANNEL_STATE_READY))
   {
+<<<<<<< HEAD
     if ((pData == NULL) && (Length > 0U))
+=======
+    if ((pData == NULL) || (Length == 0U))
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
     {
       return HAL_ERROR;
     }
@@ -834,7 +863,11 @@ HAL_StatusTypeDef HAL_TIMEx_OCN_Stop_IT(TIM_HandleTypeDef *htim, uint32_t Channe
 
     /* Disable the TIM Break interrupt (only if no more channel is active) */
     tmpccer = htim->Instance->CCER;
+<<<<<<< HEAD
     if ((tmpccer & (TIM_CCER_CC1NE | TIM_CCER_CC2NE | TIM_CCER_CC3NE)) == (uint32_t)RESET)
+=======
+    if ((tmpccer & TIM_CCER_CCxNE_MASK) == (uint32_t)RESET)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
     {
       __HAL_TIM_DISABLE_IT(htim, TIM_IT_BREAK);
     }
@@ -866,7 +899,12 @@ HAL_StatusTypeDef HAL_TIMEx_OCN_Stop_IT(TIM_HandleTypeDef *htim, uint32_t Channe
   * @param  Length The length of data to be transferred from memory to TIM peripheral
   * @retval HAL status
   */
+<<<<<<< HEAD
 HAL_StatusTypeDef HAL_TIMEx_OCN_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Channel, uint32_t *pData, uint16_t Length)
+=======
+HAL_StatusTypeDef HAL_TIMEx_OCN_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Channel, const uint32_t *pData,
+                                          uint16_t Length)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 {
   HAL_StatusTypeDef status = HAL_OK;
   uint32_t tmpsmcr;
@@ -881,7 +919,11 @@ HAL_StatusTypeDef HAL_TIMEx_OCN_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Chan
   }
   else if (TIM_CHANNEL_N_STATE_GET(htim, Channel) == HAL_TIM_CHANNEL_STATE_READY)
   {
+<<<<<<< HEAD
     if ((pData == NULL) && (Length > 0U))
+=======
+    if ((pData == NULL) || (Length == 0U))
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
     {
       return HAL_ERROR;
     }
@@ -1079,6 +1121,7 @@ HAL_StatusTypeDef HAL_TIMEx_OCN_Stop_DMA(TIM_HandleTypeDef *htim, uint32_t Chann
     (+) Stop the Complementary PWM and disable interrupts.
     (+) Start the Complementary PWM and enable DMA transfers.
     (+) Stop the Complementary PWM and disable DMA transfers.
+<<<<<<< HEAD
     (+) Start the Complementary Input Capture measurement.
     (+) Stop the Complementary Input Capture.
     (+) Start the Complementary Input Capture and enable interrupts.
@@ -1090,6 +1133,8 @@ HAL_StatusTypeDef HAL_TIMEx_OCN_Stop_DMA(TIM_HandleTypeDef *htim, uint32_t Chann
     (+) Start the Complementary One Pulse and enable interrupts.
     (+) Stop the Complementary One Pulse and disable interrupts.
 
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 @endverbatim
   * @{
   */
@@ -1315,7 +1360,11 @@ HAL_StatusTypeDef HAL_TIMEx_PWMN_Stop_IT(TIM_HandleTypeDef *htim, uint32_t Chann
 
     /* Disable the TIM Break interrupt (only if no more channel is active) */
     tmpccer = htim->Instance->CCER;
+<<<<<<< HEAD
     if ((tmpccer & (TIM_CCER_CC1NE | TIM_CCER_CC2NE | TIM_CCER_CC3NE)) == (uint32_t)RESET)
+=======
+    if ((tmpccer & TIM_CCER_CCxNE_MASK) == (uint32_t)RESET)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
     {
       __HAL_TIM_DISABLE_IT(htim, TIM_IT_BREAK);
     }
@@ -1347,7 +1396,12 @@ HAL_StatusTypeDef HAL_TIMEx_PWMN_Stop_IT(TIM_HandleTypeDef *htim, uint32_t Chann
   * @param  Length The length of data to be transferred from memory to TIM peripheral
   * @retval HAL status
   */
+<<<<<<< HEAD
 HAL_StatusTypeDef HAL_TIMEx_PWMN_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Channel, uint32_t *pData, uint16_t Length)
+=======
+HAL_StatusTypeDef HAL_TIMEx_PWMN_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Channel, const uint32_t *pData,
+                                           uint16_t Length)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 {
   HAL_StatusTypeDef status = HAL_OK;
   uint32_t tmpsmcr;
@@ -1362,7 +1416,11 @@ HAL_StatusTypeDef HAL_TIMEx_PWMN_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Cha
   }
   else if (TIM_CHANNEL_N_STATE_GET(htim, Channel) == HAL_TIM_CHANNEL_STATE_READY)
   {
+<<<<<<< HEAD
     if ((pData == NULL) && (Length > 0U))
+=======
+    if ((pData == NULL) || (Length == 0U))
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
     {
       return HAL_ERROR;
     }
@@ -1960,7 +2018,11 @@ HAL_StatusTypeDef HAL_TIMEx_ConfigCommutEvent_DMA(TIM_HandleTypeDef *htim, uint3
   * @retval HAL status
   */
 HAL_StatusTypeDef HAL_TIMEx_MasterConfigSynchronization(TIM_HandleTypeDef *htim,
+<<<<<<< HEAD
                                                         TIM_MasterConfigTypeDef *sMasterConfig)
+=======
+                                                        const TIM_MasterConfigTypeDef *sMasterConfig)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 {
   uint32_t tmpcr2;
   uint32_t tmpsmcr;
@@ -2021,7 +2083,11 @@ HAL_StatusTypeDef HAL_TIMEx_MasterConfigSynchronization(TIM_HandleTypeDef *htim,
   * @retval HAL status
   */
 HAL_StatusTypeDef HAL_TIMEx_ConfigBreakDeadTime(TIM_HandleTypeDef *htim,
+<<<<<<< HEAD
                                                 TIM_BreakDeadTimeConfigTypeDef *sBreakDeadTimeConfig)
+=======
+                                                const TIM_BreakDeadTimeConfigTypeDef *sBreakDeadTimeConfig)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 {
   /* Keep this variable initialized to 0 as it is used to configure BDTR register */
   uint32_t tmpbdtr = 0U;
@@ -2098,11 +2164,19 @@ HAL_StatusTypeDef HAL_TIMEx_ConfigBreakDeadTime(TIM_HandleTypeDef *htim,
   */
 HAL_StatusTypeDef HAL_TIMEx_RemapConfig(TIM_HandleTypeDef *htim, uint32_t Remap)
 {
+<<<<<<< HEAD
   __HAL_LOCK(htim);
 
   /* Check parameters */
   assert_param(IS_TIM_REMAP(htim->Instance, Remap));
 
+=======
+  /* Check parameters */
+  assert_param(IS_TIM_REMAP(htim->Instance, Remap));
+
+  __HAL_LOCK(htim);
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 #if defined(LPTIM_OR_TIM1_ITR2_RMP) && defined(LPTIM_OR_TIM5_ITR1_RMP) && defined(LPTIM_OR_TIM9_ITR1_RMP)
   if ((Remap & LPTIM_REMAP_MASK) == LPTIM_REMAP_MASK)
   {
@@ -2148,7 +2222,11 @@ HAL_StatusTypeDef HAL_TIMEx_RemapConfig(TIM_HandleTypeDef *htim, uint32_t Remap)
   */
 
 /**
+<<<<<<< HEAD
   * @brief  Hall commutation changed callback in non-blocking mode
+=======
+  * @brief  Commutation callback in non-blocking mode
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   * @param  htim TIM handle
   * @retval None
   */
@@ -2162,7 +2240,11 @@ __weak void HAL_TIMEx_CommutCallback(TIM_HandleTypeDef *htim)
    */
 }
 /**
+<<<<<<< HEAD
   * @brief  Hall commutation changed half complete callback in non-blocking mode
+=======
+  * @brief  Commutation half complete callback in non-blocking mode
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   * @param  htim TIM handle
   * @retval None
   */
@@ -2177,7 +2259,11 @@ __weak void HAL_TIMEx_CommutHalfCpltCallback(TIM_HandleTypeDef *htim)
 }
 
 /**
+<<<<<<< HEAD
   * @brief  Hall Break detection callback in non-blocking mode
+=======
+  * @brief  Break detection callback in non-blocking mode
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   * @param  htim TIM handle
   * @retval None
   */
@@ -2214,7 +2300,11 @@ __weak void HAL_TIMEx_BreakCallback(TIM_HandleTypeDef *htim)
   * @param  htim TIM Hall Sensor handle
   * @retval HAL state
   */
+<<<<<<< HEAD
 HAL_TIM_StateTypeDef HAL_TIMEx_HallSensor_GetState(TIM_HandleTypeDef *htim)
+=======
+HAL_TIM_StateTypeDef HAL_TIMEx_HallSensor_GetState(const TIM_HandleTypeDef *htim)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 {
   return htim->State;
 }
@@ -2229,7 +2319,11 @@ HAL_TIM_StateTypeDef HAL_TIMEx_HallSensor_GetState(TIM_HandleTypeDef *htim)
   *            @arg TIM_CHANNEL_3: TIM Channel 3
   * @retval TIM Complementary channel state
   */
+<<<<<<< HEAD
 HAL_TIM_ChannelStateTypeDef HAL_TIMEx_GetChannelNState(TIM_HandleTypeDef *htim,  uint32_t ChannelN)
+=======
+HAL_TIM_ChannelStateTypeDef HAL_TIMEx_GetChannelNState(const TIM_HandleTypeDef *htim,  uint32_t ChannelN)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 {
   HAL_TIM_ChannelStateTypeDef channel_state;
 
@@ -2249,7 +2343,11 @@ HAL_TIM_ChannelStateTypeDef HAL_TIMEx_GetChannelNState(TIM_HandleTypeDef *htim, 
   */
 
 /* Private functions ---------------------------------------------------------*/
+<<<<<<< HEAD
 /** @defgroup TIMEx_Private_Functions TIMEx Private Functions
+=======
+/** @defgroup TIMEx_Private_Functions TIM Extended Private Functions
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   * @{
   */
 
@@ -2328,6 +2426,7 @@ static void TIM_DMADelayPulseNCplt(DMA_HandleTypeDef *hdma)
       TIM_CHANNEL_N_STATE_SET(htim, TIM_CHANNEL_3, HAL_TIM_CHANNEL_STATE_READY);
     }
   }
+<<<<<<< HEAD
   else if (hdma == htim->hdma[TIM_DMA_ID_CC4])
   {
     htim->Channel = HAL_TIM_ACTIVE_CHANNEL_4;
@@ -2337,6 +2436,8 @@ static void TIM_DMADelayPulseNCplt(DMA_HandleTypeDef *hdma)
       TIM_CHANNEL_N_STATE_SET(htim, TIM_CHANNEL_4, HAL_TIM_CHANNEL_STATE_READY);
     }
   }
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   else
   {
     /* nothing to do */
@@ -2405,13 +2506,21 @@ static void TIM_CCxNChannelCmd(TIM_TypeDef *TIMx, uint32_t Channel, uint32_t Cha
 {
   uint32_t tmp;
 
+<<<<<<< HEAD
   tmp = TIM_CCER_CC1NE << (Channel & 0x1FU); /* 0x1FU = 31 bits max shift */
+=======
+  tmp = TIM_CCER_CC1NE << (Channel & 0xFU); /* 0xFU = 15 bits max shift */
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
   /* Reset the CCxNE Bit */
   TIMx->CCER &=  ~tmp;
 
   /* Set or reset the CCxNE Bit */
+<<<<<<< HEAD
   TIMx->CCER |= (uint32_t)(ChannelNState << (Channel & 0x1FU)); /* 0x1FU = 31 bits max shift */
+=======
+  TIMx->CCER |= (uint32_t)(ChannelNState << (Channel & 0xFU)); /* 0xFU = 15 bits max shift */
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 }
 /**
   * @}
@@ -2425,5 +2534,8 @@ static void TIM_CCxNChannelCmd(TIM_TypeDef *TIMx, uint32_t Channel, uint32_t Cha
 /**
   * @}
   */
+<<<<<<< HEAD
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

@@ -64,8 +64,13 @@ all: main-build
 main-build: SMART_FRIDGE.elf secondary-outputs
 
 # Tool invocations
+<<<<<<< HEAD
 SMART_FRIDGE.elf SMART_FRIDGE.map: $(OBJS) $(USER_OBJS) D:\project\stm32\SMART_FRIDGE\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-gcc -o "SMART_FRIDGE.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\project\stm32\SMART_FRIDGE\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SMART_FRIDGE.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+=======
+SMART_FRIDGE.elf SMART_FRIDGE.map: $(OBJS) $(USER_OBJS) C:\Chan\Gits\SMART_FRIDGE\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "SMART_FRIDGE.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Chan\Gits\SMART_FRIDGE\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SMART_FRIDGE.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 	@echo 'Finished building target: $@'
 	@echo ' '
 

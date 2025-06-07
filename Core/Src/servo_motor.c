@@ -22,8 +22,13 @@ void servo_motor_set_angle(uint8_t angle)
     int compare_value;
     if(angle <= 0) compare_value = 40;
     else if(angle >= 180) compare_value = 130;
+<<<<<<< HEAD
     //else compare_value = 40 + (angle * (130 - 40)) / 180;
     else compare_value = 40 + (angle * 90) / 180; // (130 - 40) = 90
+=======
+    else compare_value = 40 + (angle * (130 - 40)) / 180;
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
     __HAL_TIM_SET_COMPARE(&htim5, TIM_CHANNEL_2, compare_value);
 }
 
@@ -36,7 +41,11 @@ void servo_motor_update(void)
         lost_timer = 0;
         if(detect_timer >= 2000 && state == 0)
         {
+<<<<<<< HEAD
             servo_motor_set_angle(150);
+=======
+            servo_motor_set_angle(110);
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
             state = 1;
         }
     }
@@ -48,7 +57,11 @@ void servo_motor_update(void)
         {
         	// evnet
         	set_event(1);
+<<<<<<< HEAD
             servo_motor_set_angle(60);
+=======
+            servo_motor_set_angle(30);
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
             state = 0;
         }
     }

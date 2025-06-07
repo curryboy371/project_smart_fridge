@@ -23,7 +23,11 @@
 #define __STM32F4xx_IT_H
 
 #ifdef __cplusplus
+<<<<<<< HEAD
  extern "C" {
+=======
+extern "C" {
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 #endif
 
 /* Private includes ----------------------------------------------------------*/
@@ -56,7 +60,10 @@ void DebugMon_Handler(void);
 void TIM1_UP_TIM10_IRQHandler(void);
 void TIM1_TRG_COM_TIM11_IRQHandler(void);
 void TIM3_IRQHandler(void);
+<<<<<<< HEAD
 void USART1_IRQHandler(void);
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 void USART2_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
@@ -67,5 +74,8 @@ void USART2_IRQHandler(void);
 #endif
 
 #endif /* __STM32F4xx_IT_H */
+<<<<<<< HEAD
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

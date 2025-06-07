@@ -1,4 +1,9 @@
 #include "uart.h"
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 #include <stdio.h>
 
 volatile int event;

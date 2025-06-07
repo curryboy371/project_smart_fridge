@@ -42,8 +42,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/ultra_sonic.h ../Core/Inc/i2c_lcd.h \
+<<<<<<< HEAD
  ../Core/Inc/servo_motor.h ../Core/Inc/dht11.h ../Core/Inc/uart.h \
  ../Core/Inc/timer.h ../Core/Inc/main.h
+=======
+ ../Core/Inc/servo_motor.h ../Core/Inc/dht11.h ../Core/Inc/uart.h
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -92,5 +96,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/servo_motor.h:
 ../Core/Inc/dht11.h:
 ../Core/Inc/uart.h:
+<<<<<<< HEAD
 ../Core/Inc/timer.h:
 ../Core/Inc/main.h:
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

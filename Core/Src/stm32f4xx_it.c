@@ -58,7 +58,10 @@
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim11;
+<<<<<<< HEAD
 extern UART_HandleTypeDef huart1;
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 extern UART_HandleTypeDef huart2;
 extern TIM_HandleTypeDef htim10;
 
@@ -207,6 +210,7 @@ void TIM3_IRQHandler(void)
 }
 
 /**
+<<<<<<< HEAD
   * @brief This function handles USART1 global interrupt.
   */
 void USART1_IRQHandler(void)
@@ -221,6 +225,8 @@ void USART1_IRQHandler(void)
 }
 
 /**
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   * @brief This function handles USART2 global interrupt.
   */
 void USART2_IRQHandler(void)
@@ -237,4 +243,7 @@ void USART2_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
+<<<<<<< HEAD
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

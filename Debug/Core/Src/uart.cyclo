@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 ../Core/Src/uart.c:6:6:set_event	1
 ../Core/Src/uart.c:11:5:get_event	1
+=======
+../Core/Src/uart.c:8:6:set_event	1
+../Core/Src/uart.c:13:5:get_event	1
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

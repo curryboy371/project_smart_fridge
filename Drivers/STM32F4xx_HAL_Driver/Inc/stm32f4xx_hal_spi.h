@@ -6,6 +6,7 @@
   ******************************************************************************
   * @attention
   *
+<<<<<<< HEAD
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
@@ -13,6 +14,14 @@
   * the "License"; You may not use this file except in compliance with the
   * License. You may obtain a copy of the License at:
   *                        opensource.org/licenses/BSD-3-Clause
+=======
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   *
   ******************************************************************************
   */
@@ -108,7 +117,11 @@ typedef struct __SPI_HandleTypeDef
 
   SPI_InitTypeDef            Init;           /*!< SPI communication parameters             */
 
+<<<<<<< HEAD
   uint8_t                    *pTxBuffPtr;    /*!< Pointer to SPI Tx transfer Buffer        */
+=======
+  const uint8_t              *pTxBuffPtr;    /*!< Pointer to SPI Tx transfer Buffer        */
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
   uint16_t                   TxXferSize;     /*!< SPI Tx Transfer size                     */
 
@@ -340,11 +353,20 @@ typedef  void (*pSPI_CallbackTypeDef)(SPI_HandleTypeDef *hspi); /*!< pointer to 
   * @retval None
   */
 #if (USE_HAL_SPI_REGISTER_CALLBACKS == 1U)
+<<<<<<< HEAD
 #define __HAL_SPI_RESET_HANDLE_STATE(__HANDLE__)                do{                                                  \
                                                                     (__HANDLE__)->State = HAL_SPI_STATE_RESET;       \
                                                                     (__HANDLE__)->MspInitCallback = NULL;            \
                                                                     (__HANDLE__)->MspDeInitCallback = NULL;          \
                                                                   } while(0)
+=======
+#define __HAL_SPI_RESET_HANDLE_STATE(__HANDLE__)      \
+  do{                                                 \
+    (__HANDLE__)->State = HAL_SPI_STATE_RESET;        \
+    (__HANDLE__)->MspInitCallback = NULL;             \
+    (__HANDLE__)->MspDeInitCallback = NULL;           \
+  } while(0)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 #else
 #define __HAL_SPI_RESET_HANDLE_STATE(__HANDLE__) ((__HANDLE__)->State = HAL_SPI_STATE_RESET)
 #endif /* USE_HAL_SPI_REGISTER_CALLBACKS */
@@ -445,7 +467,11 @@ typedef  void (*pSPI_CallbackTypeDef)(SPI_HandleTypeDef *hspi); /*!< pointer to 
     __IO uint32_t tmpreg_fre = 0x00U;              \
     tmpreg_fre = (__HANDLE__)->Instance->SR;       \
     UNUSED(tmpreg_fre);                            \
+<<<<<<< HEAD
   }while(0U)
+=======
+  } while(0U)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
 /** @brief  Enable the SPI peripheral.
   * @param  __HANDLE__ specifies the SPI Handle.
@@ -489,8 +515,16 @@ typedef  void (*pSPI_CallbackTypeDef)(SPI_HandleTypeDef *hspi); /*!< pointer to 
   *         This parameter can be SPI where x: 1, 2, or 3 to select the SPI peripheral.
   * @retval None
   */
+<<<<<<< HEAD
 #define SPI_RESET_CRC(__HANDLE__) do{CLEAR_BIT((__HANDLE__)->Instance->CR1, SPI_CR1_CRCEN);\
                                        SET_BIT((__HANDLE__)->Instance->CR1, SPI_CR1_CRCEN);}while(0U)
+=======
+#define SPI_RESET_CRC(__HANDLE__)                           \
+  do{                                                       \
+    CLEAR_BIT((__HANDLE__)->Instance->CR1, SPI_CR1_CRCEN);  \
+    SET_BIT((__HANDLE__)->Instance->CR1, SPI_CR1_CRCEN);    \
+  } while(0U)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
 /** @brief  Check whether the specified SPI flag is set or not.
   * @param  __SR__  copy of SPI SR register.
@@ -506,7 +540,11 @@ typedef  void (*pSPI_CallbackTypeDef)(SPI_HandleTypeDef *hspi); /*!< pointer to 
   * @retval SET or RESET.
   */
 #define SPI_CHECK_FLAG(__SR__, __FLAG__) ((((__SR__) & ((__FLAG__) & SPI_FLAG_MASK)) == \
+<<<<<<< HEAD
                                           ((__FLAG__) & SPI_FLAG_MASK)) ? SET : RESET)
+=======
+                                           ((__FLAG__) & SPI_FLAG_MASK)) ? SET : RESET)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
 /** @brief  Check whether the specified SPI Interrupt is set or not.
   * @param  __CR2__  copy of SPI CR2 register.
@@ -518,7 +556,11 @@ typedef  void (*pSPI_CallbackTypeDef)(SPI_HandleTypeDef *hspi); /*!< pointer to 
   * @retval SET or RESET.
   */
 #define SPI_CHECK_IT_SOURCE(__CR2__, __INTERRUPT__) ((((__CR2__) & (__INTERRUPT__)) == \
+<<<<<<< HEAD
                                                      (__INTERRUPT__)) ? SET : RESET)
+=======
+                                                      (__INTERRUPT__)) ? SET : RESET)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
 /** @brief  Checks if SPI Mode parameter is in allowed range.
   * @param  __MODE__ specifies the SPI Mode.
@@ -628,7 +670,11 @@ typedef  void (*pSPI_CallbackTypeDef)(SPI_HandleTypeDef *hspi); /*!< pointer to 
   */
 #define IS_SPI_CRC_POLYNOMIAL(__POLYNOMIAL__) (((__POLYNOMIAL__) >= 0x1U)    && \
                                                ((__POLYNOMIAL__) <= 0xFFFFU) && \
+<<<<<<< HEAD
                                               (((__POLYNOMIAL__)&0x1U) != 0U))
+=======
+                                               (((__POLYNOMIAL__)&0x1U) != 0U))
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
 /** @brief  Checks if DMA handle is valid.
   * @param  __HANDLE__ specifies a DMA Handle.
@@ -656,7 +702,12 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef *hspi);
 
 /* Callbacks Register/UnRegister functions  ***********************************/
 #if (USE_HAL_SPI_REGISTER_CALLBACKS == 1U)
+<<<<<<< HEAD
 HAL_StatusTypeDef HAL_SPI_RegisterCallback(SPI_HandleTypeDef *hspi, HAL_SPI_CallbackIDTypeDef CallbackID, pSPI_CallbackTypeDef pCallback);
+=======
+HAL_StatusTypeDef HAL_SPI_RegisterCallback(SPI_HandleTypeDef *hspi, HAL_SPI_CallbackIDTypeDef CallbackID,
+                                           pSPI_CallbackTypeDef pCallback);
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 HAL_StatusTypeDef HAL_SPI_UnRegisterCallback(SPI_HandleTypeDef *hspi, HAL_SPI_CallbackIDTypeDef CallbackID);
 #endif /* USE_HAL_SPI_REGISTER_CALLBACKS */
 /**
@@ -667,6 +718,7 @@ HAL_StatusTypeDef HAL_SPI_UnRegisterCallback(SPI_HandleTypeDef *hspi, HAL_SPI_Ca
   * @{
   */
 /* I/O operation functions  ***************************************************/
+<<<<<<< HEAD
 HAL_StatusTypeDef HAL_SPI_Transmit(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 HAL_StatusTypeDef HAL_SPI_TransmitReceive(SPI_HandleTypeDef *hspi, uint8_t *pTxData, uint8_t *pRxData, uint16_t Size,
@@ -678,6 +730,19 @@ HAL_StatusTypeDef HAL_SPI_TransmitReceive_IT(SPI_HandleTypeDef *hspi, uint8_t *p
 HAL_StatusTypeDef HAL_SPI_Transmit_DMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef HAL_SPI_Receive_DMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef HAL_SPI_TransmitReceive_DMA(SPI_HandleTypeDef *hspi, uint8_t *pTxData, uint8_t *pRxData,
+=======
+HAL_StatusTypeDef HAL_SPI_Transmit(SPI_HandleTypeDef *hspi, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+HAL_StatusTypeDef HAL_SPI_TransmitReceive(SPI_HandleTypeDef *hspi, const uint8_t *pTxData, uint8_t *pRxData,
+                                          uint16_t Size, uint32_t Timeout);
+HAL_StatusTypeDef HAL_SPI_Transmit_IT(SPI_HandleTypeDef *hspi, const uint8_t *pData, uint16_t Size);
+HAL_StatusTypeDef HAL_SPI_Receive_IT(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size);
+HAL_StatusTypeDef HAL_SPI_TransmitReceive_IT(SPI_HandleTypeDef *hspi, const uint8_t *pTxData, uint8_t *pRxData,
+                                             uint16_t Size);
+HAL_StatusTypeDef HAL_SPI_Transmit_DMA(SPI_HandleTypeDef *hspi, const uint8_t *pData, uint16_t Size);
+HAL_StatusTypeDef HAL_SPI_Receive_DMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size);
+HAL_StatusTypeDef HAL_SPI_TransmitReceive_DMA(SPI_HandleTypeDef *hspi, const uint8_t *pTxData, uint8_t *pRxData,
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
                                               uint16_t Size);
 HAL_StatusTypeDef HAL_SPI_DMAPause(SPI_HandleTypeDef *hspi);
 HAL_StatusTypeDef HAL_SPI_DMAResume(SPI_HandleTypeDef *hspi);
@@ -703,8 +768,13 @@ void HAL_SPI_AbortCpltCallback(SPI_HandleTypeDef *hspi);
   * @{
   */
 /* Peripheral State and Error functions ***************************************/
+<<<<<<< HEAD
 HAL_SPI_StateTypeDef HAL_SPI_GetState(SPI_HandleTypeDef *hspi);
 uint32_t             HAL_SPI_GetError(SPI_HandleTypeDef *hspi);
+=======
+HAL_SPI_StateTypeDef HAL_SPI_GetState(const SPI_HandleTypeDef *hspi);
+uint32_t             HAL_SPI_GetError(const SPI_HandleTypeDef *hspi);
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /**
   * @}
   */
@@ -727,4 +797,7 @@ uint32_t             HAL_SPI_GetError(SPI_HandleTypeDef *hspi);
 
 #endif /* STM32F4xx_HAL_SPI_H */
 
+<<<<<<< HEAD
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

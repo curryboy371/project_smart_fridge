@@ -8,6 +8,20 @@
   *           + Initialization and de-initialization functions
   *           + IO operation functions
   *
+<<<<<<< HEAD
+=======
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   @verbatim
   ==============================================================================
                     ##### GPIO Peripheral features #####
@@ -91,6 +105,7 @@
   
   @endverbatim
   ******************************************************************************
+<<<<<<< HEAD
   * @attention
   *
   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
@@ -102,6 +117,8 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -245,6 +262,7 @@ void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
         temp |= ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4U * (position & 0x03U)));
         SYSCFG->EXTICR[position >> 2U] = temp;
 
+<<<<<<< HEAD
         /* Clear EXTI line configuration */
         temp = EXTI->IMR;
         temp &= ~((uint32_t)iocurrent);
@@ -262,6 +280,8 @@ void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
         }
         EXTI->EMR = temp;
 
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
         /* Clear Rising Falling edge configuration */
         temp = EXTI->RTSR;
         temp &= ~((uint32_t)iocurrent);
@@ -278,6 +298,26 @@ void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
           temp |= iocurrent;
         }
         EXTI->FTSR = temp;
+<<<<<<< HEAD
+=======
+
+        temp = EXTI->EMR;
+        temp &= ~((uint32_t)iocurrent);
+        if((GPIO_Init->Mode & EXTI_EVT) != 0x00U)
+        {
+          temp |= iocurrent;
+        }
+        EXTI->EMR = temp;
+
+        /* Clear EXTI line configuration */
+        temp = EXTI->IMR;
+        temp &= ~((uint32_t)iocurrent);
+        if((GPIO_Init->Mode & EXTI_IT) != 0x00U)
+        {
+          temp |= iocurrent;
+        }
+        EXTI->IMR = temp;
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
       }
     }
   }
@@ -321,8 +361,13 @@ void HAL_GPIO_DeInit(GPIO_TypeDef  *GPIOx, uint32_t GPIO_Pin)
         EXTI->EMR &= ~((uint32_t)iocurrent);
         
         /* Clear Rising Falling edge configuration */
+<<<<<<< HEAD
         EXTI->RTSR &= ~((uint32_t)iocurrent);
         EXTI->FTSR &= ~((uint32_t)iocurrent);
+=======
+        EXTI->FTSR &= ~((uint32_t)iocurrent);
+        EXTI->RTSR &= ~((uint32_t)iocurrent);
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
         /* Configure the External Interrupt or event for the current IO */
         tmp = 0x0FU << (4U * (position & 0x03U));
@@ -437,7 +482,11 @@ void HAL_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
   /* Check the parameters */
   assert_param(IS_GPIO_PIN(GPIO_Pin));
 
+<<<<<<< HEAD
   /* get current Ouput Data Register value */
+=======
+  /* get current Output Data Register value */
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   odr = GPIOx->ODR;
 
   /* Set selected pins that were at low level, and reset ones that were high */
@@ -531,4 +580,7 @@ __weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @}
   */
 
+<<<<<<< HEAD
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

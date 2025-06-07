@@ -6,6 +6,7 @@
   ******************************************************************************
   * @attention
   *
+<<<<<<< HEAD
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
@@ -13,6 +14,14 @@
   * the "License"; You may not use this file except in compliance with the
   * License. You may obtain a copy of the License at:
   *                        opensource.org/licenses/BSD-3-Clause
+=======
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   *
   ******************************************************************************
   */
@@ -138,13 +147,31 @@ typedef enum
 /**
   * @brief HAL UART Reception type definition
   * @note  HAL UART Reception type value aims to identify which type of Reception is ongoing.
+<<<<<<< HEAD
   *        It is expected to admit following values :
+=======
+  *        This parameter can be a value of @ref UART_Reception_Type_Values :
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   *           HAL_UART_RECEPTION_STANDARD         = 0x00U,
   *           HAL_UART_RECEPTION_TOIDLE           = 0x01U,
   */
 typedef uint32_t HAL_UART_RxTypeTypeDef;
 
 /**
+<<<<<<< HEAD
+=======
+  * @brief HAL UART Rx Event type definition
+  * @note  HAL UART Rx Event type value aims to identify which type of Event has occurred
+  *        leading to call of the RxEvent callback.
+  *        This parameter can be a value of @ref UART_RxEvent_Type_Values :
+  *           HAL_UART_RXEVENT_TC                 = 0x00U,
+  *           HAL_UART_RXEVENT_HT                 = 0x01U,
+  *           HAL_UART_RXEVENT_IDLE               = 0x02U,
+  */
+typedef uint32_t HAL_UART_RxEventTypeTypeDef;
+
+/**
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   * @brief  UART handle Structure definition
   */
 typedef struct __UART_HandleTypeDef
@@ -153,7 +180,11 @@ typedef struct __UART_HandleTypeDef
 
   UART_InitTypeDef              Init;             /*!< UART communication parameters      */
 
+<<<<<<< HEAD
   uint8_t                       *pTxBuffPtr;      /*!< Pointer to UART Tx transfer Buffer */
+=======
+  const uint8_t                 *pTxBuffPtr;      /*!< Pointer to UART Tx transfer Buffer */
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
   uint16_t                      TxXferSize;       /*!< UART Tx Transfer size              */
 
@@ -167,6 +198,11 @@ typedef struct __UART_HandleTypeDef
 
   __IO HAL_UART_RxTypeTypeDef ReceptionType;      /*!< Type of ongoing reception          */
 
+<<<<<<< HEAD
+=======
+  __IO HAL_UART_RxEventTypeTypeDef RxEventType;   /*!< Type of Rx Event                   */
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   DMA_HandleTypeDef             *hdmatx;          /*!< UART Tx DMA Handle parameters      */
 
   DMA_HandleTypeDef             *hdmarx;          /*!< UART Rx DMA Handle parameters      */
@@ -382,7 +418,11 @@ typedef  void (*pUART_RxEventCallbackTypeDef)(struct __UART_HandleTypeDef *huart
   * @}
   */
 
+<<<<<<< HEAD
 /** @defgroup UART_RECEPTION_TYPE_Values  UART Reception type values
+=======
+/** @defgroup UART_Reception_Type_Values  UART Reception type values
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   * @{
   */
 #define HAL_UART_RECEPTION_STANDARD          (0x00000000U)             /*!< Standard reception                       */
@@ -391,6 +431,19 @@ typedef  void (*pUART_RxEventCallbackTypeDef)(struct __UART_HandleTypeDef *huart
   * @}
   */
 
+<<<<<<< HEAD
+=======
+/** @defgroup UART_RxEvent_Type_Values  UART RxEvent type values
+  * @{
+  */
+#define HAL_UART_RXEVENT_TC                  (0x00000000U)             /*!< RxEvent linked to Transfer Complete event */
+#define HAL_UART_RXEVENT_HT                  (0x00000001U)             /*!< RxEvent linked to Half Transfer event     */
+#define HAL_UART_RXEVENT_IDLE                (0x00000002U)
+/**
+  * @}
+  */
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /**
   * @}
   */
@@ -720,11 +773,19 @@ HAL_StatusTypeDef HAL_UART_UnRegisterRxEventCallback(UART_HandleTypeDef *huart);
   */
 
 /* IO operation functions *******************************************************/
+<<<<<<< HEAD
 HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+=======
+HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size);
+HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size);
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 HAL_StatusTypeDef HAL_UART_Receive_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef HAL_UART_DMAPause(UART_HandleTypeDef *huart);
 HAL_StatusTypeDef HAL_UART_DMAResume(UART_HandleTypeDef *huart);
@@ -735,6 +796,11 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *p
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
 
+<<<<<<< HEAD
+=======
+HAL_UART_RxEventTypeTypeDef HAL_UARTEx_GetRxEventType(UART_HandleTypeDef *huart);
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /* Transfer Abort functions */
 HAL_StatusTypeDef HAL_UART_Abort(UART_HandleTypeDef *huart);
 HAL_StatusTypeDef HAL_UART_AbortTransmit(UART_HandleTypeDef *huart);
@@ -776,8 +842,13 @@ HAL_StatusTypeDef HAL_HalfDuplex_EnableReceiver(UART_HandleTypeDef *huart);
   * @{
   */
 /* Peripheral State functions  **************************************************/
+<<<<<<< HEAD
 HAL_UART_StateTypeDef HAL_UART_GetState(UART_HandleTypeDef *huart);
 uint32_t              HAL_UART_GetError(UART_HandleTypeDef *huart);
+=======
+HAL_UART_StateTypeDef HAL_UART_GetState(const UART_HandleTypeDef *huart);
+uint32_t              HAL_UART_GetError(const UART_HandleTypeDef *huart);
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /**
   * @}
   */
@@ -883,4 +954,7 @@ HAL_StatusTypeDef UART_Start_Receive_DMA(UART_HandleTypeDef *huart, uint8_t *pDa
 
 #endif /* __STM32F4xx_HAL_UART_H */
 
+<<<<<<< HEAD
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

@@ -24,15 +24,22 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+<<<<<<< HEAD
 #include <stdint.h>
 #include <string.h>
 
+=======
+#include <string.h>
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 #include "ultra_sonic.h"
 #include "i2c_lcd.h"
 #include "servo_motor.h"
 #include "dht11.h"
 #include "uart.h"
+<<<<<<< HEAD
 #include "timer.h"
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
 /* USER CODE END Includes */
 
@@ -65,42 +72,66 @@ UART_HandleTypeDef huart2;
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
+<<<<<<< HEAD
   .stack_size = 256 * 4,
+=======
+  .stack_size = 128 * 4,
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for UART */
 osThreadId_t UARTHandle;
 const osThreadAttr_t UART_attributes = {
   .name = "UART",
+<<<<<<< HEAD
   .stack_size = 256 * 4,
+=======
+  .stack_size = 128 * 4,
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   .priority = (osPriority_t) osPriorityLow,
 };
 /* Definitions for ULTRASONIC */
 osThreadId_t ULTRASONICHandle;
 const osThreadAttr_t ULTRASONIC_attributes = {
   .name = "ULTRASONIC",
+<<<<<<< HEAD
   .stack_size = 256 * 4,
+=======
+  .stack_size = 128 * 4,
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   .priority = (osPriority_t) osPriorityLow,
 };
 /* Definitions for LCD */
 osThreadId_t LCDHandle;
 const osThreadAttr_t LCD_attributes = {
   .name = "LCD",
+<<<<<<< HEAD
   .stack_size = 256 * 4,
+=======
+  .stack_size = 128 * 4,
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   .priority = (osPriority_t) osPriorityLow,
 };
 /* Definitions for SERVO_MOTOR */
 osThreadId_t SERVO_MOTORHandle;
 const osThreadAttr_t SERVO_MOTOR_attributes = {
   .name = "SERVO_MOTOR",
+<<<<<<< HEAD
   .stack_size = 256 * 4,
+=======
+  .stack_size = 128 * 4,
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   .priority = (osPriority_t) osPriorityLow,
 };
 /* Definitions for DHT11 */
 osThreadId_t DHT11Handle;
 const osThreadAttr_t DHT11_attributes = {
   .name = "DHT11",
+<<<<<<< HEAD
   .stack_size = 256 * 4,
+=======
+  .stack_size = 128 * 4,
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   .priority = (osPriority_t) osPriorityLow,
 };
 /* USER CODE BEGIN PV */
@@ -167,6 +198,10 @@ PUTCHAR_PROTOTYPE   // Add for printf
   */
 int main(void)
 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -198,6 +233,11 @@ int main(void)
   MX_SPI2_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+<<<<<<< HEAD
+=======
+
+  printf("start\r\n");
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 	HAL_UART_Receive_IT(&huart2, &rx_data, 1);
 	HAL_TIM_Base_Start_IT(&htim11);
 	HAL_TIM_Base_Start_IT(&htim2);	// for make delay_us
@@ -263,6 +303,10 @@ int main(void)
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1)
@@ -298,6 +342,10 @@ void SystemClock_Config(void)
   */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -314,6 +362,10 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -658,6 +710,12 @@ static void MX_USART2_UART_Init(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
+<<<<<<< HEAD
+=======
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+
+  /* USER CODE END MX_GPIO_Init_1 */
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
@@ -700,6 +758,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+<<<<<<< HEAD
+=======
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+
+  /* USER CODE END MX_GPIO_Init_2 */
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 }
 
 /* USER CODE BEGIN 4 */
@@ -708,14 +772,22 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN Header_StartDefaultTask */
 /**
+<<<<<<< HEAD
  * @brief  Function implementing the defaultTask thread.
  * @param  argument: Not used
  * @retval None
  */
+=======
+  * @brief  Function implementing the defaultTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
+<<<<<<< HEAD
 	/* Infinite loop */
 	for(;;)
 	{
@@ -731,19 +803,44 @@ void StartDefaultTask(void *argument)
 
 		osDelay(1);
 	}
+=======
+  /* Infinite loop */
+  for(;;)
+  {
+      if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET)
+      {
+    	  osDelay(100); // 디바운스
+          if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET)
+          {
+        	  set_event(1);
+        	  osDelay(300);
+          }
+      }
+
+      osDelay(1);
+  }
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /* USER CODE END 5 */
 }
 
 /* USER CODE BEGIN Header_UARTTask */
 /**
+<<<<<<< HEAD
  * @brief Function implementing the UART thread.
  * @param argument: Not used
  * @retval None
  */
+=======
+* @brief Function implementing the UART thread.
+* @param argument: Not used
+* @retval None
+*/
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /* USER CODE END Header_UARTTask */
 void UARTTask(void *argument)
 {
   /* USER CODE BEGIN UARTTask */
+<<<<<<< HEAD
 	/* Infinite loop */
 	char* message = "d\r\n";
 	for(;;)
@@ -757,42 +854,89 @@ void UARTTask(void *argument)
 
 		osDelay(1);
 	}
+=======
+  /* Infinite loop */
+
+  char* message = "detect\r\n";
+  for(;;)
+  {
+	if(get_event()) {
+
+		set_event(0);
+		HAL_UART_Transmit(&huart1, (uint8_t*)message, strlen(message), HAL_MAX_DELAY);
+
+		printf("%s", message);
+	}
+
+    osDelay(1);
+  }
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /* USER CODE END UARTTask */
 }
 
 /* USER CODE BEGIN Header_UltrasonicTask */
 /**
+<<<<<<< HEAD
  * @brief Function implementing the ULTRASONIC thread.
  * @param argument: Not used
  * @retval None
  */
+=======
+* @brief Function implementing the ULTRASONIC thread.
+* @param argument: Not used
+* @retval None
+*/
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /* USER CODE END Header_UltrasonicTask */
 void UltrasonicTask(void *argument)
 {
   /* USER CODE BEGIN UltrasonicTask */
+<<<<<<< HEAD
 	/* Infinite loop */
 	for(;;)
 	{
 		ultra_sonic_trigger();
 		osDelay(100);
 	}
+=======
+  /* Infinite loop */
+  for(;;)
+  {
+		ultra_sonic_trigger();
+		osDelay(100);
+  }
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /* USER CODE END UltrasonicTask */
 }
 
 /* USER CODE BEGIN Header_LCDTask */
 /**
+<<<<<<< HEAD
  * @brief Function implementing the LCD thread.
  * @param argument: Not used
  * @retval None
  */
+=======
+* @brief Function implementing the LCD thread.
+* @param argument: Not used
+* @retval None
+*/
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /* USER CODE END Header_LCDTask */
 void LCDTask(void *argument)
 {
   /* USER CODE BEGIN LCDTask */
+<<<<<<< HEAD
 	/* Infinite loop */
 	char buf[32];  // 크기는 상황에 따라 적절히 조정
 	for(;;)
 	{
+=======
+  /* Infinite loop */
+  char buf[32];  // 크기는 상황에 따라 적절히 조정
+  for(;;)
+  {
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 		// 0번 라인 초기화 후 출력
 		move_cursor(0, 0);
 		snprintf(buf, sizeof(buf), "T:%d.%d H:%d.%d     ", temperature_int, temperature_dec, humidity_int, humidity_dec);
@@ -804,49 +948,86 @@ void LCDTask(void *argument)
 		lcd_string((uint8_t*)buf);
 
 		osDelay(500);
+<<<<<<< HEAD
 	}
+=======
+  }
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /* USER CODE END LCDTask */
 }
 
 /* USER CODE BEGIN Header_ServoTask */
 /**
+<<<<<<< HEAD
  * @brief Function implementing the SERVO_MOTOR thread.
  * @param argument: Not used
  * @retval None
  */
+=======
+* @brief Function implementing the SERVO_MOTOR thread.
+* @param argument: Not used
+* @retval None
+*/
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /* USER CODE END Header_ServoTask */
 void ServoTask(void *argument)
 {
   /* USER CODE BEGIN ServoTask */
+<<<<<<< HEAD
 	/* Infinite loop */
 	for(;;)
 	{
 		servo_motor_update();  // 모듈 함수 호출
 		osDelay(100);
 	}
+=======
+  /* Infinite loop */
+  for(;;)
+  {
+		servo_motor_update();  // 모듈 함수 호출
+		osDelay(100);
+  }
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /* USER CODE END ServoTask */
 }
 
 /* USER CODE BEGIN Header_DHT11Task */
 /**
+<<<<<<< HEAD
  * @brief Function implementing the DHT11 thread.
  * @param argument: Not used
  * @retval None
  */
+=======
+* @brief Function implementing the DHT11 thread.
+* @param argument: Not used
+* @retval None
+*/
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /* USER CODE END Header_DHT11Task */
 void DHT11Task(void *argument)
 {
   /* USER CODE BEGIN DHT11Task */
+<<<<<<< HEAD
 	/* Infinite loop */
 	for(;;)
 	{
+=======
+  /* Infinite loop */
+  for(;;)
+  {
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 		dht11_read();  // dht11_data[] 갱신
 		temperature_int = dht11_data[2];
 		temperature_dec = dht11_data[3];
 		humidity_int = dht11_data[0];
 		humidity_dec = dht11_data[1];
 		osDelay(500);
+<<<<<<< HEAD
 	}
+=======
+  }
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   /* USER CODE END DHT11Task */
 }
 
@@ -863,7 +1044,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
+<<<<<<< HEAD
   if (htim->Instance == TIM10) {
+=======
+  if (htim->Instance == TIM10)
+  {
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
@@ -907,5 +1093,8 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+<<<<<<< HEAD
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

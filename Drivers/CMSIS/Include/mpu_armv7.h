@@ -1,11 +1,19 @@
 /******************************************************************************
  * @file     mpu_armv7.h
  * @brief    CMSIS MPU API for Armv7-M MPU
+<<<<<<< HEAD
  * @version  V5.0.4
  * @date     10. January 2018
  ******************************************************************************/
 /*
  * Copyright (c) 2017-2018 Arm Limited. All rights reserved.
+=======
+ * @version  V5.1.2
+ * @date     25. May 2020
+ ******************************************************************************/
+/*
+ * Copyright (c) 2017-2020 Arm Limited. All rights reserved.
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -86,10 +94,17 @@
 * \param IsBufferable      Region is bufferable, i.e. using write-back caching. Cacheable but non-bufferable regions use write-through policy.
 */  
 #define ARM_MPU_ACCESS_(TypeExtField, IsShareable, IsCacheable, IsBufferable)   \
+<<<<<<< HEAD
   ((((TypeExtField ) << MPU_RASR_TEX_Pos) & MPU_RASR_TEX_Msk)                 | \
    (((IsShareable ) << MPU_RASR_S_Pos) & MPU_RASR_S_Msk)                      | \
    (((IsCacheable ) << MPU_RASR_C_Pos) & MPU_RASR_C_Msk)                      | \
    (((IsBufferable ) << MPU_RASR_B_Pos) & MPU_RASR_B_Msk))
+=======
+  ((((TypeExtField) << MPU_RASR_TEX_Pos) & MPU_RASR_TEX_Msk)                  | \
+   (((IsShareable)  << MPU_RASR_S_Pos)   & MPU_RASR_S_Msk)                    | \
+   (((IsCacheable)  << MPU_RASR_C_Pos)   & MPU_RASR_C_Msk)                    | \
+   (((IsBufferable) << MPU_RASR_B_Pos)   & MPU_RASR_B_Msk))
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
 /**
 * MPU Region Attribute and Size Register Value
@@ -100,11 +115,22 @@
 * \param SubRegionDisable  Sub-region disable field.
 * \param Size              Region size of the region to be configured, for example 4K, 8K.
 */
+<<<<<<< HEAD
 #define ARM_MPU_RASR_EX(DisableExec, AccessPermission, AccessAttributes, SubRegionDisable, Size)      \
   ((((DisableExec ) << MPU_RASR_XN_Pos) & MPU_RASR_XN_Msk)                                          | \
    (((AccessPermission) << MPU_RASR_AP_Pos) & MPU_RASR_AP_Msk)                                      | \
    (((AccessAttributes) ) & (MPU_RASR_TEX_Msk | MPU_RASR_S_Msk | MPU_RASR_C_Msk | MPU_RASR_B_Msk)))
   
+=======
+#define ARM_MPU_RASR_EX(DisableExec, AccessPermission, AccessAttributes, SubRegionDisable, Size)    \
+  ((((DisableExec)      << MPU_RASR_XN_Pos)   & MPU_RASR_XN_Msk)                                  | \
+   (((AccessPermission) << MPU_RASR_AP_Pos)   & MPU_RASR_AP_Msk)                                  | \
+   (((AccessAttributes) & (MPU_RASR_TEX_Msk | MPU_RASR_S_Msk | MPU_RASR_C_Msk | MPU_RASR_B_Msk))) | \
+   (((SubRegionDisable) << MPU_RASR_SRD_Pos)  & MPU_RASR_SRD_Msk)                                 | \
+   (((Size)             << MPU_RASR_SIZE_Pos) & MPU_RASR_SIZE_Msk)                                | \
+   (((MPU_RASR_ENABLE_Msk))))
+
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /**
 * MPU Region Attribute and Size Register Value
 * 
@@ -131,7 +157,11 @@
 
 /**
 * MPU Memory Access Attribute for device memory.
+<<<<<<< HEAD
 *  - TEX: 000b (if non-shareable) or 010b (if shareable)
+=======
+*  - TEX: 000b (if shareable) or 010b (if non-shareable)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 *  - Shareable or non-shareable
 *  - Non-cacheable
 *  - Bufferable (if shareable) or non-bufferable (if non-shareable)
@@ -151,7 +181,11 @@
 * \param InnerCp Configures the inner cache policy.
 * \param IsShareable Configures the memory as shareable or non-shareable.
 */ 
+<<<<<<< HEAD
 #define ARM_MPU_ACCESS_NORMAL(OuterCp, InnerCp, IsShareable) ARM_MPU_ACCESS_((4U | (OuterCp)), IsShareable, ((InnerCp) & 2U), ((InnerCp) & 1U))
+=======
+#define ARM_MPU_ACCESS_NORMAL(OuterCp, InnerCp, IsShareable) ARM_MPU_ACCESS_((4U | (OuterCp)), IsShareable, ((InnerCp) >> 1U), ((InnerCp) & 1U))
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 
 /**
 * MPU Memory Access Attribute non-cacheable policy.
@@ -187,24 +221,42 @@ typedef struct {
 */
 __STATIC_INLINE void ARM_MPU_Enable(uint32_t MPU_Control)
 {
+<<<<<<< HEAD
   __DSB();
   __ISB();
+=======
+  __DMB();
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   MPU->CTRL = MPU_Control | MPU_CTRL_ENABLE_Msk;
 #ifdef SCB_SHCSR_MEMFAULTENA_Msk
   SCB->SHCSR |= SCB_SHCSR_MEMFAULTENA_Msk;
 #endif
+<<<<<<< HEAD
+=======
+  __DSB();
+  __ISB();
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 }
 
 /** Disable the MPU.
 */
 __STATIC_INLINE void ARM_MPU_Disable(void)
 {
+<<<<<<< HEAD
   __DSB();
   __ISB();
+=======
+  __DMB();
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 #ifdef SCB_SHCSR_MEMFAULTENA_Msk
   SCB->SHCSR &= ~SCB_SHCSR_MEMFAULTENA_Msk;
 #endif
   MPU->CTRL  &= ~MPU_CTRL_ENABLE_Msk;
+<<<<<<< HEAD
+=======
+  __DSB();
+  __ISB();
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 }
 
 /** Clear and disable the given MPU region.
@@ -218,7 +270,11 @@ __STATIC_INLINE void ARM_MPU_ClrRegion(uint32_t rnr)
 
 /** Configure an MPU region.
 * \param rbar Value for RBAR register.
+<<<<<<< HEAD
 * \param rsar Value for RSAR register.
+=======
+* \param rasr Value for RASR register.
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 */   
 __STATIC_INLINE void ARM_MPU_SetRegion(uint32_t rbar, uint32_t rasr)
 {
@@ -229,7 +285,11 @@ __STATIC_INLINE void ARM_MPU_SetRegion(uint32_t rbar, uint32_t rasr)
 /** Configure the given MPU region.
 * \param rnr Region number to be configured.
 * \param rbar Value for RBAR register.
+<<<<<<< HEAD
 * \param rsar Value for RSAR register.
+=======
+* \param rasr Value for RASR register.
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 */   
 __STATIC_INLINE void ARM_MPU_SetRegionEx(uint32_t rnr, uint32_t rbar, uint32_t rasr)
 {
@@ -238,12 +298,20 @@ __STATIC_INLINE void ARM_MPU_SetRegionEx(uint32_t rnr, uint32_t rbar, uint32_t r
   MPU->RASR = rasr;
 }
 
+<<<<<<< HEAD
 /** Memcopy with strictly ordered memory access, e.g. for register targets.
+=======
+/** Memcpy with strictly ordered memory access, e.g. used by code in ARM_MPU_Load().
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 * \param dst Destination data is copied to.
 * \param src Source data is copied from.
 * \param len Amount of data words to be copied.
 */
+<<<<<<< HEAD
 __STATIC_INLINE void orderedCpy(volatile uint32_t* dst, const uint32_t* __RESTRICT src, uint32_t len)
+=======
+__STATIC_INLINE void ARM_MPU_OrderedMemcpy(volatile uint32_t* dst, const uint32_t* __RESTRICT src, uint32_t len)
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 {
   uint32_t i;
   for (i = 0U; i < len; ++i) 
@@ -260,11 +328,19 @@ __STATIC_INLINE void ARM_MPU_Load(ARM_MPU_Region_t const* table, uint32_t cnt)
 {
   const uint32_t rowWordSize = sizeof(ARM_MPU_Region_t)/4U;
   while (cnt > MPU_TYPE_RALIASES) {
+<<<<<<< HEAD
     orderedCpy(&(MPU->RBAR), &(table->RBAR), MPU_TYPE_RALIASES*rowWordSize);
     table += MPU_TYPE_RALIASES;
     cnt -= MPU_TYPE_RALIASES;
   }
   orderedCpy(&(MPU->RBAR), &(table->RBAR), cnt*rowWordSize);
+=======
+    ARM_MPU_OrderedMemcpy(&(MPU->RBAR), &(table->RBAR), MPU_TYPE_RALIASES*rowWordSize);
+    table += MPU_TYPE_RALIASES;
+    cnt -= MPU_TYPE_RALIASES;
+  }
+  ARM_MPU_OrderedMemcpy(&(MPU->RBAR), &(table->RBAR), cnt*rowWordSize);
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 }
 
 #endif

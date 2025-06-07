@@ -7,6 +7,20 @@
   *          functionalities of I2C extension peripheral:
   *           + Extension features functions
   *
+<<<<<<< HEAD
+=======
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   @verbatim
   ==============================================================================
                ##### I2C peripheral extension features  #####
@@ -25,6 +39,7 @@
     (#) Configure I2C Digital noise filter using the function HAL_I2C_DigitalFilter_Config()
 
   @endverbatim
+<<<<<<< HEAD
   ******************************************************************************
   * @attention
   *
@@ -37,6 +52,8 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -181,4 +198,7 @@ HAL_StatusTypeDef HAL_I2CEx_ConfigDigitalFilter(I2C_HandleTypeDef *hi2c, uint32_
   * @}
   */
 
+<<<<<<< HEAD
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0

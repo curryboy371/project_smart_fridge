@@ -6,6 +6,7 @@
   ******************************************************************************
   * @attention
   *
+<<<<<<< HEAD
   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
@@ -14,6 +15,14 @@
   * License. You may obtain a copy of the License at:
   *                        opensource.org/licenses/BSD-3-Clause
   *
+=======
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file in
+  * the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
   ******************************************************************************
   */ 
 
@@ -286,8 +295,16 @@ void HAL_SYSTICK_Callback(void);
 #if (__MPU_PRESENT == 1U)
 void HAL_MPU_Enable(uint32_t MPU_Control);
 void HAL_MPU_Disable(void);
+<<<<<<< HEAD
 void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init);
 #endif /* __MPU_PRESENT */
+=======
+void HAL_MPU_EnableRegion(uint32_t RegionNumber);
+void HAL_MPU_DisableRegion(uint32_t RegionNumber);
+void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init);
+#endif /* __MPU_PRESENT */
+void HAL_CORTEX_ClearEvent(void);
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
 /**
   * @}
   */
@@ -407,4 +424,7 @@ void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init);
 #endif /* __STM32F4xx_HAL_CORTEX_H */
  
 
+<<<<<<< HEAD
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+=======
+>>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
