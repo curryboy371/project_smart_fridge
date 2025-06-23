@@ -1,0 +1,372 @@
+<diagram program="umletino" version="15.1"><zoom_level>17</zoom_level><help_text>&lt;&lt;Singleton Manager&gt;&gt;
+manager::RouterManager  
+{FastAPI 라우터 및 API 인스턴스를 중앙에서 관리하는 전역 관리자}
+--
+- routers: Dict[str, APIRouter]
+- main_api: MainAPI
+- chatgpt_api: ChatGPTAPI
+--  
++ include_routers(app: FastAPI)
++ _register_all()
++ _register_api(enum, api_cls, model_cls, crud_cls)
+--  
+Responsibilities  
+-- 각 도메인별 API 객체 생성 및 등록  
+-- FastAPI 라우터 일괄 포함 처리  
+-- API/CRUD/Model의 일관된 생성 및 연결 관리</help_text><element><id>UMLClass</id><coordinates><x>8972</x><y>6477</y><w>646</w><h>527</h></coordinates><panel_attributes>&lt;&lt;CRUD Service&gt;&gt;
+crud::GenericCRUD
+{MongoDB 컬렉션에 대한 CRUD 추상화}
+--
+-collection: AsyncIOMotorCollection
+--
++__init__(collection_enum: CollectionName)
++create(data: dict) -&gt; dict
++get_all() -&gt; List[dict]
++get_by_name(name: str) -&gt; Optional[dict]
++get_by_food_category_name(name: str) -&gt; Optional[dict]
++get_by_id(item_id: str) -&gt; Optional[dict]
++update(item_id: str, data: dict) -&gt; Optional[dict]
++delete(item_id: str) -&gt; bool
+--
+Responsibilities
+-- MongoDB 문서 단위의 CRUD 기능 제공
+-- 모든 도메인에 재사용 가능한 공통 인터페이스 제공
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>9805</x><y>8449</y><w>493</w><h>340</h></coordinates><panel_attributes>&lt;&lt;Base Class&gt;&gt;
+api::BaseAPI
+{공통 API 루트 라우터 클래스}
+--
+-_crud: GenericCRUD
+-_router: APIRouter
+--
++get_all(): Coroutine[List[_model]]
+--
+Responsibilities
+-- 공통 get 기능 제공
+-- 자식이 나머지 CRUD 구현</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>7153</x><y>7497</y><w>680</w><h>323</h></coordinates><panel_attributes>&lt;&lt;Singleton Manager&gt;&gt;
+manager::CrudManager
+{CRUD 객체들을 공유하는 전역 관리자}
+--
+-cruds: Dict[CollectionName, GenericCRUD]
+--
++set_crud()
++get_crud()
++create_fridge_log_template()
+--
+Responsibilities
+-- 각 도메인별 CRUD 객체 저장/조회
+-- 로그 템플릿 생성 지원</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>11539</x><y>6766</y><w>527</w><h>391</h></coordinates><panel_attributes>&lt;&lt;Abstract Data Model&gt;&gt;
+models::TFBaseModel
+{모든 모델의 공통 베이스}
+--
++id: Optional[ObjectId] (alias="_id")
+(model_config):
+  arbitrary_types_allowed = True
+  json_encoders = {ObjectId: str}
+  ...
+--
+Responsibilities
+-- Pydantic 모델 ID 필드 및 직렬화 처리
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>11624</x><y>8568</y><w>901</w><h>340</h></coordinates><panel_attributes>&lt;&lt;Router Class&gt;&gt;
+api::UserProfileAPI
+{사용자 프로필 관리용 FastAPI 라우터}
+--
+(상속) BaseAPI
+--
++get_profile(id: str): Coroutine[UserProfileModel]
++create_profile(user_profile: UserProfileModel): Coroutine[UserProfileModel]
++update_profile(user_profile: UserProfileModel): Coroutine[UserProfileModel]
++delete_profile(id: str): Coroutine[dict]
+--
+Responsibilities
+-- 사용자 정보 단건 조회, 생성, 수정, 삭제</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>9788</x><y>8993</y><w>731</w><h>374</h></coordinates><panel_attributes>&lt;&lt;External API Router&gt;&gt;
+api::ChatGPTAPI
+{OpenAI GPT API를 통해 사용자별 음식 추천 수행}
+--
+-open_ai: AsyncOpenAI
+--
++chat_with_gpt(): Coroutine[ChatResponse]
++chat_with_gpt_test(): Coroutine[ChatResponse]
+--
+Responsibilities
+-- 사용자 및 음식 정보를 바탕으로 GPT에게 추천 요청
+-- 추천 결과를 응답으로 반환
+-- 예외 상황 로깅 및 처리
+-- 환경 변수 기반 API 키 설정
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>11624</x><y>8075</y><w>901</w><h>459</h></coordinates><panel_attributes>&lt;&lt;Router Class&gt;&gt;
+api::FoodCategoryAPI
+{식품 카테고리 정보 관리 API}
+--
+(상속) BaseAPI
+--
++get_categories(): Coroutine[List[FoodCategoryModel]]
++create_category(category: FoodCategoryModel): Coroutine[FoodCategoryModel]
++update_category(category: FoodCategoryModel): Coroutine[FoodCategoryModel]
++delete_category(id: str): Coroutine[dict]
+--
+Responsibilities
+-- 식품 카테고리 생성, 수정, 삭제, 조회
+-- 이름 중복 여부 사전 검사
+-- ID 유효성 검사 및 중복 이름 검증 포함
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>10655</x><y>8075</y><w>935</w><h>459</h></coordinates><panel_attributes>&lt;&lt;Router Class&gt;&gt;
+api::FridgeLogAPI
+{냉장고 입출고 이벤트 로그 API}
+--
+(상속) BaseAPI
+--
++get_logs_by_event(event_type: str): Coroutine[List[FridgeLogModel]]
++get_datas(): Coroutine[List[FridgeLogModel]]
++create_data(data: FridgeLogModel): Coroutine[FridgeLogModel]
++update_data(data: FridgeLogModel): Coroutine[FridgeLogModel]
++delete_data(id: str): Coroutine[dict]
+--
+Responsibilities
+-- 냉장고 이벤트 로그 생성, 수정, 삭제, 조회
+-- event_type 기반 필터 조회 기능 제공
+-- timestamp 자동 포맷 및 유효성 검사 처리
+-- 로그 기록 포함</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>12406</x><y>6392</y><w>561</w><h>459</h></coordinates><panel_attributes>&lt;&lt;Pydantic Model&gt;&gt;
+models::FoodCategoryModel
+{식품 분류 정보를 나타내는 데이터 모델}
+--
+(상속) TFBaseMdoel
+--
++name: str
++food_category: Optional[str]
++storageMethod: Optional[str]
++shelfLifeDays: Optional[int]
++allergenTags: Optional[List[str]]
++nutrition: Optional[List[str]]
++desc: Optional[str]
+--
+Responsibilities
+-- 음식 분류 정보를 표현하는 스키마
+-- 유통기한, 보관 방식, 알러지, 영양소 정보 포함
+-- API 요청/응답 및 DB 직렬화에 사용</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>13018</x><y>6392</y><w>578</w><h>476</h></coordinates><panel_attributes>&lt;&lt;Pydantic Model&gt;&gt;
+models::FridgeItemModel
+{냉장고에 보관 중인 음식 아이템 정보 모델}
+--
+(상속) TFBaseMdoel
+--
++name: str
++food_category: Optional[str]
++storageMethod: Optional[str]
++entered_dt: Optional[str]
++expire_dt: Optional[str]
++position: Optional[int]
++desc: Optional[str]
+--
+Responsibilities
+-- 냉장고 내 음식의 식별 정보 저장
+-- 입고/만료 날짜 형식 유효성 검증
+-- 보관 위치 및 설명 정보 포함</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>12406</x><y>6919</y><w>561</w><h>459</h></coordinates><panel_attributes>&lt;&lt;Pydantic Model&gt;&gt;
+models::FridgeLogModel
+{냉장고 음식 이벤트 로그 데이터 모델}
+--
+(상속) TFBaseMdoel
+--
++food_id: str
++name: str
++food_category: Optional[str]
++event_type: str
++timestamp: str
++entered_dt: str
++expire_dt: Optional[str]
+--
+Responsibilities
+-- 입출고/소비/폐기 등 이벤트 로그 표현
+-- 해당 음식의 id 및 카테고리 정보 보존
+-- 발생 시점 기록 (timestamp)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>13035</x><y>6953</y><w>561</w><h>459</h></coordinates><panel_attributes>&lt;&lt;Pydantic Model&gt;&gt;
+models::UserProfileModel
+{사용자의 식습관 및 영양 프로필 모델}
+--
+(상속) TFBaseMdoel
+--
++username: str
++age: Optional[int]
++gender: str
++allergies: Optional[List[str]]
++preferredCategories: Optional[List[str]]
++missingNutrients: Optional[List[str]]
++desc: Optional[str]
+--
+Responsibilities
+-- 사용자 개인 정보 저장
+-- 알레르기, 선호 음식군, 부족 영양소 관리
+-- 음식 추천 시스템 입력값으로 사용됨
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>12049</x><y>6800</y><w>289</w><h>102</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>150;40;40;10;10;10</additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>12100</x><y>6154</y><w>1802</w><h>1496</h></coordinates><panel_attributes>lt=.
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>10655</x><y>8568</y><w>935</w><h>510</h></coordinates><panel_attributes>&lt;&lt;Router Class&gt;&gt;
+api::FridgeItemAPI
+{냉장고 아이템 CRUD 및 도메인 로직 처리}
+--
+(상속) BaseAPI
+--
++get_expired_items(): Coroutine[List[FridgeItemModel]]
++get_expiring_soon_items(days: int): Coroutine[List[FridgeItemModel]]
++get_item(item_id: str): Coroutine[FridgeItemModel]
++create_item(item: FridgeItemModel): Coroutine[FridgeItemModel]
++create_items(items: List[FridgeItemModel]): Coroutine[List[FridgeItemModel]]
++update_item(item: FridgeItemModel): Coroutine[FridgeItemModel]
++delete_item(item_id: str): Coroutine[dict]
+--
+Responsibilities
+-- 유통기한 지난/곧 지날 음식 필터링
+-- 포지션 중복 검사 및 삭제 후 대체 처리
+-- 음식 생성 시 자동 유통기한 계산
+-- CRUD 연계 로그 자동 생성
+-- 복수 아이템 처리 시 기존 위치와 비교 후 폐기/소비 처리
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>10366</x><y>7735</y><w>2414</w><h>1632</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>10264</x><y>8466</y><w>136</w><h>68</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>60;20;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>9788</x><y>9520</y><w>850</w><h>561</h></coordinates><panel_attributes>&lt;&lt;Service Router&gt;&gt;
+api::MainAPI
+{라즈베리파이 영상 스트리밍 및 이미지 관리용 API}
+--
+(상속) SimpleBaseAPI
+--
+-_RPI_STREAM_URL: str
+-_last_frame: Any
+--
++main_root(): Coroutine[dict]
++main_time(): Coroutine[dict]
++receive_frame(image: UploadFile): Coroutine[dict]
++receive_image(file: UploadFile): Coroutine[dict]
++main_stream_proxy(): Coroutine[StreamingResponse]
++main_stream_local(): Coroutine[StreamingResponse]
++main_image(): Coroutine[Response]
+--
+Responsibilities
+-- 라즈베리파이에서 이미지·프레임 수신
+-- MJPEG 웹 스트리밍 응답 반환
+-- 현재 서버 시간 응답
+-- 이미지 저장 및 반환
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>9754</x><y>6443</y><w>935</w><h>323</h></coordinates><panel_attributes>&lt;&lt;CRUD Service&gt;&gt;
+crud::FridgeLogCRUD
+{냉장고 로그 데이터 처리}
+--
+(상속됨) -collection: AsyncIOMotorCollection
+--
++__init__(collection_enum: CollectionName)
++get_logs_by_event(event_type: str) -&gt; List[dict]
+--
+Responsibilities
+-- event_type에 따른 로그 필터링
+-- FridgeItem의 상태 변경 기록 (INBOUND / CONSUMED / DISCARDED 등)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>9754</x><y>6817</y><w>935</w><h>425</h></coordinates><panel_attributes>&lt;&lt;CRUD Service&gt;&gt;
+crud::FridgeItemCRUD
+{냉장고 음식 정보 처리}
+--
+(상속됨) -collection: AsyncIOMotorCollection
+--
++__init__(collection_enum: CollectionName)
++get_position_item(position) → Optional[dict]
++get_not_expired_items() → List[dict]
++get_expired_items() → List[dict]
++get_items_between_dates(start: datetime, end: datetime) → List[dict]
+--
+Responsibilities
+-- 냉장고 내 음식 위치별 조회
+-- 유통기한에 따른 음식 분류
+-- 날짜 범위 기반 유통기한 필터링
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>9601</x><y>6494</y><w>187</w><h>51</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>9601</x><y>6494</y><w>187</w><h>391</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;210;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>7153</x><y>7837</y><w>799</w><h>493</h></coordinates><panel_attributes>&lt;&lt;Singleton Manager&gt;&gt;
+manager::RouterManager  
+{FastAPI 라우터 및 API 인스턴스를 중앙에서 관리하는 전역 관리자}
+--
+- routers: Dict[str, APIRouter]
+- main_api: MainAPI
+- chatgpt_api: ChatGPTAPI
+--  
++ include_routers(app: FastAPI)
++ _register_all()
++ _register_api(enum, api_cls, model_cls, crud_cls)
+--  
+Responsibilities  
+-- 각 도메인별 API 객체 생성 및 등록  
+-- FastAPI 라우터 일괄 포함 처리  
+-- API/CRUD/Model의 일관된 생성 및 연결 관리</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>7153</x><y>8347</y><w>782</w><h>442</h></coordinates><panel_attributes>&lt;&lt;Singleton Manager&gt;&gt;
+manager::TFDB  
+{MongoDB 연결 및 컬렉션 접근을 전역에서 담당하는 데이터베이스 관리자}
+--
+- client: AsyncIOMotorClient  
+- db: AsyncIOMotorDatabase  
+- collections: Dict[CollectionName, AsyncIOMotorCollection]
+--
++ get_collection(name: CollectionName) -&gt; Collection  
++ create_collections()  
++ is_connected() -&gt; bool
+--
+Responsibilities  
+-- MongoDB 클라이언트 및 DB 연결 초기화  
+-- 컬렉션 생성 및 존재 여부 확인  
+-- enum 기반 컬렉션 접근 제공  
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>5725</x><y>7769</y><w>680</w><h>374</h></coordinates><panel_attributes>&lt;&lt;Singleton Base&gt;&gt;
+core::TFSingletonBase  
+{전역 단일 인스턴스를 보장하는 싱글턴 기반 클래스}
+--
+- _instances: Dict[type, object]
+- _initialized: bool
+--
++ __new__(cls, *args, **kwargs) -&gt; object  
++ __init__(*args, **kwargs)  
++ get_instance(cls, *args, **kwargs) -&gt; object
+--
+Responsibilities  
+-- 클래스별 단일 인스턴스 생성 및 보존  
+-- 서브클래스가 상속받아 싱글턴 패턴 구현 가능하게 지원  
+-- get_instance() 통해 일관된 접근 방식 제공
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>6388</x><y>7803</y><w>255</w><h>51</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>6524</x><y>7259</y><w>1751</w><h>1717</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1135</x><y>0</y><w>170</w><h>51</h></coordinates><panel_attributes>Server
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1203</x><y>34</y><w>51</w><h>102</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1203</x><y>102</y><w>34</w><h>425</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1220</x><y>425</y><w>255</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+DB Query</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1220</x><y>493</y><w>255</w><h>68</h></coordinates><panel_attributes>lt=&lt;-
+result</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1441</x><y>136</y><w>34</w><h>391</h></coordinates><panel_attributes>
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1441</x><y>34</y><w>51</w><h>136</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1373</x><y>0</y><w>170</w><h>51</h></coordinates><panel_attributes>DB
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>642</x><y>0</y><w>170</w><h>51</h></coordinates><panel_attributes>Rassberry
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>710</x><y>34</y><w>51</w><h>102</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>948</x><y>34</y><w>51</w><h>136</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>727</x><y>272</y><w>255</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+객체 detect call</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>Relation</id><coordinates><x>727</x><y>323</y><w>255</w><h>68</h></coordinates><panel_attributes>lt=&lt;-
+detect return</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>948</x><y>136</y><w>34</w><h>221</h></coordinates><panel_attributes>
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>710</x><y>102</y><w>34</w><h>357</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>880</x><y>0</y><w>170</w><h>51</h></coordinates><panel_attributes>Yolo5
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>13</x><y>0</y><w>170</w><h>51</h></coordinates><panel_attributes>STM32
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>81</x><y>34</y><w>51</w><h>102</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>319</x><y>34</y><w>51</w><h>136</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>98</x><y>102</y><w>255</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+초음파 Trigger</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>Relation</id><coordinates><x>98</x><y>204</y><w>255</w><h>85</h></coordinates><panel_attributes>lt=&lt;-
+초음파 신호 발사
+ ECHO 신호</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>319</x><y>136</y><w>34</w><h>102</h></coordinates><panel_attributes>
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>81</x><y>102</y><w>34</w><h>221</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>251</x><y>0</y><w>170</w><h>51</h></coordinates><panel_attributes>Ultrasonic
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>98</x><y>272</y><w>646</w><h>85</h></coordinates><panel_attributes>lt=-&gt;&gt;
+거리 계산, 물체 판단?
+event key 전송 (UART TX)</panel_attributes><additional_attributes>10;20;360;20</additional_attributes></element><element><id>Relation</id><coordinates><x>727</x><y>425</y><w>510</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+detect result request</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>13</x><y>714</y><w>170</w><h>51</h></coordinates><panel_attributes>User
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>98</x><y>816</y><w>255</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+URL 접속, 데이터 수정</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>Relation</id><coordinates><x>98</x><y>1003</y><w>255</w><h>68</h></coordinates><panel_attributes>lt=&lt;-
+화면 갱신</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>319</x><y>850</y><w>34</w><h>187</h></coordinates><panel_attributes>
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>319</x><y>748</y><w>51</w><h>136</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>81</x><y>748</y><w>51</w><h>102</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>251</x><y>714</y><w>170</w><h>51</h></coordinates><panel_attributes>Web Front
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>81</x><y>816</y><w>34</w><h>221</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>816</y><w>306</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+HTTP Request</panel_attributes><additional_attributes>10;20;160;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>540</x><y>714</y><w>170</w><h>51</h></coordinates><panel_attributes>Server
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>608</x><y>748</y><w>51</w><h>102</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>608</x><y>816</y><w>34</w><h>187</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>965</x><y>748</y><w>51</w><h>136</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>897</x><y>714</y><w>170</w><h>51</h></coordinates><panel_attributes>DB
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>965</x><y>850</y><w>34</w><h>153</h></coordinates><panel_attributes>
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>625</x><y>816</y><w>374</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+DB Query</panel_attributes><additional_attributes>10;20;200;20</additional_attributes></element><element><id>Relation</id><coordinates><x>625</x><y>969</y><w>374</w><h>68</h></coordinates><panel_attributes>lt=&lt;-
+result</panel_attributes><additional_attributes>10;20;200;20</additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>969</y><w>306</w><h>68</h></coordinates><panel_attributes>lt=&lt;-
+HTTP Response</panel_attributes><additional_attributes>10;20;160;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>64</x><y>1224</y><w>170</w><h>51</h></coordinates><panel_attributes>User
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>948</x><y>1564</y><w>51</w><h>102</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>149</x><y>1326</y><w>255</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+레시피 요청</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>Relation</id><coordinates><x>149</x><y>1666</y><w>255</w><h>68</h></coordinates><panel_attributes>lt=&lt;-
+화면 갱신</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>370</x><y>1360</y><w>34</w><h>340</h></coordinates><panel_attributes>
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>132</x><y>1326</y><w>34</w><h>374</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>302</x><y>1224</y><w>170</w><h>51</h></coordinates><panel_attributes>Web Front
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>1258</y><w>51</w><h>136</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>387</x><y>1326</y><w>306</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+HTTP Request</panel_attributes><additional_attributes>10;20;160;20</additional_attributes></element><element><id>Relation</id><coordinates><x>387</x><y>1666</y><w>306</w><h>68</h></coordinates><panel_attributes>lt=&lt;-
+HTTP Response</panel_attributes><additional_attributes>10;20;160;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>659</x><y>1326</y><w>34</w><h>374</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>659</x><y>1258</y><w>51</w><h>102</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>591</x><y>1224</y><w>170</w><h>51</h></coordinates><panel_attributes>Server
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>676</x><y>1326</y><w>527</w><h>85</h></coordinates><panel_attributes>lt=-&gt;&gt;
+DB Query
+사용자 정보, 음식 정보 </panel_attributes><additional_attributes>10;20;290;20</additional_attributes></element><element><id>Relation</id><coordinates><x>676</x><y>1479</y><w>527</w><h>68</h></coordinates><panel_attributes>lt=&lt;-
+result</panel_attributes><additional_attributes>10;20;290;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1169</x><y>1360</y><w>34</w><h>153</h></coordinates><panel_attributes>
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1101</x><y>1224</y><w>170</w><h>51</h></coordinates><panel_attributes>DB
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1169</x><y>1258</y><w>51</w><h>136</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>931</x><y>1258</y><w>51</w><h>306</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>863</x><y>1224</y><w>170</w><h>51</h></coordinates><panel_attributes>GPT
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>931</x><y>1530</y><w>34</w><h>102</h></coordinates><panel_attributes>
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>676</x><y>1530</y><w>289</w><h>68</h></coordinates><panel_attributes>lt=-&gt;&gt;
+Frompt Request</panel_attributes><additional_attributes>10;20;150;20</additional_attributes></element><element><id>Relation</id><coordinates><x>676</x><y>1581</y><w>289</w><h>68</h></coordinates><panel_attributes>lt=&lt;-
+Response</panel_attributes><additional_attributes>10;20;150;20</additional_attributes></element></diagram>
