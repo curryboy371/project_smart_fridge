@@ -1,5 +1,5 @@
 username,age,gender,allergies,preferredCategories,missingNutrients,desc
-yh,29,male,"MILK,PEANUT","FRUIT,VEGETABLE","VITAMINS,FIBER","꾸준한 자기개발 중"
-jane,25,female,"EGG,WHEAT","DAIRY,MEAT","PROTEIN","필라테스와 건강에 관심 많음"
-hong,32,male,,"SEAFOOD,NUTS","CALCIUM","운동을 즐기며 건강식품 섭취를 선호"
-minji,27,female,"SOY","GRAINS,VEGETABLE","IRON","비건 식단을 지향함"
+chansong,29,male,"MILK,PEANUT","FRUIT,VEGETABLE","VITAMINS,FIBER","꾸준한 자기개발 중"
+seongeun,20,male,"EGG,WHEAT","DAIRY,MEAT","PROTEIN","필라테스와 건강에 관심 많음" 
+yujin,29,female,,"SEAFOOD,NUTS","CALCIUM","운동을 즐기며 건강식품 섭취를 선호"
+yeonhwi,29,male,"SOY","GRAINS,VEGETABLE","IRON","비건 식단을 지향함"

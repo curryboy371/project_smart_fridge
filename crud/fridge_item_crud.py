@@ -57,7 +57,7 @@ class FridgeItemCRUD(GenericCRUD):
 
     async def get_items_between_dates(self, start: datetime, end: datetime) -> List[dict]:
         
-        format = utils.validators.DATETIME_FORMAT_STRFTIME["second"]  # "%Y-%m-%d %H:%M:%S"
+        format = utils.validators.DATETIME_FORMAT_STRFTIME["hour"]  # "%Y-%m-%d %H:%M:%S"
         results = []
         cursor = self.collection.find({})  # 전부 불러온 뒤 필터링
         async for doc in cursor:

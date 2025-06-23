@@ -121,6 +121,35 @@ class FridgeItemAPI(BaseAPI):
         fridge_item_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_ITEM)
         fridge_log_crud = CrudManager.get_instance().get_crud(en.CollectionName.FRIDGE_LOG)
 
+        # 기존 존재하는 포지션 받고
+        # 새로 들어운 포지션과 비교
+        # 겹치지 않는 포지션은 소비 or 폐끼 처리
+        
+        # 기존 존재하는 포지션 받고
+        existing_items = await fridge_item_crud.get_all()
+        existing_position_map = {item["position"]: item for item in existing_items}
+        new_positions = {item.position for item in items}
+
+        for position, existing_item in existing_position_map.items():
+            # 새로운 포지션에 포함되어 있지 않으면 삭제 및 로그 처리
+            if position not in new_positions:
+                expire_dt_str = existing_item.get("expire_dt")
+                try:
+                    expire_dt = utils.validators.strptime_datetime(expire_dt_str, fmt=self._time_format)
+                except Exception as e:
+                    self._log.logger.error(f"Invalid expire_dt during position diff check: {e}")
+                    utils.exceptions.raise_bad_request(detail=str(e))
+
+                # 유통기한 기준으로 로그 타입 결정
+                event_type = en.EventType.DISCARDED if expire_dt and expire_dt < now else en.EventType.CONSUMED
+
+                deleted = await self._crud.delete(existing_item["_id"])
+                if deleted:
+                    log_data = await CrudManager.get_instance().create_fridge_log_template(existing_item, event_type)
+                    await fridge_log_crud.create(log_data)
+                    self._log.logger.info(f"removed unreferenced position item ({existing_item['name']}, pos: {position}, {event_type.value})")
+        
+
         if not items:
             self._log.logger.info(f"input item zero")
             existing_items = await fridge_item_crud.get_all()
@@ -191,28 +220,31 @@ class FridgeItemAPI(BaseAPI):
                     self._log.logger.info(f"same food exists at position({item.position}), skip")
                     continue
                 else:
-                    # 다른 음식인 경우 처리 (소비 또는 폐기 처리)
-                    print("exsisting expire dt", existing_item)
-                    existing_expire_dt = existing_item.get("expire_dt")
-                    expire_dt = utils.validators.strptime_datetime(existing_expire_dt, fmt=self._time_format)
-
-                    # 유통기한이 남으면 소비, 지나면 버림
-                    log_event_type = en.EventType.CONSUMED
-                    if expire_dt and expire_dt < now:
-                        log_event_type = en.EventType.DISCARDED
-
-                    # 기존 음식 제거
-                    id = existing_item["_id"]
-                    deleted = await self._crud.delete(id)
-                    if not deleted:
-                        self._log.logger.warning(f"failed delete existing fridge item id({id})")
+                    existing_expire_dt_str = existing_item.get("expire_dt")
+                    try:
+                        existing_expire_dt_obj = utils.validators.strptime_datetime(existing_expire_dt_str, fmt=self._time_format)
+                    except Exception as e:
+                        self._log.logger.error(f"Invalid expire_dt on existing item: {e}")
                         utils.exceptions.raise_bad_request()
 
-                    # 로깅
+                    log_event_type = en.EventType.CONSUMED
+                    if existing_expire_dt_obj and existing_expire_dt_obj < now:
+                        log_event_type = en.EventType.DISCARDED
+
+                    existing_id = existing_item.get("_id")
+                    if not existing_id:
+                        self._log.logger.error("existing item has no _id")
+                        utils.exceptions.raise_bad_request()
+
+                    deleted = await self._crud.delete(existing_id)
+                    if not deleted:
+                        self._log.logger.warning(f"failed delete existing fridge item id({existing_id})")
+                        utils.exceptions.raise_bad_request()
+
                     log_data = await CrudManager.get_instance().create_fridge_log_template(existing_item, log_event_type)
                     await fridge_log_crud.create(log_data)
 
-                    self._log.logger.info(f"exsisting item delete({item.id})")
+                    self._log.logger.info(f"existing item deleted: name={existing_item['name']}, id={existing_id}, position={item.position}")
 
 
             created = await self._crud.create(item.dict(by_alias=True))
