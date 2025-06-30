@@ -1,0 +1,20 @@
+{
+  "gitSyncId": "6839bb95990a0a494d89660e_5dce31f9-9522-43cc-9e96-0647a5472ee9",
+  "id": "FoodCategory_utils",
+  "unpublishedCollection": {
+    "name": "utils",
+    "pageId": "FoodCategory",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "state",
+        "value": "{\n  modalMode: 'add',\n  currentData: null,\n  isModalOpen: false,\n  defaultAllergies: [],\n  defaultNutrition: []\n}"
+      },
+      {
+        "name": "categoryTable",
+        "value": "{\n  isInit: false,\n  allergies: [],\n  nutrition: [],\n  storage_method: [],\n  food_simple: []\n}"
+      }
+    ]
+  }
+}

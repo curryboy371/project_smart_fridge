@@ -1,0 +1,52 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 48,
+  "dynamicBindingPathList": [
+    {
+      "key": "truncateButtonColor"
+    },
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "1rem",
+  "fontStyle": "BOLD",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "6q7fesno6i",
+  "leftColumn": 2,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 12,
+  "mobileLeftColumn": 2,
+  "mobileRightColumn": 18,
+  "mobileTopRow": 8,
+  "needsErrorInfo": false,
+  "originalBottomRow": 48,
+  "originalTopRow": 44,
+  "overflow": "NONE",
+  "parentColumnSpace": 20.25,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 18,
+  "shouldTruncate": false,
+  "text": "유통기한 임박 음식",
+  "textAlign": "LEFT",
+  "textColor": "#231F20",
+  "topRow": 44,
+  "truncateButtonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "1yupw8q8g6",
+  "widgetName": "Text1Copy"
+}

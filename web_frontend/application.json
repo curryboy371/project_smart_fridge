@@ -1,0 +1,43 @@
+{
+  "appIsExample": false,
+  "applicationVersion": 2,
+  "collapseInvisibleWidgets": true,
+  "color": "#FFDEDE",
+  "embedSetting": {
+    "height": "720px",
+    "showNavigationBar": true,
+    "width": "1024px"
+  },
+  "evaluationVersion": 2,
+  "icon": "bicycle",
+  "pages": [
+    {
+      "id": "UserProfile",
+      "isDefault": false
+    },
+    {
+      "id": "Content",
+      "isDefault": false
+    },
+    {
+      "id": "main",
+      "isDefault": true
+    },
+    {
+      "id": "FoodCategory",
+      "isDefault": false
+    },
+    {
+      "id": "Food",
+      "isDefault": false
+    },
+    {
+      "id": "FridgeLog",
+      "isDefault": false
+    },
+    {
+      "id": "Cam",
+      "isDefault": false
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "autoFocus": false,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 19,
+  "boxShadow": "none",
+  "defaultText": "{{ utils.state.modalMode == \"add\" ? utils.state.server_time_hour : utils.state.currentData.entered_dt }}",
+  "displayName": "Input",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "defaultText"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicTriggerPathList": [],
+  "hideCard": false,
+  "iconAlign": "left",
+  "iconSVG": "/static/media/icon.9f505595da61a34f563dba82adeb06ec.svg",
+  "inputType": "TEXT",
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "09svys3ytz",
+  "label": "입고 날짜 (%Y-%m-%d %H)",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelStyle": "BOLD",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 2,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 17,
+  "mobileLeftColumn": 43,
+  "mobileRightColumn": 63,
+  "mobileTopRow": 10,
+  "originalBottomRow": 66,
+  "originalTopRow": 60,
+  "parentColumnSpace": 10.38037109375,
+  "parentId": "fn1suqgpfa",
+  "parentRowSpace": 10,
+  "regex": "^\\d{4}-\\d{2}-\\d{2} \\d{2}$",
+  "renderMode": "CANVAS",
+  "resetOnSubmit": true,
+  "responsiveBehavior": "fill",
+  "rightColumn": 27,
+  "searchTags": [
+    "form",
+    "text input",
+    "number",
+    "textarea"
+  ],
+  "shouldAllowAutofill": false,
+  "showStepArrows": false,
+  "topRow": 13,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "2ohl31b2e8",
+  "widgetName": "inp_Entered_DT"
+}

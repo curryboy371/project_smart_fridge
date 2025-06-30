@@ -1,0 +1,20 @@
+{
+  "gitSyncId": "68353d7be9e51751500a63c7_2ee8b8e6-031a-49f6-b4d1-5bc967427055",
+  "id": "UserProfile_utils",
+  "unpublishedCollection": {
+    "name": "utils",
+    "pageId": "UserProfile",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "state",
+        "value": "{\n  modalMode: 'add',\n  currentData: null,\n  isModalOpen: false,\n  defaultAllergies: [],\n  defaultpreferredCategories: [],\n  defaultmissingNutrients: []\n}"
+      },
+      {
+        "name": "categoryTable",
+        "value": "{\n  isInit: false,\n  allergies: [],\n  nutrition: [],\n  storage_method: [],\n  food_simple: []\n}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "0.375rem",
+  "bottomRow": 27,
+  "boxShadow": "none",
+  "defaultOptionValue": "{{ ((options, serverSideFiltering) => (  utils.state.defaultAllergies ))(MultiSel_Allergies.options, MultiSel_Allergies.serverSideFiltering) }}",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "defaultOptionValue"
+    },
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "isDisabled": false,
+  "isFilterable": true,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "y2hzkr54ev",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelText": "Allergies",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 0,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 26,
+  "mobileLeftColumn": 1,
+  "mobileRightColumn": 21,
+  "mobileTopRow": 19,
+  "needsErrorInfo": false,
+  "optionLabel": "label",
+  "optionValue": "value",
+  "parentColumnSpace": 10.5556640625,
+  "parentId": "fn1suqgpfa",
+  "parentRowSpace": 10,
+  "placeholderText": "Select option(s)",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 20,
+  "serverSideFiltering": false,
+  "sourceData": "{{ utils.categoryTable.allergies}}",
+  "topRow": 19,
+  "type": "MULTI_SELECT_WIDGET_V2",
+  "version": 1,
+  "widgetId": "pmebiojmoj",
+  "widgetName": "MultiSel_Allergies"
+}

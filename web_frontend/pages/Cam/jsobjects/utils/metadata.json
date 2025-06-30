@@ -1,0 +1,16 @@
+{
+  "gitSyncId": "683d9acdc648eb7fbab2a0e6_3aaf2eb5-ec94-4487-860b-aa0c70fc2e23",
+  "id": "Cam_utils",
+  "unpublishedCollection": {
+    "name": "utils",
+    "pageId": "Cam",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "recipe",
+        "value": "\"None\""
+      }
+    ]
+  }
+}

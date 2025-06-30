@@ -1,0 +1,50 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 6,
+  "boxShadow": "none",
+  "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "buttonColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "rsmh042z0u",
+  "leftColumn": 2,
+  "minWidth": 120,
+  "mobileBottomRow": 27,
+  "mobileLeftColumn": 7,
+  "mobileRightColumn": 23,
+  "mobileTopRow": 23,
+  "needsErrorInfo": false,
+  "onClick": "{{JSObject1.ping();}}",
+  "parentColumnSpace": 30.40625,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 11,
+  "text": "서버 연결 테스트",
+  "topRow": 2,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "43foo9jv7p",
+  "widgetName": "Button1"
+}

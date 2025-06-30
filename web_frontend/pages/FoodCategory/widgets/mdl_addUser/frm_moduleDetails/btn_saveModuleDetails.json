@@ -1,0 +1,71 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 51,
+  "boxShadow": "none",
+  "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": true,
+  "displayName": "Button",
+  "dynamicBindingPathList": [
+    {
+      "key": "buttonColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "text"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.cca026338f1c8eb6df8ba03d084c2fca.svg",
+  "isDefaultClickDisabled": true,
+  "isDeprecated": false,
+  "isDisabled": "{{\nutils.state.modalMode == \"add\" ? false : utils.state.currentData == null\n}}",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "bd4q6tnrdx",
+  "leftColumn": 47,
+  "minWidth": 120,
+  "mobileBottomRow": 37,
+  "mobileLeftColumn": 46,
+  "mobileRightColumn": 62,
+  "mobileTopRow": 33,
+  "onClick": "{{\nutils.state.modalMode == \"add\" ? utils.addUser() : utils.editUser()\n\ncloseModal(mdl_addUser.name);\n\n}}",
+  "originalBottomRow": 42,
+  "originalTopRow": 38,
+  "parentId": "fn1suqgpfa",
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": true,
+  "responsiveBehavior": "hug",
+  "rightColumn": 63,
+  "searchTags": [
+    "click",
+    "submit"
+  ],
+  "text": "{{\nutils.state.modalMode == \"add\" ? \"ADD\" : \"EDIT\"\n}}",
+  "topRow": 47,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "80uexuvutq",
+  "widgetName": "btn_saveModuleDetails"
+}

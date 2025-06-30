@@ -1,0 +1,32 @@
+{
+  "gitSyncId": "683d9acdc648eb7fbab2a0e6_9e661ef6-8c44-4df7-af45-19761b77806f",
+  "unpublishedPage": {
+    "isHidden": false,
+    "layouts": [
+      {
+        "dsl": {
+          "backgroundColor": "none",
+          "bottomRow": 1090,
+          "canExtend": true,
+          "containerStyle": "none",
+          "detachFromLayout": true,
+          "dynamicBindingPathList": [],
+          "leftColumn": 0,
+          "minHeight": 900,
+          "parentColumnSpace": 1,
+          "parentRowSpace": 1,
+          "rightColumn": 1224,
+          "snapColumns": 64,
+          "snapRows": 88,
+          "topRow": 0,
+          "type": "CANVAS_WIDGET",
+          "version": 93,
+          "widgetId": "0",
+          "widgetName": "MainContainer"
+        }
+      }
+    ],
+    "name": "Cam",
+    "slug": "cam"
+  }
+}

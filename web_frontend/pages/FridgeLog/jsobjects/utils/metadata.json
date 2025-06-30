@@ -1,0 +1,20 @@
+{
+  "gitSyncId": "68353d7be9e51751500a63c7_f13feed4-79f7-43b4-8f85-24b37cf5d301",
+  "id": "FridgeLog_utils",
+  "unpublishedCollection": {
+    "name": "utils",
+    "pageId": "FridgeLog",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "state",
+        "value": "{\n  modalMode: 'add',\n  currentData: null,\n  isModalOpen: false,\n  defaultAllergies: [],\n  defaultNutrition: []\n}"
+      },
+      {
+        "name": "categoryTable",
+        "value": "{\n  isInit: false,\n  allergies: [],\n  nutrition: [],\n  storage_method: [],\n  food_simple: []\n}"
+      }
+    ]
+  }
+}

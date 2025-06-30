@@ -1,0 +1,96 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 61,
+  "boxShadow": "none",
+  "canEscapeKeyClose": true,
+  "canOutsideClickClose": true,
+  "children": [
+    {
+      "bottomRow": 610,
+      "canExtend": true,
+      "detachFromLayout": true,
+      "displayName": "Canvas",
+      "dynamicBindingPathList": [],
+      "flexLayers": [],
+      "hideCard": true,
+      "isDeprecated": false,
+      "isDisabled": false,
+      "isLoading": false,
+      "isVisible": true,
+      "key": "wcr2prra9w",
+      "leftColumn": 0,
+      "minHeight": 600,
+      "minWidth": 450,
+      "mobileBottomRow": 240,
+      "mobileLeftColumn": 0,
+      "mobileRightColumn": 209.3994140625,
+      "mobileTopRow": 0,
+      "parentColumnSpace": 1,
+      "parentId": "yl0o1ojb8f",
+      "parentRowSpace": 1,
+      "renderMode": "CANVAS",
+      "responsiveBehavior": "fill",
+      "rightColumn": 209.3994140625,
+      "shouldScrollContents": false,
+      "topRow": 0,
+      "type": "CANVAS_WIDGET",
+      "version": 1,
+      "widgetId": "c6y8usbzch",
+      "widgetName": "Canvas16"
+    }
+  ],
+  "detachFromLayout": true,
+  "displayName": "Modal",
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClose"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClose"
+    }
+  ],
+  "height": 610,
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.4975978e9a961fb0bfb4e38de7ecc7c5.svg",
+  "isCanvas": true,
+  "isDeprecated": false,
+  "isLoading": false,
+  "key": "q6veiqqt3b",
+  "leftColumn": 0,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 10,
+  "minHeight": 610,
+  "mobileBottomRow": 29,
+  "mobileLeftColumn": 0,
+  "mobileRightColumn": 18,
+  "mobileTopRow": 5,
+  "onClose": "",
+  "originalBottomRow": 245,
+  "originalTopRow": 5,
+  "parentColumnSpace": 11.63330078125,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "rightColumn": 18,
+  "searchTags": [
+    "dialog",
+    "popup",
+    "notification"
+  ],
+  "shouldScrollContents": true,
+  "topRow": 5,
+  "type": "MODAL_WIDGET",
+  "version": 2,
+  "widgetId": "yl0o1ojb8f",
+  "widgetName": "mdl_addUser",
+  "width": 730
+}

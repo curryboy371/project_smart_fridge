@@ -1,0 +1,74 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 9,
+  "boxShadow": "none",
+  "defaultOptionValue": "{{ ((options, serverSideFiltering) => (  utils.state.modalMode == \"add\" ? [] : utils.state.currentData.storageMethod ))(sel_StorageMethod.options, sel_StorageMethod.serverSideFiltering) }}",
+  "displayName": "Select",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "sourceData"
+    },
+    {
+      "key": "defaultOptionValue"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.bd99caba5853ad71e4b3d8daffacb3a2.svg",
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isFilterable": true,
+  "isLoading": false,
+  "isRequired": true,
+  "isVisible": true,
+  "key": "ru5iwpo3rm",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelStyle": "BOLD",
+  "labelText": "보관 방법",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 31,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 16,
+  "mobileLeftColumn": 1,
+  "mobileRightColumn": 21,
+  "mobileTopRow": 9,
+  "optionLabel": "label",
+  "optionValue": "value",
+  "originalBottomRow": 16,
+  "originalTopRow": 9,
+  "parentColumnSpace": 18.203125,
+  "parentId": "fn1suqgpfa",
+  "parentRowSpace": 10,
+  "placeholderText": "Select option",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 44,
+  "searchTags": [
+    "dropdown"
+  ],
+  "serverSideFiltering": false,
+  "sourceData": "{{ \nutils.categoryTable.storage_method\n}}",
+  "topRow": 2,
+  "type": "SELECT_WIDGET",
+  "version": 1,
+  "widgetId": "kldk7b645r",
+  "widgetName": "sel_StorageMethod"
+}
