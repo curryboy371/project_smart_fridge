@@ -1,3 +1,0 @@
-../Core/Src/servo_motor.c:12:6:servo_motor_init	8	static
-../Core/Src/servo_motor.c:17:6:servo_motor_set_angle	24	static
-../Core/Src/servo_motor.c:31:6:servo_motor_update	8	static

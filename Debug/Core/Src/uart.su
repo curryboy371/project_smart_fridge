@@ -1,7 +1,0 @@
-<<<<<<< HEAD
-../Core/Src/uart.c:6:6:set_event	16	static
-../Core/Src/uart.c:11:5:get_event	4	static
-=======
-../Core/Src/uart.c:8:6:set_event	16	static
-../Core/Src/uart.c:13:5:get_event	4	static
->>>>>>> 95147dff18777353e4155d9c14b1506f44999be0
