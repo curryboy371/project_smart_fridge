@@ -10,18 +10,62 @@
 2. 사용자에게 유통기한 임박 등을 안내하며, 웹을 통해 이를 편리하게 모니터링할 수 있다.
 3. 사용자 정보 및 냉장고 식품을 관리하여 사용자 맞춤형 레시피를 제공할 수 있고, 입출고 로그를 확장하면 음식 소비 패턴을 파악하여 시각화 및 예측이 가능하다.
 
-## 2. 시스템 구성
+## 2. 주요 기능
+### **자동문 제어**
+
+- STM32 기반 초음파 센서와 서보 모터를 이용해
+- 냉장고 문을 자동으로 열고 닫음
+- 양손에 물건을 들고 있을 때 매우 편리
+
+### **식재료 인식**
+
+- 라즈베리파이와 웹캠을 활용
+- 냉장고 속 음식(식재료)을 인식하여
+- 정확한 재고 파악 가능
+
+### **데이터화 및 관리**
+
+- 인식된 식재료 + 사용자 건강 데이터를 통합 관리
+- FIFO(선입선출) 방식으로 관리해 음식물 낭비 감소
+
+### **스마트 시스템**
+
+- 유통기한 기반 레시피와 맞춤형 식단 추천
+- 사용자 알레르기 및 선호도 고려해 식생활 제안
+
+
+
+
+## 2. 시스템 구성 및 외관
+1. 시스템 구성
 <img width="1397" height="665" alt="image" src="https://github.com/user-attachments/assets/aad906f1-3501-4a49-a5f2-6d48115b4c2c" />
 
+2. 외관
+<img width="1228" height="815" alt="image" src="https://github.com/user-attachments/assets/97c7e24a-c5e2-4016-92f6-9a6182b27fb2" />
+
+
+### 사용 부품
+- Control Board : STM32 NUCLEO-F411RE ( C )
+- Detect Board : Raspberry Pi 4
+- Camera : Logitech 4K Webcam
+- Device **:** Ultrasonic HC-SR04, Servo Motor SG90
+
+### 사용 기술
+- Web frontend : Appsmith ( Nocode Web Service + JavaScript )
+- Web backend : FastAPI ( Python )
+- DB : MongoDB
+- LLM : GPT-API
+- Computer Vision : OpenCV, Yolo5
 
 
 ## 3. 통신 플로우
 
 1. 객체 인식 Flow
-<img width="1423" height="552" alt="image" src="https://github.com/user-attachments/assets/04fe7d75-d367-4d48-af58-bbbeef8c8948" />
+<img width="2083" height="764" alt="image" src="https://github.com/user-attachments/assets/fc74fd69-a76c-4ae9-aca2-cf49bfc82514" />
 
 2. 유저 레시피 요청 Flow
-<img width="1433" height="606" alt="image" src="https://github.com/user-attachments/assets/0b841b42-8d95-4d60-9eaa-bc5ea68e4ffc" />
+<img width="1980" height="685" alt="image" src="https://github.com/user-attachments/assets/4e7ccc6f-0734-4997-b9a2-3b041a77a35f" />
+
 
 ## 4. 상세 수행 내용
 
