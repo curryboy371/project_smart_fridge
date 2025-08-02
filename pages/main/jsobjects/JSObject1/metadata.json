@@ -6,6 +6,11 @@
     "pageId": "main",
     "pluginId": "js-plugin",
     "pluginType": "JS",
-    "variables": []
+    "variables": [
+      {
+        "name": "state",
+        "value": "{\n  server_time: \"None\"\n}"
+      }
+    ]
   }
 }
