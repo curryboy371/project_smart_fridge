@@ -3,6 +3,8 @@ from core.tflog import TFLoggerManager as TFLog
 from core.tfdb import TFDB
 from api.router_manager import RouterManager
 
+from datetime import datetime
+
 #from core.tfconfig_manager import TFConfigManager as TFConfig
 
 def configure_middleware(app: FastAPI):
@@ -44,6 +46,10 @@ def create_app() -> FastAPI:
     async def root():
         return {"message": "Connected FastAPI Server!!!"}
 
+    @app.get("/time")
+    async def root():
+        now = datetime.now()
+        return {"time": now.strftime("%Y-%m-%d %H:%M:%S")}
 
     
     return app

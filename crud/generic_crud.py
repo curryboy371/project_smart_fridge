@@ -2,7 +2,7 @@ from core.tfdb import TFDB
 from core import tfenums as en
 from bson import ObjectId
 from typing import List, Optional, Any, Dict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 class GenericCRUD:
     def __init__(self, collection_enum: en.CollectionName):
@@ -20,7 +20,24 @@ class GenericCRUD:
         async for data in cursor:
             items.append(data)
         return items
-
+    
+    async def get_expired_items(self) -> List[dict]:
+        now = datetime.now()
+        items = []
+        cursor = self.collection.find({"expire_dt": {"$lt": now}}) # lt : less then ( 미만 )
+        async for data in cursor:
+            items.append(data)
+        return items
+    
+    async def get_items_between_dates(self, start: datetime, end: datetime) -> List[dict]:
+        cursor = self.collection.find({
+            "expire_dt": {
+                "$gt": start,   # greater then (초과)
+                "$lte": end     # less than or equal (이후후)
+            }
+        })
+        return [doc async for doc in cursor]
+    
     async def get_by_name(self, name: str) -> Optional[dict]:
         data = await self.collection.find_one({"name": name})
         return data

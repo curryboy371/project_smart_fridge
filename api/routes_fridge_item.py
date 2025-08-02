@@ -12,6 +12,7 @@ from core.tflog import TFLoggerManager as TFLog
 
 from crud.crud_manager import CrudManager
 
+from fastapi import Query
 
 
 class FridgeItemAPI():
@@ -24,7 +25,10 @@ class FridgeItemAPI():
         self._router = APIRouter(prefix=f"/{self._enum_value.value}")
 
         self._router.get("/", response_model=List[FridgeItemModel])(self.get_items)
+        self._router.get("/expired", response_model=List[FridgeItemModel])(self.get_expired_items)
+        self._router.get("/expiring-soon", response_model=List[FridgeItemModel])(self.get_expiring_soon_items)
         self._router.get("/{item_id}", response_model=FridgeItemModel)(self.get_item)
+
         self._router.post("/", response_model=FridgeItemModel)(self.create_item)
         self._router.put("/", response_model=FridgeItemModel)(self.update_item)
         self._router.delete("/{item_id}")(self.delete_item)
@@ -39,6 +43,14 @@ class FridgeItemAPI():
 
     async def get_items(self):
         return await self._crud.get_all()
+    
+    async def get_expired_items(self):
+        return await self._crud.get_expired_items()
+    
+    async def get_expiring_soon_items(self, days: int = 1):
+        now = datetime.now()
+        limit = now + timedelta(days=days)
+        return await self._crud.get_items_between_dates(now, limit)
 
     async def get_item(self, item_id: str):
         item = await self._crud.get_by_id(item_id)
